@@ -37,7 +37,53 @@ html, body, [class*="css"] {
 
 .block-container {
   padding-top: 1.5rem !important;
-  max-width: 1440px !important;
+}
+
+[data-testid="stMain"] {
+  flex: 1 1 0% !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+[data-testid="stMain"] > div,
+[data-testid="stMain"] [data-testid="stAppViewContainer"] {
+  width: 100% !important;
+}
+
+[data-testid="stMain"] .block-container {
+  width: 100% !important;
+  max-width: min(1080px, calc(100% - 1.5rem)) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(1rem, 2.5vw, 2.5rem) !important;
+  padding-right: clamp(1rem, 2.5vw, 2.5rem) !important;
+  box-sizing: border-box !important;
+}
+
+/* Sidebar collapsed — center content and use the freed horizontal space */
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) [data-testid="stMain"] .block-container,
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) [data-testid="stMain"] .block-container {
+  max-width: min(1280px, calc(100vw - 5rem)) !important;
+  padding-left: clamp(1.5rem, 5vw, 4rem) !important;
+  padding-right: clamp(1.5rem, 5vw, 4rem) !important;
+}
+
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) [data-testid="stHorizontalBlock"],
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) [data-testid="stHorizontalBlock"] {
+  justify-content: center !important;
+}
+
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) .np-page-title,
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) .np-page-sub,
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) .np-page-sub-compact,
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) .np-status-bar,
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) .np-page-title,
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) .np-page-sub,
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) .np-page-sub-compact,
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) .np-status-bar {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 [data-testid="stSidebar"] {
@@ -218,11 +264,13 @@ div[data-testid="stForm"] [data-testid="InputInstructions"] {
 [data-testid="stHorizontalBlock"] {
   align-items: stretch !important;
   gap: 1.5rem !important;
+  width: 100% !important;
 }
 
 [data-testid="column"] {
   display: flex !important;
   flex-direction: column !important;
+  min-width: 0 !important;
 }
 
 [data-testid="stSidebar"] [data-testid="stRadio"] > div {
@@ -375,6 +423,14 @@ header[data-testid="stHeader"] [data-testid="collapsedControl"] {
 .st-key-volunteer_form_shell {
   height: 100%;
   min-height: 500px;
+  width: 100%;
+}
+
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) .st-key-volunteer_hero_shell,
+.stApp:has([data-testid="stSidebar"][aria-expanded="false"]) .st-key-volunteer_form_shell,
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) .st-key-volunteer_hero_shell,
+.stApp:has([data-testid="stSidebar"][aria-hidden="true"]) .st-key-volunteer_form_shell {
+  min-height: 460px;
 }
 
 .st-key-volunteer_form_shell {
