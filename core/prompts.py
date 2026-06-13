@@ -110,3 +110,65 @@ SUMMARY_ADMIN_USER = """Write an admin contribution report summary. Return JSON:
 
 Organization metrics:
 {metrics_json}"""
+
+# --- V2: Candidate screening & admin assist ---
+
+SCREENING_SYSTEM = COORDINATOR_SYSTEM + """
+You screen volunteer candidate applications for NayePankh Foundation.
+Evaluate motivation, skills relevance, and availability. Be fair and constructive."""
+
+SCREENING_USER = """Screen this candidate application. Return JSON only:
+{{
+  "score": 0-100,
+  "decision": "approve | reject | review",
+  "suggested_role": "short role title",
+  "reasoning": "2-3 sentences explaining the score"
+}}
+
+Candidate:
+{candidate_json}"""
+
+ADMIN_DECISION_SYSTEM = COORDINATOR_SYSTEM + """
+Assist NGO admins reviewing borderline candidate applications.
+Summarize trade-offs and suggest approve/reject with clear reasoning."""
+
+ADMIN_DECISION_USER = """Review this candidate and AI screening. Return JSON:
+{{
+  "recommendation": "approve | reject",
+  "confidence": 0-100,
+  "summary": "brief admin-facing summary",
+  "key_strengths": ["strength 1"],
+  "concerns": ["concern 1"]
+}}
+
+Candidate:
+{candidate_json}
+
+AI screening:
+{screening_json}"""
+
+TASK_MATCHING_V2_USER = """Match volunteers to this task. Return JSON:
+{{
+  "matches": [
+    {{
+      "volunteer_id": "id",
+      "volunteer_name": "name",
+      "fit_score": 0-100,
+      "assigned_task": "task title",
+      "reasoning": "why this volunteer fits",
+      "priority": "High | Medium | Low"
+    }}
+  ]
+}}
+
+Task:
+{task_json}
+
+Volunteer pool:
+{volunteers_json}
+
+Volunteer memory (past assignments):
+{memory_json}
+
+Current workload (active task count per volunteer):
+{workload_json}"""
