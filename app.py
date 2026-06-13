@@ -58,6 +58,7 @@ from utils.ui.components import (
     volunteer_hero_panel,
 )
 from utils.ui.logo import logo_mark_path
+from utils.ui.render import render_html
 from utils.ui.styles import inject_theme
 
 st.set_page_config(
@@ -127,21 +128,20 @@ def render_task_card(task: dict, show_ai_fields: bool = True) -> None:
             f'{html.escape(task["assignment_reason"])}</p>'
         )
 
-    st.markdown(
+    render_html(
         f"""
-        <div class="np-card">
-            <div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;">
-                <div>
-                    <h4 style="margin:0 0 0.5rem 0;font-size:1.1rem;">{html.escape(task["title"])}</h4>
-                    <p style="margin:0;color:#434655;font-size:0.925rem;">{html.escape(task["description"])}</p>
-                </div>
-                <span class="np-status {status_class}">{status}</span>
-            </div>
-            <p style="margin:0.75rem 0 0 0;font-size:0.8rem;color:#737686;">{" · ".join(html.escape(p) for p in meta_parts)}</p>
-            {reason_block}
-        </div>
-        """,
-        unsafe_allow_html=True,
+<div class="np-card">
+  <div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;">
+    <div>
+      <h4 style="margin:0 0 0.5rem 0;font-size:1.1rem;">{html.escape(task["title"])}</h4>
+      <p style="margin:0;color:#434655;font-size:0.925rem;">{html.escape(task["description"])}</p>
+    </div>
+    <span class="np-status {status_class}">{status}</span>
+  </div>
+  <p style="margin:0.75rem 0 0 0;font-size:0.8rem;color:#737686;">{" · ".join(html.escape(p) for p in meta_parts)}</p>
+  {reason_block}
+</div>
+"""
     )
 
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import streamlit as st
+from utils.ui.render import render_html
 
 STITCH_CSS = """
 <style>
@@ -507,4 +507,4 @@ hr, [data-testid="stDivider"] {
 
 
 def inject_theme() -> None:
-    st.markdown(STITCH_CSS, unsafe_allow_html=True)
+    render_html(STITCH_CSS)
