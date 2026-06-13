@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+import html
+import os
 from pathlib import Path
 
 import streamlit as st
+from streamlit.errors import StreamlitPageNotFoundError
+from streamlit.file_util import get_main_script_directory, normalize_path_join
 from streamlit.runtime.scriptrunner_utils.script_run_context import get_script_run_ctx
 
 from core.config import APP_NAME_SHORT, ORG_NAME
@@ -19,6 +23,17 @@ TASKS_PAGE = "pages/3_Task_Assignment.py"
 SETTINGS_PAGE = "pages/4_Settings.py"
 HELP_PAGE = "pages/5_Help_Center.py"
 ACCOUNT_PAGE = "pages/6_Account.py"
+
+# Streamlit multipage URL paths (fallback when page_link registry is incomplete).
+PAGE_HREFS: dict[str, str] = {
+    HOME_PAGE: "/",
+    ONBOARDING_PAGE: "/Volunteer_Onboarding",
+    ADMIN_PAGE: "/Admin_Dashboard",
+    TASKS_PAGE: "/Task_Assignment",
+    SETTINGS_PAGE: "/Settings",
+    HELP_PAGE: "/Help_Center",
+    ACCOUNT_PAGE: "/Account",
+}
 
 NAV_ITEMS: list[tuple[str, str, str, str]] = [
     ("overview", HOME_PAGE, "Overview", "dashboard"),
@@ -41,8 +56,38 @@ def _resolve_page_path(page: str) -> str:
     return page
 
 
+def _registered_page_path(page: str) -> str | None:
+    """Return a script path safe for st.page_link, or None if not registered."""
+    ctx = get_script_run_ctx()
+    if not ctx:
+        return _resolve_page_path(page)
+
+    rel = _resolve_page_path(page)
+    main_dir = get_main_script_directory(ctx.main_script_path)
+    requested = os.path.realpath(normalize_path_join(main_dir, rel))
+
+    for page_data in ctx.pages_manager.get_pages().values():
+        script_path = page_data.get("script_path")
+        if not script_path:
+            continue
+        if os.path.realpath(script_path) != requested:
+            continue
+        if page_data.get("page_script_hash") and "url_pathname" in page_data:
+            return rel.replace("\\", "/")
+    return None
+
+
 def _material_icon(name: str) -> str:
     return f":material/{name}:"
+
+
+def _fallback_nav_link(label: str, icon: str, href: str, *, active: bool) -> None:
+    cls = "np-sidebar-link np-sidebar-link-active" if active else "np-sidebar-link"
+    render_html(
+        f'<a class="{cls}" href="{html.escape(href)}" target="_self">'
+        f'<span class="material-symbols-outlined np-sidebar-icon">{html.escape(icon)}</span>'
+        f"<span>{html.escape(label)}</span></a>"
+    )
 
 
 def _brand_html() -> str:
@@ -71,12 +116,19 @@ def _render_nav_link(
     with st.container(key=container_key):
         if active == page_id:
             render_html('<div class="np-nav-active-flag" aria-hidden="true"></div>')
-        st.page_link(
-            _resolve_page_path(page),
-            label=label,
-            icon=_material_icon(icon),
-            width="stretch",
-        )
+        registered = _registered_page_path(page)
+        if registered:
+            try:
+                st.page_link(
+                    registered,
+                    label=label,
+                    icon=_material_icon(icon),
+                    width="stretch",
+                )
+                return
+            except StreamlitPageNotFoundError:
+                pass
+        _fallback_nav_link(label, icon, PAGE_HREFS.get(page, "/"), active=active == page_id)
 
 
 def render_app_sidebar(active: str = "", *, show_admin_actions: bool = False) -> None:
@@ -103,12 +155,27 @@ def render_app_sidebar(active: str = "", *, show_admin_actions: bool = False) ->
         )
 
     with st.container(key="np_sidebar_cta"):
-        st.page_link(
-            TASKS_PAGE,
-            label="Assign Task",
-            icon=_material_icon("add"),
-            width="stretch",
-        )
+        tasks_registered = _registered_page_path(TASKS_PAGE)
+        if tasks_registered:
+            try:
+                st.page_link(
+                    tasks_registered,
+                    label="Assign Task",
+                    icon=_material_icon("add"),
+                    width="stretch",
+                )
+            except StreamlitPageNotFoundError:
+                render_html(
+                    '<a class="np-sidebar-cta" href="/Task_Assignment" target="_self">'
+                    '<span class="material-symbols-outlined np-sidebar-icon">add</span>'
+                    "<span>Assign Task</span></a>"
+                )
+        else:
+            render_html(
+                '<a class="np-sidebar-cta" href="/Task_Assignment" target="_self">'
+                '<span class="material-symbols-outlined np-sidebar-icon">add</span>'
+                "<span>Assign Task</span></a>"
+            )
 
     with st.container(key="np_sidebar_footer"):
         _render_nav_link(

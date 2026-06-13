@@ -6,31 +6,14 @@ import streamlit as st
 
 from core.config import APP_NAME
 from utils.ui.layout import setup_page
+from utils.ui.mobile_stitch import help_mobile_hero, help_mobile_support_cta
 from utils.ui.support_pages import (
     help_category_grid,
-    help_hero,
     help_support_panel,
     support_page_header,
 )
 
 setup_page(f"Help Center — {APP_NAME}", active="help")
-
-support_page_header("Help Center", f"Documentation and answers for {APP_NAME}.")
-
-help_hero()
-
-search = st.text_input(
-    "Search Help Center",
-    placeholder="Describe what you're looking for…",
-    label_visibility="collapsed",
-)
-
-if search.strip():
-    st.info(f'Showing topics matching "{search.strip()}". Expand an FAQ below for details.')
-
-help_category_grid()
-
-faq_col, side_col = st.columns([2, 1], gap="large")
 
 FAQS = [
     (
@@ -56,16 +39,35 @@ FAQS = [
     ),
 ]
 
-with faq_col:
-    st.markdown("#### Frequently Asked Questions")
-    for question, answer in FAQS:
-        if search.strip() and search.strip().lower() not in f"{question} {answer}".lower():
-            continue
-        with st.expander(question, expanded=question.startswith("How does")):
-            st.write(answer)
+with st.container(key="help_page"):
+    support_page_header("Help Center", f"Documentation and answers for {APP_NAME}.")
+    help_mobile_hero()
 
-with side_col:
-    help_support_panel()
+    search = st.text_input(
+        "Search Help Center",
+        placeholder="Search documentation...",
+        label_visibility="collapsed",
+    )
+
+    if search.strip():
+        st.info(f'Showing topics matching "{search.strip()}". Expand an FAQ below for details.')
+
+    help_category_grid()
+
+    faq_col, side_col = st.columns([2, 1], gap="large")
+
+    with faq_col:
+        st.markdown("#### Frequently Asked Questions")
+        for question, answer in FAQS:
+            if search.strip() and search.strip().lower() not in f"{question} {answer}".lower():
+                continue
+            with st.expander(question, expanded=question.startswith("How does")):
+                st.write(answer)
+
+    with side_col:
+        help_support_panel()
+
+    help_mobile_support_cta()
 
 st.markdown("---")
 st.markdown(

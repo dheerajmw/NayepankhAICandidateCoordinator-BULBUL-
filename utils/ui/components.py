@@ -40,7 +40,14 @@ def brand_block() -> None:
 def page_header(title: str, subtitle: str = "", *, compact: bool = False) -> None:
     sub_class = "np-page-sub np-page-sub-compact" if compact else "np-page-sub"
     sub = f'<p class="{sub_class}">{html.escape(subtitle)}</p>' if subtitle else ""
-    render_html(f'<h1 class="np-page-title">{html.escape(title)}</h1>{sub}')
+    render_html(
+        f"""
+<div class="np-page-header">
+  <h1 class="np-page-title">{html.escape(title)}</h1>
+  {sub}
+</div>
+"""
+    )
 
 
 def hero_panel(title: str, subtitle: str, badge: str = "AI OS") -> None:

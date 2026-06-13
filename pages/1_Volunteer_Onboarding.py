@@ -14,6 +14,11 @@ from utils.ui.components import (
 )
 from core.config import APP_NAME
 from utils.ui.layout import setup_onboarding_page
+from utils.ui.mobile_stitch import (
+    onboarding_mobile_chat,
+    onboarding_mobile_progress_bar,
+    onboarding_step_header,
+)
 from utils.ui.render import render_html
 
 setup_onboarding_page(f"Volunteer Onboarding — {APP_NAME}")
@@ -104,8 +109,23 @@ if screening_phase == "running" and st.session_state.get(SCREENING_WORK_KEY):
             _clear_screening_state()
         st.rerun()
 
+def _mobile_onboarding_layout() -> bool:
+    try:
+        if st.query_params.get("np_m") == "1":
+            return True
+        if st.query_params.get("np_m") == "0":
+            return False
+    except Exception:
+        pass
+    return bool(st.session_state.get("np_is_mobile", False))
+
+
+is_mobile = _mobile_onboarding_layout()
+show_idle_mobile_chat = screening_phase not in ("running", "done")
+
 with st.container(key="onboarding_page"):
-    render_onboarding_background()
+    if not is_mobile:
+        render_onboarding_background()
 
     if screening_phase == "running":
         hero_state = "loading"
@@ -117,8 +137,13 @@ with st.container(key="onboarding_page"):
         hero_state = "idle"
         hero_progress = 45
 
-    with st.container(key="volunteer_hero_shell"):
-        onboarding_hero_panel(progress=hero_progress, v2=True, state=hero_state)
+    if not is_mobile:
+        with st.container(key="volunteer_hero_shell"):
+            onboarding_hero_panel(progress=hero_progress, v2=True, state=hero_state)
+
+    if show_idle_mobile_chat:
+        with st.container(key="onboarding_mobile_chat"):
+            onboarding_mobile_chat()
 
     with st.container(key="volunteer_form_shell"):
         screening_error = st.session_state.pop("np_screening_error", None)
@@ -163,42 +188,46 @@ with st.container(key="onboarding_page"):
 """
             )
         else:
-            onboarding_profile_header(v2=True)
-
-            render_onboarding_skills_interests(
-                SKILLS_KEY,
-                INTERESTS_KEY,
-                SKILL_OPTIONS,
-                INTEREST_OPTIONS,
-            )
-
-            with st.form("volunteer_onboarding", clear_on_submit=True):
-                name_col, email_col = st.columns(2, gap="medium")
-                with name_col:
-                    name = st.text_input("Full Name", placeholder="e.g. Alex Rivera", key="onboarding_name")
-                with email_col:
-                    email = st.text_input("Email Address", placeholder="alex@impact.org", key="onboarding_email")
-
-                phone = st.text_input(
-                    "Phone Number",
-                    placeholder="+1 (555) 000-0000",
-                    key="onboarding_phone",
+            with st.container(key="volunteer_form_card"):
+                onboarding_profile_header(v2=True)
+                render_onboarding_skills_interests(
+                    SKILLS_KEY,
+                    INTERESTS_KEY,
+                    SKILL_OPTIONS,
+                    INTEREST_OPTIONS,
                 )
 
-                st.markdown('<p class="np-v2-field-label">Availability</p>', unsafe_allow_html=True)
-                with st.container(key="availability_cards", horizontal=True, gap=None):
-                    weekdays = st.checkbox("Weekdays", key="avail_weekdays")
-                    weekends = st.checkbox("Weekends", key="avail_weekends")
-                    flexible = st.checkbox("Flexible", key="avail_flexible")
+                with st.form("volunteer_onboarding", clear_on_submit=True):
+                    onboarding_step_header(1, "Basics")
+                    name_col, email_col = st.columns(2, gap="medium")
+                    with name_col:
+                        name = st.text_input("Full Name", placeholder="e.g. Alex Rivera", key="onboarding_name")
+                    with email_col:
+                        email = st.text_input("Email Address", placeholder="alex@impact.org", key="onboarding_email")
 
-                motivation = st.text_area(
-                    "Motivation",
-                    placeholder="What drives you to make a change?",
-                    height=56,
-                )
+                    phone = st.text_input(
+                        "Phone Number",
+                        placeholder="+1 (555) 000-0000",
+                        key="onboarding_phone",
+                    )
 
-                cta_col, btn_col = st.columns([1.4, 1], gap="small")
-                with cta_col:
+                    onboarding_step_header(3, "Availability")
+                    st.markdown(
+                        '<p class="np-v2-field-label np-v2-field-label--sr">Availability</p>',
+                        unsafe_allow_html=True,
+                    )
+                    with st.container(key="availability_cards", horizontal=True, gap=None):
+                        weekdays = st.checkbox("Weekdays", key="avail_weekdays")
+                        weekends = st.checkbox("Weekends", key="avail_weekends")
+                        flexible = st.checkbox("Flexible", key="avail_flexible")
+
+                    onboarding_step_header(4, "Motivation")
+                    motivation = st.text_area(
+                        "Motivation",
+                        placeholder="What drives you to make a change?",
+                        height=56,
+                    )
+
                     render_html(
                         """
 <div class="np-v2-form-footer">
@@ -209,12 +238,13 @@ with st.container(key="onboarding_page"):
 </div>
 """
                     )
-                with btn_col:
                     submitted = st.form_submit_button(
                         "Start AI Screening →",
                         type="primary",
                         use_container_width=True,
                     )
+
+            onboarding_mobile_progress_bar(68)
 
             if submitted:
                 skills = list(st.session_state.get(SKILLS_KEY, []))
