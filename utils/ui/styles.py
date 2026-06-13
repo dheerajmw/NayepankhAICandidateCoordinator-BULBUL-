@@ -133,14 +133,14 @@ div[data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
   min-height: 44px !important;
 }
 
-/* Input fields — visible borders and backgrounds (Streamlit 1.32+ / BaseWeb) */
+/* Input fields — style BaseWeb wrappers only (not parent blocks with hints) */
 [data-testid="stTextInput"],
 [data-testid="stTextArea"],
 [data-testid="stNumberInput"],
 [data-testid="stSelectbox"],
 [data-testid="stDateInput"],
 [data-testid="stMultiSelect"] {
-  margin-bottom: 0.25rem !important;
+  margin-bottom: 0.35rem !important;
 }
 
 [data-testid="stWidgetLabel"] p,
@@ -155,15 +155,12 @@ div[data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
 
 div[data-baseweb="input"],
 div[data-baseweb="textarea"],
-div[data-baseweb="select"] > div,
-[data-testid="stTextInput"] > div > div,
-[data-testid="stTextArea"] > div > div,
-[data-testid="stNumberInput"] > div > div,
-[data-testid="stSelectbox"] > div > div {
+div[data-baseweb="select"] > div {
   background-color: var(--np-surface-low) !important;
   border: 1.5px solid var(--np-outline-variant) !important;
   border-radius: 8px !important;
   min-height: 44px !important;
+  box-sizing: border-box !important;
   transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
 }
 
@@ -182,9 +179,13 @@ div[data-baseweb="input"] input,
 div[data-baseweb="textarea"] textarea {
   background-color: transparent !important;
   border: none !important;
+  box-shadow: none !important;
   color: var(--np-on-surface) !important;
   font-size: 0.9375rem !important;
-  padding: 0.65rem 0.85rem !important;
+  line-height: 1.45 !important;
+  padding: 0.625rem 2rem 0.625rem 0.875rem !important;
+  min-height: 40px !important;
+  height: auto !important;
 }
 
 div[data-baseweb="input"] input::placeholder,
@@ -194,20 +195,24 @@ div[data-baseweb="textarea"] textarea::placeholder {
 }
 
 .stTextInput input,
-.stTextArea textarea,
-.stSelectbox div[data-baseweb="select"] > div {
-  background-color: var(--np-surface-low) !important;
-  border: 1.5px solid var(--np-outline-variant) !important;
-  border-radius: 8px !important;
-  color: var(--np-on-surface) !important;
-  min-height: 44px !important;
+.stTextArea textarea {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: unset !important;
 }
 
-.stTextInput input:focus,
-.stTextArea textarea:focus {
-  border-color: var(--np-primary-container) !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
-  outline: none !important;
+/* Keep Enter-to-submit hint out of the input box */
+[data-testid="InputInstructions"] {
+  display: block !important;
+  margin-top: 0.2rem !important;
+  font-size: 0.72rem !important;
+  color: #737686 !important;
+  line-height: 1.3 !important;
+}
+
+div[data-testid="stForm"] [data-testid="InputInstructions"] {
+  display: none !important;
 }
 
 [data-testid="stHorizontalBlock"] {
@@ -377,9 +382,7 @@ hr, [data-testid="stDivider"] {
 }
 
 .st-key-volunteer_form_shell div[data-baseweb="input"],
-.st-key-volunteer_form_shell div[data-baseweb="textarea"],
-.st-key-volunteer_form_shell [data-testid="stTextInput"] > div > div,
-.st-key-volunteer_form_shell [data-testid="stTextArea"] > div > div {
+.st-key-volunteer_form_shell div[data-baseweb="textarea"] {
   background-color: #ffffff !important;
   border: 1.5px solid #b8bfd4 !important;
 }
