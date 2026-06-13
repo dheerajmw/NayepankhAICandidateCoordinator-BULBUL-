@@ -2869,6 +2869,165 @@ html:has(.st-key-onboarding_page) .stApp [data-testid="stAppViewContainer"] {
   color: var(--np-on-surface-variant);
 }
 
+/* ── Mobile (≤768px) ── */
+@media (max-width: 768px) {
+  .stApp [data-testid="stMain"],
+  .stApp section.main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .stApp:has(.np-sidebar-hidden-flag) [data-testid="stSidebar"],
+  .stApp:has(.np-sidebar-hidden-flag) section[data-testid="stSidebar"] {
+    transform: translateX(-105%) !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  html.np-is-mobile .stApp:has(.np-sidebar-visible-flag) [data-testid="stMain"],
+  html.np-is-mobile .stApp:has(.np-sidebar-hidden-flag) [data-testid="stMain"],
+  html.np-is-mobile .stApp:has(.np-sidebar-visible-flag) section.main,
+  html.np-is-mobile .stApp:has(.np-sidebar-hidden-flag) section.main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  html.np-is-mobile .stApp:has(.np-sidebar-hidden-flag) [data-testid="stSidebar"],
+  html.np-is-mobile .stApp:has(.np-sidebar-hidden-flag) section[data-testid="stSidebar"] {
+    transform: translateX(-105%) !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  html.np-is-mobile .stApp:has(.np-sidebar-visible-flag) [data-testid="stSidebar"],
+  html.np-is-mobile .stApp:has(.np-sidebar-visible-flag) section[data-testid="stSidebar"] {
+    transform: translateX(0) !important;
+    width: min(280px, 88vw) !important;
+    min-width: min(280px, 88vw) !important;
+    z-index: 1005 !important;
+    box-shadow: 4px 0 32px rgba(19, 27, 46, 0.2) !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  }
+
+  html.np-is-mobile .stApp:has(.np-sidebar-hidden-flag) [data-testid="stSidebar"],
+  html.np-is-mobile .stApp:has(.np-sidebar-hidden-flag) section[data-testid="stSidebar"] {
+    transition: transform 0.25s ease !important;
+  }
+
+  html.np-is-mobile .st-key-np_sidebar_chevron {
+    left: 0.75rem !important;
+    top: 0.65rem !important;
+    transform: none !important;
+  }
+
+  html.np-is-mobile .stApp:has(.np-sidebar-visible-flag) .st-key-np_sidebar_chevron {
+    left: calc(min(280px, 88vw) - 0.65rem) !important;
+    transform: translateX(-100%) !important;
+  }
+
+  .np-mobile-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1004;
+    background: rgba(11, 28, 48, 0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  [data-testid="stMain"] .block-container,
+  html.np-is-mobile [data-testid="stMain"] .block-container {
+    padding-top: 3.25rem !important;
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+    padding-bottom: 2rem !important;
+    max-width: 100% !important;
+  }
+
+  .np-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
+    margin-bottom: 1rem;
+  }
+  .np-kpi-card { padding: 0.85rem 0.9rem; }
+  .np-kpi-value { font-size: 1.35rem; }
+  .np-kpi-label { font-size: 0.72rem; }
+  .np-kpi-icon { width: 2rem; height: 2rem; }
+  .np-kpi-badge { font-size: 0.58rem; padding: 0.12rem 0.4rem; }
+
+  .np-flow-grid { grid-template-columns: 1fr; gap: 0.85rem; }
+  .np-hero-grid { grid-template-columns: 1fr; }
+  .np-support-title { font-size: 1.45rem; }
+  .np-support-sub { font-size: 0.875rem; }
+  .np-page-title { font-size: 1.45rem; }
+  .np-help-bento { grid-template-columns: 1fr; }
+  .np-account-meta-grid { grid-template-columns: 1fr; }
+  .np-system-health-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+  }
+
+  [data-testid="stHorizontalBlock"] {
+    flex-direction: column !important;
+    gap: 0.65rem !important;
+    width: 100% !important;
+  }
+  [data-testid="column"] {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+  }
+
+  .st-key-availability_cards,
+  .st-key-availability_cards > div[data-testid="stVerticalBlock"],
+  .st-key-availability_cards [data-testid="stHorizontalBlock"],
+  .st-key-manual_row_onboarding_skills [data-testid="stHorizontalBlock"],
+  .st-key-manual_row_onboarding_interests [data-testid="stHorizontalBlock"],
+  .stTabs [data-baseweb="tab-list"] {
+    flex-direction: row !important;
+  }
+
+  .stTabs [data-baseweb="tab-list"] {
+    flex-wrap: wrap !important;
+    gap: 0.35rem !important;
+  }
+  .stTabs [data-baseweb="tab"] {
+    padding: 0.42rem 0.7rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .st-key-onboarding_page > div > [data-testid="stHorizontalBlock"]:nth-last-child(1) {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .st-key-volunteer_form_shell {
+    padding: 0.85rem 0.95rem 0.9rem 0.95rem !important;
+  }
+
+  .st-key-volunteer_hero_shell {
+    margin-right: 0 !important;
+  }
+
+  div[data-testid="stForm"] {
+    padding: 1rem !important;
+  }
+
+  .np-onboarding-v2-hero { min-height: auto; }
+  .np-onboarding-v2-form-title { font-size: 1.15rem; }
+  .np-glass-card { padding: 1rem 1.05rem; }
+}
+
+@media (max-width: 480px) {
+  .np-kpi-grid { grid-template-columns: 1fr; }
+  .st-key-availability_cards [data-testid="stCheckbox"] label p {
+    font-size: 0.72rem !important;
+  }
+}
+
 @media (max-width: 960px) {
   .np-help-bento { grid-template-columns: 1fr; }
   .np-account-meta-grid { grid-template-columns: 1fr; }
@@ -2899,6 +3058,28 @@ html:has(.st-key-onboarding_page) .stApp [data-testid="stAppViewContainer"] {
         doc.querySelector('[data-testid="stMain"]') ||
         doc.querySelector("section.main");
       const isOnboarding = !!doc.querySelector(".st-key-onboarding_page");
+      const viewportW =
+        window.innerWidth ||
+        doc.documentElement.clientWidth ||
+        (app && app.clientWidth) ||
+        1024;
+      const isMobile = viewportW <= 768;
+      doc.documentElement.classList.toggle("np-is-mobile", isMobile);
+
+      function npSyncMobileBackdrop(show) {
+        var existing = doc.getElementById("np-mobile-sidebar-backdrop");
+        if (!show) {
+          if (existing) existing.remove();
+          return;
+        }
+        if (!existing) {
+          existing = doc.createElement("div");
+          existing.id = "np-mobile-sidebar-backdrop";
+          existing.className = "np-mobile-sidebar-backdrop";
+          existing.setAttribute("aria-hidden", "true");
+          doc.body.appendChild(existing);
+        }
+      }
 
       if (isOnboarding) {
         [html, body].forEach(function (el) {
@@ -2940,37 +3121,59 @@ html:has(.st-key-onboarding_page) .stApp [data-testid="stAppViewContainer"] {
       }
 
       const hidden = !!doc.querySelector(".np-sidebar-hidden-flag");
-      const sidebarW = hidden ? 0 : 280;
+      let sidebarW = hidden ? 0 : 280;
+      if (isMobile) {
+        sidebarW = 0;
+      }
 
       if (sidebar && !hidden) {
         sidebar.style.setProperty("position", "fixed", "important");
         sidebar.style.setProperty("top", "0", "important");
         sidebar.style.setProperty("left", "0", "important");
-        sidebar.style.setProperty("width", "280px", "important");
-        sidebar.style.setProperty("min-width", "280px", "important");
+        sidebar.style.setProperty("width", isMobile ? "min(280px, 88vw)" : "280px", "important");
+        sidebar.style.setProperty("min-width", isMobile ? "min(280px, 88vw)" : "280px", "important");
         sidebar.style.setProperty("height", "100vh", "important");
         sidebar.style.setProperty("overflow-y", "auto", "important");
-        sidebar.style.setProperty("z-index", "998", "important");
-        sidebar.style.setProperty("transform", "none", "important");
+        sidebar.style.setProperty("z-index", isMobile ? "1005" : "998", "important");
+        sidebar.style.setProperty("transform", isMobile ? "translateX(0)" : "none", "important");
         sidebar.style.setProperty("visibility", "visible", "important");
         sidebar.style.setProperty("opacity", "1", "important");
         sidebar.style.setProperty("pointer-events", "auto", "important");
+        if (isMobile) {
+          sidebar.style.setProperty(
+            "box-shadow",
+            "4px 0 32px rgba(19, 27, 46, 0.2)",
+            "important"
+          );
+        }
       } else if (sidebar) {
         sidebar.style.setProperty("width", "0", "important");
         sidebar.style.setProperty("min-width", "0", "important");
+        sidebar.style.setProperty(
+          "transform",
+          isMobile ? "translateX(-105%)" : "none",
+          "important"
+        );
         sidebar.style.setProperty("visibility", "hidden", "important");
         sidebar.style.setProperty("pointer-events", "none", "important");
       }
 
+      npSyncMobileBackdrop(isMobile && !hidden);
+
       const chevron = doc.querySelector(".st-key-np_sidebar_chevron");
       if (chevron) {
         chevron.style.setProperty("position", "fixed", "important");
-        chevron.style.setProperty("top", "12px", "important");
+        chevron.style.setProperty("top", isMobile ? "10px" : "12px", "important");
         chevron.style.setProperty("z-index", "1006", "important");
         chevron.style.setProperty("pointer-events", "auto", "important");
-        if (hidden) {
+        if (hidden || isMobile) {
           chevron.style.setProperty("left", "12px", "important");
-          chevron.style.setProperty("transform", "none", "important");
+          if (!hidden && isMobile) {
+            chevron.style.setProperty("left", "calc(min(280px, 88vw) - 10px)", "important");
+            chevron.style.setProperty("transform", "translateX(-100%)", "important");
+          } else {
+            chevron.style.setProperty("transform", "none", "important");
+          }
         } else {
           chevron.style.setProperty("left", "calc(280px - 10px)", "important");
           chevron.style.setProperty("transform", "translateX(-100%)", "important");
@@ -3010,6 +3213,7 @@ html:has(.st-key-onboarding_page) .stApp [data-testid="stAppViewContainer"] {
   }
 
   npAppLayoutFix();
+  window.addEventListener("resize", npAppLayoutFix);
   setInterval(npAppLayoutFix, 600);
 })();
 </script>

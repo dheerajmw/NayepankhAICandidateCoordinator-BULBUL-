@@ -12,7 +12,8 @@ from utils.ui.styles import inject_theme
 
 def _init_sidebar_visibility() -> None:
     if "np_sidebar_visible" not in st.session_state:
-        st.session_state.np_sidebar_visible = True
+        # Collapsed by default — mobile uses the chevron as a menu toggle.
+        st.session_state.np_sidebar_visible = False
 
 
 def _render_sidebar_visibility_flags() -> None:
@@ -26,7 +27,7 @@ def _render_sidebar_chevron() -> None:
     """Fixed « / » toggle — always outside the sidebar panel."""
     visible = st.session_state.get("np_sidebar_visible", True)
     label = "«" if visible else "»"
-    if st.button(label, key="np_sidebar_chevron", help="Toggle navigation menu"):
+    if st.button(label, key="np_sidebar_chevron", help="Open or close navigation menu"):
         st.session_state.np_sidebar_visible = not visible
         st.rerun()
 
