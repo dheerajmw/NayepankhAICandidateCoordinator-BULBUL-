@@ -117,23 +117,19 @@ with st.container(key="onboarding_page"):
         hero_state = "idle"
         hero_progress = 45
 
-    hero_col, form_col = st.columns([2, 3], gap="large")
+    with st.container(key="volunteer_hero_shell"):
+        onboarding_hero_panel(progress=hero_progress, v2=True, state=hero_state)
 
-    with hero_col:
-        with st.container(key="volunteer_hero_shell"):
-            onboarding_hero_panel(progress=hero_progress, v2=True, state=hero_state)
+    with st.container(key="volunteer_form_shell"):
+        screening_error = st.session_state.pop("np_screening_error", None)
+        if screening_error:
+            st.error(screening_error)
 
-    with form_col:
-        with st.container(key="volunteer_form_shell"):
-            screening_error = st.session_state.pop("np_screening_error", None)
-            if screening_error:
-                st.error(screening_error)
-
-            if screening_phase == "done" and screening_result:
-                screening = screening_result["screening"]
-                score = int(screening.get("score", 0))
-                render_html(
-                    f"""
+        if screening_phase == "done" and screening_result:
+            screening = screening_result["screening"]
+            score = int(screening.get("score", 0))
+            render_html(
+                f"""
 <div class="np-screening-card np-onboarding-v2-success">
   <h4 class="np-onboarding-v2-form-title">Profile submitted</h4>
   <p class="np-onboarding-v2-form-sub">AI screening completed — an NGO admin will review your application.</p>
@@ -152,59 +148,59 @@ with st.container(key="onboarding_page"):
   </p>
 </div>
 """
-                )
-                if st.button("Submit another application", type="secondary"):
-                    _clear_screening_state()
-                    st.rerun()
-            elif screening_phase == "running":
-                onboarding_profile_header(v2=True)
-                render_html(
-                    """
+            )
+            if st.button("Submit another application", type="secondary"):
+                _clear_screening_state()
+                st.rerun()
+        elif screening_phase == "running":
+            onboarding_profile_header(v2=True)
+            render_html(
+                """
 <div class="np-screening-card np-onboarding-v2-success">
   <h4 class="np-onboarding-v2-form-title">Screening in progress</h4>
   <p class="np-onboarding-v2-form-sub">Bulbul AI is reviewing your profile. This usually takes a few seconds.</p>
 </div>
 """
+            )
+        else:
+            onboarding_profile_header(v2=True)
+
+            render_onboarding_skills_interests(
+                SKILLS_KEY,
+                INTERESTS_KEY,
+                SKILL_OPTIONS,
+                INTEREST_OPTIONS,
+            )
+
+            with st.form("volunteer_onboarding", clear_on_submit=True):
+                name_col, email_col = st.columns(2, gap="medium")
+                with name_col:
+                    name = st.text_input("Full Name", placeholder="e.g. Alex Rivera", key="onboarding_name")
+                with email_col:
+                    email = st.text_input("Email Address", placeholder="alex@impact.org", key="onboarding_email")
+
+                phone = st.text_input(
+                    "Phone Number",
+                    placeholder="+1 (555) 000-0000",
+                    key="onboarding_phone",
                 )
-            else:
-                onboarding_profile_header(v2=True)
 
-                render_onboarding_skills_interests(
-                    SKILLS_KEY,
-                    INTERESTS_KEY,
-                    SKILL_OPTIONS,
-                    INTEREST_OPTIONS,
+                st.markdown('<p class="np-v2-field-label">Availability</p>', unsafe_allow_html=True)
+                with st.container(key="availability_cards", horizontal=True, gap=None):
+                    weekdays = st.checkbox("Weekdays", key="avail_weekdays")
+                    weekends = st.checkbox("Weekends", key="avail_weekends")
+                    flexible = st.checkbox("Flexible", key="avail_flexible")
+
+                motivation = st.text_area(
+                    "Motivation",
+                    placeholder="What drives you to make a change?",
+                    height=56,
                 )
 
-                with st.form("volunteer_onboarding", clear_on_submit=True):
-                    name_col, email_col = st.columns(2, gap="medium")
-                    with name_col:
-                        name = st.text_input("Full Name", placeholder="e.g. Alex Rivera", key="onboarding_name")
-                    with email_col:
-                        email = st.text_input("Email Address", placeholder="alex@impact.org", key="onboarding_email")
-
-                    phone = st.text_input(
-                        "Phone Number",
-                        placeholder="+1 (555) 000-0000",
-                        key="onboarding_phone",
-                    )
-
-                    st.markdown('<p class="np-v2-field-label">Availability</p>', unsafe_allow_html=True)
-                    with st.container(key="availability_cards", horizontal=True, gap=None):
-                        weekdays = st.checkbox("Weekdays", key="avail_weekdays")
-                        weekends = st.checkbox("Weekends", key="avail_weekends")
-                        flexible = st.checkbox("Flexible", key="avail_flexible")
-
-                    motivation = st.text_area(
-                        "Motivation",
-                        placeholder="What drives you to make a change?",
-                        height=56,
-                    )
-
-                    cta_col, btn_col = st.columns([1.4, 1], gap="small")
-                    with cta_col:
-                        render_html(
-                            """
+                cta_col, btn_col = st.columns([1.4, 1], gap="small")
+                with cta_col:
+                    render_html(
+                        """
 <div class="np-v2-form-footer">
   <div class="np-v2-form-footer-copy">
     <span class="np-v2-form-footer-sub">Ready for the intelligence match?</span>
@@ -212,48 +208,48 @@ with st.container(key="onboarding_page"):
   </div>
 </div>
 """
-                        )
-                    with btn_col:
-                        submitted = st.form_submit_button(
-                            "Start AI Screening →",
-                            type="primary",
-                            use_container_width=True,
-                        )
+                    )
+                with btn_col:
+                    submitted = st.form_submit_button(
+                        "Start AI Screening →",
+                        type="primary",
+                        use_container_width=True,
+                    )
 
-                if submitted:
-                    skills = list(st.session_state.get(SKILLS_KEY, []))
-                    interests = list(st.session_state.get(INTERESTS_KEY, []))
+            if submitted:
+                skills = list(st.session_state.get(SKILLS_KEY, []))
+                interests = list(st.session_state.get(INTERESTS_KEY, []))
 
-                    selected_slots = [
-                        label
-                        for label, checked in {
-                            "Weekdays": weekdays,
-                            "Weekends": weekends,
-                            "Flexible": flexible,
-                        }.items()
-                        if checked
-                    ]
-                    availability = _format_availability(selected_slots)
-                    if phone.strip():
-                        availability = f"{availability}; Phone: {phone.strip()}"
+                selected_slots = [
+                    label
+                    for label, checked in {
+                        "Weekdays": weekdays,
+                        "Weekends": weekends,
+                        "Flexible": flexible,
+                    }.items()
+                    if checked
+                ]
+                availability = _format_availability(selected_slots)
+                if phone.strip():
+                    availability = f"{availability}; Phone: {phone.strip()}"
 
-                    if not all([name.strip(), email.strip(), motivation.strip(), selected_slots]):
-                        st.error("Please complete name, email, at least one availability option, and motivation.")
-                    elif not skills and not interests:
-                        st.error("Please select or add at least one skill or interest.")
-                    else:
-                        st.session_state[SCREENING_PAYLOAD_KEY] = {
-                            "name": name.strip(),
-                            "email": email.strip(),
-                            "skills": skills or ["General"],
-                            "interests": interests or ["Community Impact"],
-                            "availability": availability,
-                            "motivation": motivation.strip(),
-                        }
-                        st.session_state[SCREENING_PHASE_KEY] = "running"
-                        st.session_state.pop(SCREENING_RESULT_KEY, None)
-                        st.session_state.pop(SCREENING_WORK_KEY, None)
-                        st.rerun()
+                if not all([name.strip(), email.strip(), motivation.strip(), selected_slots]):
+                    st.error("Please complete name, email, at least one availability option, and motivation.")
+                elif not skills and not interests:
+                    st.error("Please select or add at least one skill or interest.")
+                else:
+                    st.session_state[SCREENING_PAYLOAD_KEY] = {
+                        "name": name.strip(),
+                        "email": email.strip(),
+                        "skills": skills or ["General"],
+                        "interests": interests or ["Community Impact"],
+                        "availability": availability,
+                        "motivation": motivation.strip(),
+                    }
+                    st.session_state[SCREENING_PHASE_KEY] = "running"
+                    st.session_state.pop(SCREENING_RESULT_KEY, None)
+                    st.session_state.pop(SCREENING_WORK_KEY, None)
+                    st.rerun()
 
 if screening_phase == "running" and st.session_state.get(SCREENING_PAYLOAD_KEY):
     if not st.session_state.get(SCREENING_WORK_KEY):

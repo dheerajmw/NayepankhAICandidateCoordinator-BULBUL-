@@ -2,81 +2,131 @@
 
 from __future__ import annotations
 
-import html
+from pathlib import Path
 
 import streamlit as st
+from streamlit.runtime.scriptrunner_utils.script_run_context import get_script_run_ctx
 
 from core.config import APP_NAME_SHORT, ORG_NAME
 from utils.auth import is_admin_authenticated
 from utils.ui.logo import logo_svg_markup
 from utils.ui.render import render_html
 
-HOME_PATH = "/"
-ONBOARDING_PATH = "/Volunteer_Onboarding"
-ADMIN_PATH = "/Admin_Dashboard"
-TASKS_PATH = "/Task_Assignment"
-SETTINGS_PATH = "/Settings"
-HELP_PATH = "/Help_Center"
-ACCOUNT_PATH = "/Account"
+HOME_PAGE = "home"
+ONBOARDING_PAGE = "pages/1_Volunteer_Onboarding.py"
+ADMIN_PAGE = "pages/2_Admin_Dashboard.py"
+TASKS_PAGE = "pages/3_Task_Assignment.py"
+SETTINGS_PAGE = "pages/4_Settings.py"
+HELP_PAGE = "pages/5_Help_Center.py"
+ACCOUNT_PAGE = "pages/6_Account.py"
 
 NAV_ITEMS: list[tuple[str, str, str, str]] = [
-    ("overview", HOME_PATH, "Overview", "dashboard"),
-    ("onboarding", ONBOARDING_PATH, "Volunteer Onboarding", "person_add"),
-    ("admin", ADMIN_PATH, "Volunteers", "group"),
-    ("tasks", TASKS_PATH, "Task Engine", "precision_manufacturing"),
+    ("overview", HOME_PAGE, "Overview", "dashboard"),
+    ("onboarding", ONBOARDING_PAGE, "Volunteer Onboarding", "person_add"),
+    ("admin", ADMIN_PAGE, "Volunteers", "group"),
+    ("tasks", TASKS_PAGE, "Task Engine", "precision_manufacturing"),
 ]
 
 
-def _nav_link(active: str, page_id: str, href: str, label: str, icon: str) -> str:
-    cls = "np-sidebar-link np-sidebar-link-active" if active == page_id else "np-sidebar-link"
-    return (
-        f'<a class="{cls}" href="{html.escape(href)}" target="_self">'
-        f'<span class="material-symbols-outlined np-sidebar-icon">{html.escape(icon)}</span>'
-        f"<span>{html.escape(label)}</span></a>"
-    )
+def _home_script_path() -> str:
+    ctx = get_script_run_ctx()
+    if ctx and ctx.main_script_path:
+        return Path(ctx.main_script_path).name
+    return "streamlit_app.py"
 
 
-def _footer_link(active: str, page_id: str, href: str, label: str, icon: str) -> str:
-    cls = "np-sidebar-footer-link np-sidebar-link-active" if active == page_id else "np-sidebar-footer-link"
-    return (
-        f'<a class="{cls}" href="{html.escape(href)}" target="_self">'
-        f'<span class="material-symbols-outlined np-sidebar-icon">{html.escape(icon)}</span>'
-        f"<span>{html.escape(label)}</span></a>"
-    )
+def _resolve_page_path(page: str) -> str:
+    if page == HOME_PAGE:
+        return _home_script_path()
+    return page
 
 
-def sidebar_html(active: str) -> str:
-    nav = "".join(_nav_link(active, pid, href, label, icon) for pid, href, label, icon in NAV_ITEMS)
+def _material_icon(name: str) -> str:
+    return f":material/{name}:"
+
+
+def _brand_html() -> str:
     return f"""
-<div class="np-sidebar-shell">
-  <div class="np-sidebar-brand">
-    <div class="np-sidebar-brand-icon">
-      {logo_svg_markup(size=40)}
-    </div>
-    <div>
-      <p class="np-sidebar-brand-title">{APP_NAME_SHORT}</p>
-      <p class="np-sidebar-brand-sub">by {ORG_NAME}</p>
-    </div>
+<div class="np-sidebar-brand">
+  <div class="np-sidebar-brand-icon">
+    {logo_svg_markup(size=40)}
   </div>
-  <nav class="np-sidebar-nav" aria-label="Main navigation">
-    {nav}
-    {_nav_link(active, "settings", SETTINGS_PATH, "Settings", "settings")}
-  </nav>
-  <a class="np-sidebar-cta" href="{html.escape(TASKS_PATH)}" target="_self">
-    <span class="material-symbols-outlined np-sidebar-icon">add</span>
-    <span>Assign Task</span>
-  </a>
-  <div class="np-sidebar-footer">
-    {_footer_link(active, "help", HELP_PATH, "Help Center", "help")}
-    {_footer_link(active, "account", ACCOUNT_PATH, "Account", "manage_accounts")}
+  <div>
+    <p class="np-sidebar-brand-title">{APP_NAME_SHORT}</p>
+    <p class="np-sidebar-brand-sub">by {ORG_NAME}</p>
   </div>
 </div>
 """
 
 
+def _render_nav_link(
+    active: str,
+    page_id: str,
+    page: str,
+    label: str,
+    icon: str,
+    *,
+    container_key: str,
+) -> None:
+    with st.container(key=container_key):
+        if active == page_id:
+            render_html('<div class="np-nav-active-flag" aria-hidden="true"></div>')
+        st.page_link(
+            _resolve_page_path(page),
+            label=label,
+            icon=_material_icon(icon),
+            width="stretch",
+        )
+
+
 def render_app_sidebar(active: str = "", *, show_admin_actions: bool = False) -> None:
     """Render the shared Stitch sidebar on every screen."""
-    render_html(sidebar_html(active))
+    render_html(_brand_html())
+
+    with st.container(key="np_sidebar_nav"):
+        for page_id, page, label, icon in NAV_ITEMS:
+            _render_nav_link(
+                active,
+                page_id,
+                page,
+                label,
+                icon,
+                container_key=f"np_nav_{page_id}",
+            )
+        _render_nav_link(
+            active,
+            "settings",
+            SETTINGS_PAGE,
+            "Settings",
+            "settings",
+            container_key="np_nav_settings",
+        )
+
+    with st.container(key="np_sidebar_cta"):
+        st.page_link(
+            TASKS_PAGE,
+            label="Assign Task",
+            icon=_material_icon("add"),
+            width="stretch",
+        )
+
+    with st.container(key="np_sidebar_footer"):
+        _render_nav_link(
+            active,
+            "help",
+            HELP_PAGE,
+            "Help Center",
+            "help",
+            container_key="np_nav_help",
+        )
+        _render_nav_link(
+            active,
+            "account",
+            ACCOUNT_PAGE,
+            "Account",
+            "manage_accounts",
+            container_key="np_nav_account",
+        )
 
     if show_admin_actions and is_admin_authenticated():
         if st.button("Sign out admin", key="sidebar_signout", use_container_width=True):
