@@ -261,8 +261,30 @@ hr, [data-testid="stDivider"] {
   overflow: hidden;
 }
 
-#MainMenu, footer, header[data-testid="stHeader"] {
-  visibility: hidden;
+#MainMenu, footer {
+  visibility: hidden !important;
+  display: none !important;
+}
+
+header[data-testid="stHeader"] {
+  visibility: visible !important;
+  background: var(--np-bg) !important;
+  border-bottom: 1px solid var(--np-outline-variant);
+}
+
+header[data-testid="stHeader"] [data-testid="stToolbar"] {
+  visibility: visible !important;
+}
+
+header[data-testid="stHeader"] button[kind="header"],
+header[data-testid="stHeader"] [data-testid="stSidebarCollapsedControl"],
+header[data-testid="stHeader"] [data-testid="collapsedControl"] {
+  visibility: visible !important;
+  display: inline-flex !important;
+}
+
+[data-testid="stAppDeployButton"] {
+  display: none !important;
 }
 
 .material-symbols-outlined {
