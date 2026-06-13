@@ -1,0 +1,14 @@
+[
+  {
+    "id": "fdd86b56-42c6-4d4e-8425-b1d57b93847a",
+    "task_id": "f4a75db2-293d-4475-821c-1c8855108f14",
+    "volunteer_id": "2389cd14-a746-4d18-a14a-be36c43a26b7",
+    "notification_type": "completion",
+    "recipient": "eve@test.com",
+    "channel": "log",
+    "status": "sent",
+    "subject": "Thank you — task completed: Class",
+    "error": null,
+    "sent_at": "2026-06-13T10:47:39+00:00"
+  }
+]

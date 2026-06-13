@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: #faf8ff;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c3c6d7;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #737686;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#d3e4fe",
+                      "surface": "#faf8ff",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#dae2fd",
+                      "on-surface-variant": "#434655",
+                      "on-primary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-container": "#eeefff",
+                      "error": "#ba1a1a",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "on-primary-fixed": "#00174b",
+                      "inverse-on-surface": "#eef0ff",
+                      "surface-container": "#eaedff",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "on-secondary-fixed": "#0b1c30",
+                      "surface-bright": "#faf8ff",
+                      "tertiary-fixed": "#ffdbcd",
+                      "on-tertiary-container": "#ffede6",
+                      "error-container": "#ffdad6",
+                      "secondary-container": "#d0e1fb",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-tertiary-fixed": "#360f00",
+                      "surface-container-highest": "#dae2fd",
+                      "primary-container": "#2563eb",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-secondary-container": "#54647a",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "outline": "#737686",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#d2d9f4",
+                      "surface-container-low": "#f2f3ff",
+                      "tertiary": "#943700",
+                      "inverse-surface": "#283044",
+                      "secondary": "#505f76",
+                      "primary": "#004ac6",
+                      "outline-variant": "#c3c6d7",
+                      "surface-container-high": "#e2e7ff",
+                      "on-error": "#ffffff",
+                      "on-surface": "#131b2e",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary": "#ffffff",
+                      "background": "#faf8ff",
+                      "tertiary-container": "#bc4800",
+                      "on-background": "#131b2e",
+                      "surface-tint": "#0053db",
+                      "inverse-primary": "#b4c5ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter-desktop": "24px",
+                      "stack-sm": "8px",
+                      "gutter-tablet": "16px",
+                      "stack-md": "16px",
+                      "margin-page": "48px",
+                      "stack-lg": "24px",
+                      "sidebar-width": "280px",
+                      "container-max-width": "1440px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Geist"],
+                      "label-sm": ["Geist"],
+                      "display-md": ["Geist"],
+                      "headline-lg": ["Geist"],
+                      "body-lg": ["Geist"],
+                      "label-lg": ["Geist"],
+                      "body-md": ["Geist"],
+                      "headline-md": ["Geist"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "display-md": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-lowest border-r border-outline-variant flex flex-col py-margin-page transition-all duration-200 ease-in-out">
+<div class="px-6 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Coordinator Pro</h1>
+<p class="font-body-md text-label-sm text-on-surface-variant">AI-Powered NGO Ops</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container border-l-4 border-primary rounded-r-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Volunteers
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="rule_settings">rule_settings</span>
+                Task Matching
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+                AI Insights
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+                Profile
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 right-0 left-[280px] h-16 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-gutter-desktop z-10">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-label-lg focus:ring-2 focus:ring-primary" placeholder="Search volunteers, tasks, or reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center ml-2 border border-outline-variant overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="A professional headshot of a middle-aged male NGO coordinator with a warm, confident expression. He is wearing a minimalist navy blue blazer against a soft, out-of-focus modern office background with clean white walls and natural light. The lighting is balanced and high-key, reflecting a sophisticated corporate minimalist aesthetic with a focus on leadership and professional reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEmTOTZFeBn1eC4jHnPuXvWvAQsu-troD2lpKqAl3-GUgv4Xmj7HT6j1AMx2MWRIxYFMh3pGpHth7oqAPwC7k8NzHH0YcJdbk7-1hpNOYbogPzn46B08umHJfMQJHaaiYr498tItxCwFYxEw9XSLsr550GQefzJpQ02Tm4o0AvthBsxfdYQ0txhUI9KMBZ32xS0UtAAQziEzxPmfg9iAnOdsLTNl6K_73y3dffoLIh3FgkC9sB6PkXtYMiOFw3RDMWJaS9lZ77-H3_"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] mt-16 p-gutter-desktop min-h-screen">
+<div class="max-w-container-max-width mx-auto">
+<!-- KPI Summary Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-lg mb-stack-lg">
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<span class="text-label-sm font-semibold text-primary bg-secondary-container px-2 py-0.5 rounded-full">+12%</span>
+</div>
+<p class="text-on-surface-variant font-label-lg text-label-lg mb-1">Total Volunteers</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">1,284</h2>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-fixed rounded-lg text-tertiary">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+</div>
+<span class="text-label-sm font-semibold text-tertiary bg-tertiary-container/20 px-2 py-0.5 rounded-full">Active</span>
+</div>
+<p class="text-on-surface-variant font-label-lg text-label-lg mb-1">Active Tasks</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">86</h2>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-fixed rounded-lg text-secondary">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</div>
+<span class="text-label-sm font-semibold text-secondary-container px-2 py-0.5 rounded-full">Avg. 4.2h</span>
+</div>
+<p class="text-on-surface-variant font-label-lg text-label-lg mb-1">Volunteer Hours</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">34.2k</h2>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg border border-outline-variant hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-error-container rounded-lg text-error">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</div>
+<span class="text-label-sm font-semibold text-on-error-container bg-error-container px-2 py-0.5 rounded-full">Priority 3</span>
+</div>
+<p class="text-on-surface-variant font-label-lg text-label-lg mb-1">AI Recommends</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">14 Items</h2>
+</div>
+</div>
+<!-- Bento Layout Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg">
+<!-- Central Volunteer List Table -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-lg border border-outline-variant overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-lg text-on-surface">Volunteer Directory</h3>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-outline text-label-lg font-semibold rounded-lg hover:bg-surface-container-high transition-colors">Filter</button>
+<button class="px-4 py-2 bg-primary text-on-primary text-label-lg font-semibold rounded-lg hover:opacity-90 transition-colors">Add New</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Volunteer</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Skillset</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Reliability</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant font-bold uppercase tracking-wider"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A portrait of a cheerful young woman with curly hair, representing a dedicated volunteer. She is wearing a simple casual sweater in a brightly lit studio with a soft blue-toned background. The image style is clean, modern, and optimistic, using professional high-key lighting to emphasize her friendly and reliable demeanor for a high-end SaaS dashboard profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTCGyWbQU5pXB3B0wp1lor0QLsvHIIQcnTvdeesf72evFM3x_b_Jf5EaB6QItxpVSUwbcbolFC5J8Gpk2f1BXz0yYr-sw0voPsTzgwxKDVo4FfFSc-incKEFOYpoHxAjkaaQ0s-Dk8LCcdUKGrPZY0CybB489AwuW8-TxQV5yvN8ewMLq0fOl6uuDXuvjUjZVirg2Y7v7SYOCRnlpaUvaxEY6VTUs2vRoPmMXZmthAYy2fXNXvnTnOqyLAtTAUgIfwwtsq7hFLm0YQ"/>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Sarah Jenkins</p>
+<p class="text-label-sm text-on-surface-variant">Logistics Expert</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1 flex-wrap">
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">Project Mgmt</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">Crisis Res</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Active</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full w-[94%]"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of a professional man in his early 30s with short hair and a clean-shaven face. He is wearing a grey t-shirt, appearing ready for field work. The lighting is crisp and natural, set in an outdoor urban garden environment. The style is professional and grounded, perfectly fitting the high-utility administrative tool's aesthetic of organized efficiency and human-centered design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNSFckgp81pvNPr1oYM4qRG-gU8MRQSlx9S00mxu6o-ZoIZJ7_qxQIWa8oa3mhRPgYuNUz-yO1caBYRuRFbDZ_nLmVL4Y5k3tuZsjZDQ-PZDJNLiJTvWlXHksClim3c35mkUZg-tGqRR8u5XkGVez3k6ImEhEOWe5caGBY8eEPWFdVLfkAq4N53ZQoJF99Ysb6nV3jJGJoTfPeOQKEmhB_NEiuSuadjFAUrr5Xu1k0rtJ4SNM4CGzqKAsmmJmSuPFexM2o4DyKe4yn"/>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Michael Chen</p>
+<p class="text-label-sm text-on-surface-variant">Data Analyst</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1 flex-wrap">
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">Tableau</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">SQL</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">On Leave</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full w-[82%]"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A portrait of a confident woman wearing a blazer, looking directly into the camera with a friendly smile. She represents a senior volunteer with management experience. The background is a minimalist corporate interior with muted grey and blue tones. The lighting is soft and diffused, highlighting professional precision and reliability in a modern SaaS context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNp-ztGuGTDhNz5jlD_j9nb_5vT4qtSXslqJAfLBkci5Zep-Y60NlXzltQTKlyrBX4dbTDtsbTREh6AMSfot-1HwiQngXKYH3-M-ViAm5Yw5KMxZEqCF91srCsTVBh6cJ_N7Nn6awuqkf-hHrNwu947Xe-IdpIVlFDckXYlk7Wse90u5e9EYqQz_Id_giLfq2yKaTN57oRHc60YCtlwJapm0fT-0mC_xjGYQTl9atq2-PkFkVTjfcZf2engTMY2Bl3d3kZcT7wOzgD"/>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Elena Rodriguez</p>
+<p class="text-label-sm text-on-surface-variant">Medical Outreach</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1 flex-wrap">
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">Nursing</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">Triage</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Active</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full w-[98%]"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a younger female volunteer with a modern, approachable look. She has a subtle, thoughtful expression, wearing a neutral-toned linen shirt. The backdrop is a clean, minimalist space with soft natural lighting coming from a side window. The overall vibe is calm, organized, and technical, suitable for a sophisticated administrative tool's dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCpxRLxvW2GC9o4s4ve5kZpPc08COFxqjsFpkBhpFhxMkxtgev-ZaGeZRmEXIp2h7LVTRg0VLs-WcokHocozBTEzqzewkGSbPT4mn22MKIheG8FszmaN3si79ByzwJDOShr6pQoPiVgIUWIGMOgYkXTiaeDBLoLCb9wxmjXOOpYE5N32EWFa90ElJYh1IBk4OPM47Y5_lzvNcd_MthWtDtM0GavintckxfDEPfdSI-3iYgxOulRMR5b4zJ2U6_kBDxD5TxgyfwOcWU"/>
+</div>
+<div>
+<p class="font-label-lg text-on-surface">Jordan Smith</p>
+<p class="text-label-sm text-on-surface-variant">Communications</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex gap-1 flex-wrap">
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">PR</span>
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-[11px] font-bold text-on-surface-variant">Writing</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">New</span>
+</td>
+<td class="px-6 py-4">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full w-[65%]"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-outline-variant flex justify-between items-center bg-surface-container-low">
+<p class="text-label-sm text-on-surface-variant">Showing 1-4 of 1,284 volunteers</p>
+<div class="flex gap-2">
+<button class="p-1 border border-outline rounded hover:bg-surface-container-high disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-1 border border-outline rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- AI Recommendations Sidebar -->
+<div class="lg:col-span-4 space-y-stack-lg">
+<!-- Prediction Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 -mr-16 -mt-16 rounded-full"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 text-primary mb-4">
+<span class="material-symbols-outlined" data-weight="fill">psychology</span>
+<h4 class="font-label-lg text-label-lg font-bold">AI Priority Matches</h4>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-surface-container-low rounded-lg border-l-4 border-primary">
+<div class="flex justify-between mb-2">
+<span class="text-label-sm font-bold text-on-surface">Emergency Response</span>
+<span class="text-label-sm text-primary">98% Match</span>
+</div>
+<p class="text-label-sm text-on-surface-variant leading-relaxed">Elena Rodriguez is highly recommended for the upcoming flood relief mission based on past medical triage performance.</p>
+<button class="mt-3 text-label-sm font-bold text-primary hover:underline">Deploy Now</button>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border-l-4 border-tertiary">
+<div class="flex justify-between mb-2">
+<span class="text-label-sm font-bold text-on-surface">Data Migration</span>
+<span class="text-label-sm text-tertiary">85% Match</span>
+</div>
+<p class="text-label-sm text-on-surface-variant leading-relaxed">Michael Chen's SQL expertise matches 4 open database maintenance tasks. Recommend early contact.</p>
+<button class="mt-3 text-label-sm font-bold text-tertiary hover:underline">View Logic</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Retention Insight -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-6">
+<h4 class="font-label-lg text-label-lg font-bold text-on-surface mb-4">Retention Risk Radar</h4>
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full border-4 border-primary border-t-transparent animate-spin-slow flex items-center justify-center">
+<span class="text-on-surface font-bold text-lg">12%</span>
+</div>
+<p class="text-[10px] mt-2 font-bold uppercase text-on-surface-variant">At Risk</p>
+</div>
+<div class="flex-1 ml-6 space-y-2">
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[12%]"></div>
+</div>
+<p class="text-label-sm text-on-surface-variant leading-tight">14 volunteers haven't logged hours in 30+ days. Click to auto-generate check-in emails.</p>
+</div>
+</div>
+<button class="w-full py-3 bg-surface-container-high text-on-surface font-bold text-label-lg rounded-lg border border-outline-variant hover:bg-surface-container-highest transition-colors">
+                            Launch Outreach Campaign
+                        </button>
+</div>
+<!-- Atmospheric/System State -->
+<div class="bg-inverse-surface text-inverse-on-surface rounded-lg p-6 overflow-hidden relative group">
+
+<div class="relative z-10">
+<h4 class="font-label-lg text-label-lg font-bold mb-2">System Health</h4>
+<div class="flex items-center gap-2 mb-4">
+<span class="h-2 w-2 rounded-full bg-green-400 animate-pulse"></span>
+<span class="text-xs font-medium opacity-80">AI Engine: Operational</span>
+</div>
+<p class="text-xs opacity-70 mb-4 italic">"Optimizing route paths for field volunteers in District 9. Expected efficiency gain: 14.5%"</p>
+<div class="bg-white/10 h-px w-full my-4"></div>
+<div class="flex justify-between text-xs opacity-80">
+<span>API Latency</span>
+<span>24ms</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for table rows
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', () => {
+                row.classList.add('bg-primary-container/20');
+                setTimeout(() => {
+                    row.classList.remove('bg-primary-container/20');
+                }, 300);
+            });
+        });
+
+        // Simple sidebar toggle logic (simulated for responsive feel)
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const sidebar = document.querySelector('aside');
+            const main = document.querySelector('main');
+            const header = document.querySelector('header');
+            
+            if (width < 1024) {
+                // In a real app, we'd handle a drawer here
+            }
+        });
+    </script>
+<style>
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 8s linear infinite;
+        }
+    </style>
+</body></html>

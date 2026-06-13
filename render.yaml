@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: naye-pankh-bulbul
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port=$PORT --server.address=0.0.0.0
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: STORAGE_BACKEND
+        value: supabase
+      - key: PYTHON_VERSION
+        value: 3.11.0
+    healthCheckPath: /
+
+  - type: web
+    name: naye-pankh-bulbul-webhook
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scripts/webhook_server.py
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: WEBHOOK_PORT
+        value: "8080"

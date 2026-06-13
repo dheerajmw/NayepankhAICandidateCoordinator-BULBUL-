@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d3e4fe",
+                        "surface": "#faf8ff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#434655",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed": "#00174b",
+                        "inverse-on-surface": "#eef0ff",
+                        "surface-container": "#eaedff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-bright": "#faf8ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-tertiary-container": "#ffede6",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#d0e1fb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface-container-highest": "#dae2fd",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "outline": "#737686",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d2d9f4",
+                        "surface-container-low": "#f2f3ff",
+                        "tertiary": "#943700",
+                        "inverse-surface": "#283044",
+                        "secondary": "#505f76",
+                        "primary": "#004ac6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-high": "#e2e7ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131b2e",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf8ff",
+                        "tertiary-container": "#bc4800",
+                        "on-background": "#131b2e",
+                        "surface-tint": "#0053db",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter-desktop": "24px",
+                        "stack-sm": "8px",
+                        "gutter-tablet": "16px",
+                        "stack-md": "16px",
+                        "margin-page": "48px",
+                        "stack-lg": "24px",
+                        "sidebar-width": "280px",
+                        "container-max-width": "1440px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-md": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .ai-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .7; transform: scale(1.05); }
+        }
+        .step-transition { transition: all 0.4s ease-in-out; }
+    </style>
+</head>
+<body class="bg-background text-on-background overflow-hidden h-screen flex">
+<!-- Split Screen: Left Instructional Panel -->
+<aside class="w-[480px] h-full bg-primary relative flex flex-col justify-between overflow-hidden">
+<!-- Background Animation Layer -->
+<div class="absolute inset-0 z-0">
+
+</div>
+<div class="relative z-10 p-margin-page flex flex-col h-full">
+<div class="mb-12">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-on-primary text-[32px]">diversity_3</span>
+<h1 class="font-headline-md text-headline-md text-on-primary">Coordinator Pro</h1>
+</div>
+<h2 class="font-display-md text-display-md text-on-primary mb-4 leading-tight">
+                    Welcome to the Next Era of Social Impact.
+                </h2>
+<p class="font-body-lg text-body-lg text-on-primary/80">
+                    Our AI is analyzing thousands of active projects to find your perfect mission match. Complete your profile to begin the matching engine.
+                </p>
+</div>
+<div class="mt-auto">
+<div class="glass-card p-6 rounded-xl flex items-center gap-5 border-none bg-white/10 text-on-primary">
+<div class="relative">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed ai-pulse">
+<img class="w-full h-full object-cover" data-alt="A futuristic AI assistant avatar portrait, glowing with soft ethereal blue light. The style is clean, hyper-realistic, and professional, set against a dark, tech-inspired background with subtle data stream visualizations. The lighting is crisp and modern, reflecting a sense of advanced intelligence and calm reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOZYNaS0t4GlsceoThSpGOPPz2yQUovuvKH9YssaxkYL8jfca2EF4X-B-zTDVjXr1DkY10p1ADUnujNeTGdd_IHOtaKLuB9v2ChqwF4oGXLJLKpLT9yWzCpv2-m0gRmqKvYBjDhlWkZPTSn1R_t6MhQFcr1gXhi_1KlqNgnZLT5gvAwFjjosUbDHS6tzV75gPxsMFQHdmesEiJGS2LzLpZSTr2w16y4n9rHhyRq3KR6vmwDOBz7yXkGoM-__efzSadZFJRND3X5nkc"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 border-4 border-[#004ac6] rounded-full"></div>
+</div>
+<div>
+<p class="font-label-lg text-label-lg mb-1 opacity-70">CURRENT STATUS</p>
+<p class="font-headline-md text-headline-md text-on-primary text-[18px]" id="ai-status">AI is understanding your profile...</p>
+<div class="flex gap-1 mt-2">
+<div class="h-1 w-8 bg-on-primary rounded-full"></div>
+<div class="h-1 w-8 bg-on-primary/30 rounded-full"></div>
+<div class="h-1 w-8 bg-on-primary/30 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Split Screen: Right Form Panel -->
+<main class="flex-1 h-full overflow-y-auto bg-surface relative">
+<div class="max-w-[720px] mx-auto py-margin-page px-gutter-desktop">
+<header class="mb-12 flex justify-between items-end">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-2">Volunteer Registration</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Step <span id="step-count">1</span> of 3: Foundation</p>
+</div>
+<div class="flex gap-2">
+<div class="w-8 h-2 bg-primary rounded-full"></div>
+<div class="w-8 h-2 bg-outline-variant rounded-full"></div>
+<div class="w-8 h-2 bg-outline-variant rounded-full"></div>
+</div>
+</header>
+<form class="space-y-stack-lg" id="onboarding-form">
+<!-- Step 1: Personal Profile -->
+<section class="step-transition" id="step-1">
+<div class="grid grid-cols-2 gap-stack-lg mb-stack-lg">
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">FULL NAME</label>
+<input class="w-full h-12 glass-card px-4 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Alex Rivera" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">PROFESSIONAL ROLE</label>
+<input class="w-full h-12 glass-card px-4 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Senior Data Analyst" type="text"/>
+</div>
+</div>
+<div class="space-y-2 mb-stack-lg">
+<label class="font-label-lg text-label-lg text-on-surface-variant">LOCATION</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">location_on</span>
+<input class="w-full h-12 glass-card pl-12 pr-4 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="San Francisco, CA" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant">CORE SKILLS</label>
+<div class="glass-card p-4 rounded-lg flex flex-wrap gap-2">
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-2">
+                                Data Analysis <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-2">
+                                Strategic Planning <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-2">
+                                Python <span class="material-symbols-outlined text-[14px] cursor-pointer">close</span>
+</div>
+<button class="border border-dashed border-outline-variant text-on-surface-variant px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-1 hover:border-primary hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[14px]">add</span> Add Skill
+                            </button>
+</div>
+</div>
+</section>
+<!-- Step 2: Mission Alignment (Visual Cards) -->
+<section class="hidden step-transition" id="step-2">
+<label class="font-label-lg text-label-lg text-on-surface-variant block mb-4">PRIMARY IMPACT AREAS</label>
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card p-6 rounded-xl border-2 border-transparent hover:border-primary cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-[32px] text-primary mb-3 group-hover:scale-110 transition-transform">school</span>
+<h4 class="font-label-lg text-label-lg text-on-surface">Education &amp; Literacy</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Mentorship, tutoring, and curriculum development.</p>
+</div>
+<div class="glass-card p-6 rounded-xl border-2 border-primary bg-primary-fixed/20 cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-[32px] text-primary mb-3 group-hover:scale-110 transition-transform" style="font-variation-settings: 'FILL' 1;">eco</span>
+<h4 class="font-label-lg text-label-lg text-on-surface">Sustainability</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Climate action, conservation, and resource planning.</p>
+</div>
+<div class="glass-card p-6 rounded-xl border-2 border-transparent hover:border-primary cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-[32px] text-primary mb-3 group-hover:scale-110 transition-transform">health_and_safety</span>
+<h4 class="font-label-lg text-label-lg text-on-surface">Public Health</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Community wellness and medical logistics.</p>
+</div>
+<div class="glass-card p-6 rounded-xl border-2 border-transparent hover:border-primary cursor-pointer transition-all group">
+<span class="material-symbols-outlined text-[32px] text-primary mb-3 group-hover:scale-110 transition-transform">balance</span>
+<h4 class="font-label-lg text-label-lg text-on-surface">Justice &amp; Rights</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Legal aid, advocacy, and social equity.</p>
+</div>
+</div>
+</section>
+<!-- Footer Actions -->
+<div class="pt-8 mt-12 border-t border-outline-variant flex justify-between items-center">
+<button class="hidden font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2" id="prev-btn" type="button">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span> Previous
+                    </button>
+<div class="flex-1 flex justify-end gap-4">
+<button class="px-6 h-12 rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" type="button">
+                            Skip for Now
+                        </button>
+<button class="px-10 h-12 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2" id="next-btn" type="button">
+                            Next Phase <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="hidden px-10 h-14 bg-primary text-on-primary rounded-lg font-headline-md text-headline-md text-[18px] hover:bg-primary/90 transition-all shadow-xl shadow-primary/30 flex items-center gap-3" id="submit-btn" type="submit">
+<span class="material-symbols-outlined">rocket_launch</span> Let AI Match Me
+                        </button>
+</div>
+</div>
+</form>
+</div>
+<!-- Decorative Background Element -->
+<div class="absolute bottom-0 right-0 p-8 opacity-5">
+<span class="material-symbols-outlined text-[240px]">architecture</span>
+</div>
+</main>
+<script>
+        const steps = [document.getElementById('step-1'), document.getElementById('step-2')];
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const submitBtn = document.getElementById('submit-btn');
+        const stepCountText = document.getElementById('step-count');
+        const aiStatus = document.getElementById('ai-status');
+        
+        let currentStep = 0;
+
+        const updateUI = () => {
+            steps.forEach((step, idx) => {
+                step.classList.toggle('hidden', idx !== currentStep);
+            });
+
+            prevBtn.classList.toggle('hidden', currentStep === 0);
+            nextBtn.classList.toggle('hidden', currentStep === steps.length - 1);
+            submitBtn.classList.toggle('hidden', currentStep !== steps.length - 1);
+            
+            stepCountText.innerText = currentStep + 1;
+
+            const statuses = [
+                "AI is understanding your profile...",
+                "Optimizing mission alignment...",
+                "Reviewing global opportunities..."
+            ];
+            aiStatus.innerText = statuses[currentStep];
+        };
+
+        nextBtn.addEventListener('click', () => {
+            if (currentStep < steps.length - 1) {
+                currentStep++;
+                updateUI();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateUI();
+            }
+        });
+
+        document.getElementById('onboarding-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            aiStatus.innerText = "Scanning matches...";
+            submitBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Processing...`;
+            setTimeout(() => {
+                alert("Success! The AI has found 12 matches for your profile.");
+                submitBtn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Matches Found!`;
+            }, 2000);
+        });
+    </script>
+</body></html>

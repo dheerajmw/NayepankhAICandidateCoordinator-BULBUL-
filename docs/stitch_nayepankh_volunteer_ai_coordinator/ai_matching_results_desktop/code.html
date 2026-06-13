@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Coordinator Pro - AI Matching Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      font-family: 'Geist', sans-serif;
+      background-color: #faf8ff;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c3c6d7;
+      border-radius: 10px;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "secondary-fixed": "#d3e4fe",
+                  "surface": "#faf8ff",
+                  "on-error-container": "#93000a",
+                  "surface-variant": "#dae2fd",
+                  "on-surface-variant": "#434655",
+                  "on-primary": "#ffffff",
+                  "on-tertiary": "#ffffff",
+                  "on-primary-container": "#eeefff",
+                  "error": "#ba1a1a",
+                  "primary-fixed-dim": "#b4c5ff",
+                  "on-tertiary-fixed-variant": "#7d2d00",
+                  "on-primary-fixed": "#00174b",
+                  "inverse-on-surface": "#eef0ff",
+                  "surface-container": "#eaedff",
+                  "tertiary-fixed-dim": "#ffb596",
+                  "on-secondary-fixed": "#0b1c30",
+                  "surface-bright": "#faf8ff",
+                  "tertiary-fixed": "#ffdbcd",
+                  "on-tertiary-container": "#ffede6",
+                  "error-container": "#ffdad6",
+                  "secondary-container": "#d0e1fb",
+                  "on-primary-fixed-variant": "#003ea8",
+                  "on-tertiary-fixed": "#360f00",
+                  "surface-container-highest": "#dae2fd",
+                  "primary-container": "#2563eb",
+                  "on-secondary-fixed-variant": "#38485d",
+                  "on-secondary-container": "#54647a",
+                  "secondary-fixed-dim": "#b7c8e1",
+                  "outline": "#737686",
+                  "surface-container-lowest": "#ffffff",
+                  "surface-dim": "#d2d9f4",
+                  "surface-container-low": "#f2f3ff",
+                  "tertiary": "#943700",
+                  "inverse-surface": "#283044",
+                  "secondary": "#505f76",
+                  "primary": "#004ac6",
+                  "outline-variant": "#c3c6d7",
+                  "surface-container-high": "#e2e7ff",
+                  "on-error": "#ffffff",
+                  "on-surface": "#131b2e",
+                  "primary-fixed": "#dbe1ff",
+                  "on-secondary": "#ffffff",
+                  "background": "#faf8ff",
+                  "tertiary-container": "#bc4800",
+                  "on-background": "#131b2e",
+                  "surface-tint": "#0053db",
+                  "inverse-primary": "#b4c5ff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "gutter-desktop": "24px",
+                  "stack-sm": "8px",
+                  "gutter-tablet": "16px",
+                  "stack-md": "16px",
+                  "margin-page": "48px",
+                  "stack-lg": "24px",
+                  "sidebar-width": "280px",
+                  "container-max-width": "1440px"
+          },
+          "fontFamily": {
+                  "display-lg": ["Geist"],
+                  "label-sm": ["Geist"],
+                  "display-md": ["Geist"],
+                  "headline-lg": ["Geist"],
+                  "body-lg": ["Geist"],
+                  "label-lg": ["Geist"],
+                  "body-md": ["Geist"],
+                  "headline-md": ["Geist"]
+          },
+          "fontSize": {
+                  "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                  "display-md": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface flex min-h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-lowest dark:bg-surface-container-low border-r border-outline-variant dark:border-outline flex flex-col py-margin-page z-50">
+<div class="px-6 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Coordinator Pro</h1>
+<p class="font-label-lg text-label-lg text-on-surface-variant">AI-Powered NGO Ops</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md text-body-md">Volunteers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container border-l-4 border-primary rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="rule_settings">rule_settings</span>
+<span class="font-body-md text-body-md">Task Matching</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-body-md text-body-md">AI Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-body-md text-body-md">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors text-error" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] flex-1 flex flex-col h-screen overflow-y-auto custom-scrollbar relative">
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 right-0 left-[280px] h-16 bg-surface-container-lowest dark:bg-surface-container-low border-b border-outline-variant dark:border-outline flex justify-between items-center px-gutter-desktop z-40">
+<div class="flex items-center w-1/3">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 text-label-lg font-label-lg focus:ring-2 focus:ring-primary" placeholder="Search tasks or volunteers..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined" data-icon="apps">apps</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Coordinator Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a female NGO coordinator in a corporate setting. She is smiling warmly at the camera, conveying confidence and empathy. The background is a brightly lit, modern office with soft-focus architectural details and a palette of crisp whites and corporate blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMkXqJbeNdKuTsnfIZ0gKtP3UCJQQH47zYglhsh2qnAbC7hsqk1Gp_eIySP0HUXFu1h1YF6tCDkrYGzs0JuJhrAyceIbWUTCanQcrpl-Lmyy_-rY4S-H8emrkjTMMFiDQKP_JVZnW9yk_ccKy8DQXOl2vbRM8JfSuW_MA-ISmUoYTH00bSQWmEg1kQhO1VIwQ55-Rn2z6kl5qVsMCFF7OXDcACTbc3TmxC3FC6kiNRrfL9MDJA2_kCfxNvseXSvJUCaq8VyHluOrmo"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="mt-16 p-margin-page space-y-stack-lg">
+<!-- Hero Analytics Card -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter-desktop">
+<div class="lg:col-span-2 relative overflow-hidden rounded-xl bg-primary text-on-primary p-10 flex flex-col justify-between min-h-[320px]">
+
+<div class="relative z-10">
+<span class="bg-on-primary/20 text-on-primary px-3 py-1 rounded-full text-label-sm font-label-sm uppercase tracking-wider">AI Optimization Live</span>
+<h2 class="mt-4 font-display-md text-display-md">92% Match Accuracy</h2>
+<p class="font-body-lg text-body-lg max-w-md mt-2 opacity-90">Our neural matching engine has processed 420 volunteers for 45 active projects, reaching peak operational efficiency.</p>
+</div>
+<div class="relative z-10 flex gap-8">
+<div>
+<div class="font-display-md text-display-md text-white">45</div>
+<div class="font-label-sm text-label-sm opacity-70">Active Assignments</div>
+</div>
+<div>
+<div class="font-display-md text-display-md text-white">1.2s</div>
+<div class="font-label-sm text-label-sm opacity-70">Computation Time</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-8 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Optimization Chart</h3>
+<p class="font-label-lg text-label-lg text-on-surface-variant">Global performance metrics</p>
+</div>
+<div class="h-48 flex items-end gap-2 px-2">
+<!-- Simple Decorative Bar Chart -->
+<div class="flex-1 bg-primary-fixed-dim rounded-t h-[30%]"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t h-[45%]"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t h-[60%]"></div>
+<div class="flex-1 bg-primary-container rounded-t h-[85%] animate-pulse"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t h-[55%]"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t h-[70%]"></div>
+<div class="flex-1 bg-primary-fixed-dim rounded-t h-[40%]"></div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Last updated: 2m ago</span>
+<button class="text-primary font-label-lg text-label-lg flex items-center gap-1">
+              Details <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Main Results Feed -->
+<section class="space-y-stack-md">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Volunteer Assignment Suggestions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Top-ranked matches based on skill, availability, and sentiment analysis.</p>
+</div>
+<div class="flex gap-stack-sm">
+<button class="px-4 py-2 border border-outline-variant rounded-lg font-label-lg text-label-lg hover:bg-surface-container-high transition-colors">
+              Filter By Priority
+            </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg hover:bg-primary-container transition-colors">
+              Deploy All Suggestions
+            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-gutter-desktop">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col md:flex-row gap-8 hover:border-primary transition-colors group">
+<div class="flex gap-6 w-full md:w-1/3 border-r border-outline-variant pr-8">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0">
+<img alt="Volunteer Photo" class="w-full h-full object-cover" data-alt="A portrait of a male volunteer with a friendly, eager expression, wearing a clean white t-shirt. He is standing in a brightly lit community center with soft, natural morning light casting gentle shadows. The aesthetic is clean, professional, and optimistic, with a focus on trust and community service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA180uI7rKKj_bskG0h2c_0pEEodD66rVP3JIXhvWrYevcIHlnt_hX0l9G1fKYTIuvq-eCySFnUFHQPKIDcWYB28hWNXasSSuiJq-aYdn2UrSoWX15-v7ln4jrkeiMHeN7S8nZgMzge9gVCZayhJqVyq9nK4SRN24kXSo8D2qF7JPFy0jFnn7WIWTMs9MfXjg1MA1RkODnXbs4q-cEW0Dq9T6q0RyT4ztj0cccfcIQrS8lXfYz5d0pr1dvnk8suVn8nsunc4lZXQRgi"/>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md">Sarah Jenkins</h4>
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="px-2 py-0.5 bg-success-container/50 text-on-success-container rounded-full text-[10px] font-bold uppercase" style="background-color: rgba(74, 222, 128, 0.2); color: #166534;">Veteran</span>
+<span class="px-2 py-0.5 bg-secondary-container/50 text-on-secondary-container rounded-full text-[10px] font-bold uppercase">Logistics Specialist</span>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm">3.2 miles away</span>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-primary font-bold font-label-lg text-label-lg">PROJECT MATCH</span>
+<h5 class="font-headline-md text-headline-md mt-1">Urban Reforestation Program</h5>
+</div>
+<div class="bg-primary-fixed-dim px-4 py-2 rounded-lg text-center">
+<div class="font-display-md text-[24px] text-primary">98%</div>
+<div class="font-label-sm text-[10px] uppercase font-bold">Score</div>
+</div>
+</div>
+<!-- AI Logic Reasoning Block -->
+<div class="bg-surface-container-low border-l-4 border-primary p-4 rounded-r-lg">
+<div class="flex items-center gap-2 text-primary mb-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="psychology">psychology</span>
+<span class="font-label-lg text-label-lg font-bold">AI Logic Reasoning</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">
+                  "Sarah's historical success in field-based logistical operations (4.9/5 rating) perfectly overlaps with the 'Team Lead' requirement for the Reforestation task. Her proximity to the site reduces carbon footprint by 82% compared to the next candidate, while her weekend availability syncs 100% with the project timeline."
+                </p>
+</div>
+</div>
+<div class="flex md:flex-col justify-end gap-2">
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg hover:shadow-lg transition-all">Confirm Match</button>
+<button class="px-6 py-2 border border-outline-variant rounded-lg font-label-lg text-label-lg hover:bg-surface-container-high transition-all">Decline</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 flex flex-col md:flex-row gap-8 hover:border-primary transition-colors group">
+<div class="flex gap-6 w-full md:w-1/3 border-r border-outline-variant pr-8">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-surface-container-high flex-shrink-0">
+<img alt="Volunteer Photo" class="w-full h-full object-cover" data-alt="A portrait of a smiling woman in her 30s with short hair, wearing a professional yet casual denim shirt. She is set against a soft, bright office background with indoor plants and warm lighting, suggesting a collaborative and positive environment. The high-key lighting gives it a modern, professional light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB43-cF6u5as1OvSDjcIw3jDcjQKuouZQebEzP1BlQ0x77-Iy-iYoXAb8lAnFZOSdG6F3WtckyniFRv_ucotAU5pSvXqJSFuK05H1eidlPkBCseOVkgewXE1ESgazNvaGv4LuYHe4bTvlFmPKkWJM9XkeEDrCof8WIVYVFCqBXDPHqZsIEn7btu0FY7SFMO4BzwxbGv22rSVLePbcc-3rF479cBKP_a2UhRtMVGCteMJP8F8yhoEjh1Hq4uU5NkhqXNhhg6HvllhyUb"/>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md">Marcus Thorne</h4>
+<div class="flex flex-wrap gap-2 mt-2">
+<span class="px-2 py-0.5 bg-secondary-container/50 text-on-secondary-container rounded-full text-[10px] font-bold uppercase">New Hire</span>
+<span class="px-2 py-0.5 bg-secondary-container/50 text-on-secondary-container rounded-full text-[10px] font-bold uppercase">Tech Support</span>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm">Remote</span>
+</div>
+</div>
+</div>
+<div class="flex-1 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<span class="text-primary font-bold font-label-lg text-label-lg">PROJECT MATCH</span>
+<h5 class="font-headline-md text-headline-md mt-1">Digital Literacy Workshop</h5>
+</div>
+<div class="bg-primary-fixed-dim px-4 py-2 rounded-lg text-center">
+<div class="font-display-md text-[24px] text-primary">85%</div>
+<div class="font-label-sm text-[10px] uppercase font-bold">Score</div>
+</div>
+</div>
+<!-- AI Logic Reasoning Block -->
+<div class="bg-surface-container-low border-l-4 border-primary p-4 rounded-r-lg">
+<div class="flex items-center gap-2 text-primary mb-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="psychology">psychology</span>
+<span class="font-label-lg text-label-lg font-bold">AI Logic Reasoning</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant italic">
+                  "Marcus demonstrates high proficiency in technical communication. Although a new volunteer, his LinkedIn professional data indicates 5+ years in senior helpdesk roles. His remote capability is essential for this online-only curriculum, ensuring zero travel overhead."
+                </p>
+</div>
+</div>
+<div class="flex md:flex-col justify-end gap-2">
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg hover:shadow-lg transition-all">Confirm Match</button>
+<button class="px-6 py-2 border border-outline-variant rounded-lg font-label-lg text-label-lg hover:bg-surface-container-high transition-all">Decline</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Spacer for footer -->
+<div class="h-24 w-full"></div>
+<!-- Bottom Action Bar -->
+<footer class="fixed bottom-0 right-0 left-[280px] h-16 bg-surface-container-lowest border-t border-outline-variant flex items-center justify-between px-gutter-desktop z-40 glass-effect">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-lg text-label-lg">12 New Auto-Matches Pending Review</span>
+</div>
+<div class="h-4 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="assessment">assessment</span>
+<span class="font-label-lg text-label-lg">Optimization Report Ready</span>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg font-label-lg text-label-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+          Export Full Report
+        </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-on-surface text-surface rounded-lg font-label-lg text-label-lg hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="send">send</span>
+          Broadcast Notifications
+        </button>
+</div>
+</footer>
+</main>
+<!-- Global Toast (Micro-interaction) -->
+<div class="fixed bottom-20 right-8 bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-lg font-label-lg text-label-lg flex items-center gap-3 shadow-xl transform translate-y-24 opacity-0 transition-all duration-300 z-50" id="toast">
+<span class="material-symbols-outlined text-primary-fixed-dim" data-icon="check_circle">check_circle</span>
+    Assignment confirmed successfully.
+  </div>
+<script>
+    // Micro-interaction for confirming matches
+    document.querySelectorAll('button').forEach(btn => {
+      if (btn.innerText === 'Confirm Match') {
+        btn.addEventListener('click', () => {
+          const toast = document.getElementById('toast');
+          toast.classList.remove('translate-y-24', 'opacity-0');
+          setTimeout(() => {
+            toast.classList.add('translate-y-24', 'opacity-0');
+          }, 3000);
+        });
+      }
+    });
+
+    // Simple fade-in effect for cards
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.bg-surface-container-lowest.border');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        setTimeout(() => {
+          card.style.transition = 'all 0.4s ease-out';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 100 * index);
+      });
+    });
+  </script>
+</body></html>

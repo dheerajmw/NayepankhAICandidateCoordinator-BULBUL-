@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Coordinator Pro - AI Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d3e4fe",
+                        "surface": "#faf8ff",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#dae2fd",
+                        "on-surface-variant": "#434655",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed": "#00174b",
+                        "inverse-on-surface": "#eef0ff",
+                        "surface-container": "#eaedff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-bright": "#faf8ff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-tertiary-container": "#ffede6",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#d0e1fb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface-container-highest": "#dae2fd",
+                        "primary-container": "#2563eb",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-secondary-container": "#54647a",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "outline": "#737686",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d2d9f4",
+                        "surface-container-low": "#f2f3ff",
+                        "tertiary": "#943700",
+                        "inverse-surface": "#283044",
+                        "secondary": "#505f76",
+                        "primary": "#004ac6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-high": "#e2e7ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131b2e",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf8ff",
+                        "tertiary-container": "#bc4800",
+                        "on-background": "#131b2e",
+                        "surface-tint": "#0053db",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter-desktop": "24px",
+                        "stack-sm": "8px",
+                        "gutter-tablet": "16px",
+                        "stack-md": "16px",
+                        "margin-page": "48px",
+                        "stack-lg": "24px",
+                        "sidebar-width": "280px",
+                        "container-max-width": "1440px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "label-sm": ["Geist"],
+                        "display-md": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "body-lg": ["Geist"],
+                        "label-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-md": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface overflow-hidden">
+<!-- Sidebar Component (Predicted) -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-lowest border-r border-outline-variant flex flex-col py-margin-page z-30">
+<div class="px-6 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Coordinator Pro</h1>
+<p class="text-on-surface-variant font-label-sm text-label-sm mt-1">AI-Powered NGO Ops</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container border-l-4 border-primary rounded-r-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-md text-body-md">Volunteers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">rule_settings</span>
+<span class="font-body-md text-body-md">Task Matching</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md text-body-md">AI Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-body-md text-body-md">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Header Component (Predicted) -->
+<header class="fixed top-0 right-0 left-[280px] h-16 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center px-gutter-desktop z-20">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-label-lg font-label-lg focus:ring-2 focus:ring-primary" placeholder="Search tasks, volunteers, or insights..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-px h-6 bg-outline-variant"></div>
+<div class="flex items-center gap-3 ml-2 cursor-pointer hover:bg-surface-container-high p-1 px-2 rounded-lg transition-colors">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary">
+<img alt="Profile" data-alt="A professional close-up portrait of a mid-career male NGO coordinator with a friendly and intelligent expression. He is in a brightly lit, modern office environment with soft focus backgrounds. The lighting is clean and corporate, utilizing a primary blue and soft white palette to match a high-end AI command center aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXPOzTuDjYheTQDFNibunffTA3hmAKp1W31WJzYBA_26xQWmgtpTaPISBXJP_3P0PPadr4PHI5BiqI7Xsl7bAmI-a-NMXX3VSjOIY-YkUL78aHyfJdTTS3EbIWqPg1-n975u8A_pvTJW8pvbYN6FI8CCOy9yqOpmjIqLzFi8RNko7jCkkK4_F1ovC5DJykCV5wQ2YC5w8kCf9GLt9dewJSzu_Tw5GsN8ICFtVGF3uYW-iZPlnlH_GMR05HVjph_zCg6Ct-pJiU9NJU"/>
+</div>
+<span class="font-label-lg text-label-lg font-bold">Alex Chen</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] mt-16 p-gutter-desktop h-[calc(100vh-64px)] overflow-y-auto">
+<div class="max-w-[container-max-width] mx-auto grid grid-cols-12 gap-stack-lg">
+<!-- TOP ROW: AI Summary Cards -->
+<section class="col-span-12 grid grid-cols-1 md:grid-cols-4 gap-stack-md">
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-primary-fixed text-on-primary-fixed rounded-lg material-symbols-outlined">bolt</span>
+<span class="text-xs font-bold text-tertiary px-2 py-0.5 bg-tertiary-fixed rounded-full">LIVE</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Deployments</h3>
+<div class="mt-1 flex items-baseline gap-2">
+<span class="font-display-md text-display-md text-primary">42</span>
+<span class="text-label-sm text-green-600 font-bold">+12%</span>
+</div>
+<p class="text-on-surface-variant text-label-sm mt-2">Critical path optimized by AI Engine.</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-secondary-fixed text-on-secondary-fixed rounded-lg material-symbols-outlined">handshake</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Match Confidence</h3>
+<div class="mt-1 flex items-baseline gap-2">
+<span class="font-display-md text-display-md text-on-surface">94%</span>
+<span class="text-label-sm text-primary font-bold">Optimal</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary h-full w-[94%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant hover:border-primary transition-colors">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-tertiary-fixed text-on-tertiary-fixed rounded-lg material-symbols-outlined">hourglass_top</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Unassigned Tasks</h3>
+<div class="mt-1 flex items-baseline gap-2">
+<span class="font-display-md text-display-md text-on-surface">08</span>
+<span class="text-label-sm text-error font-bold">Action Needed</span>
+</div>
+<p class="text-on-surface-variant text-label-sm mt-2">AI suggests 3 urgent reassignments.</p>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl border border-outline-variant hover:border-primary transition-colors relative overflow-hidden">
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-on-surface text-surface rounded-lg material-symbols-outlined">psychology</span>
+</div>
+<h3 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">AI Model Status</h3>
+<div class="mt-1 flex items-center gap-2">
+<span class="font-label-lg text-label-lg font-bold text-on-surface">GPT-4 Turbo NGO</span>
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+<p class="text-on-surface-variant text-label-sm mt-2">Processing real-time logistic feeds.</p>
+</div>
+</div>
+</section>
+<!-- MIDDLE SECTION: AI Task Engine -->
+<section class="col-span-12 lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col overflow-hidden">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center bg-white">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">AI Task Engine</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Intelligent volunteer-task matching grid</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-lg font-label-lg text-label-lg flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">auto_fix</span>
+                            Auto-Match All
+                        </button>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="text-left py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase">Volunteer</th>
+<th class="text-left py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase">Recommended Task</th>
+<th class="text-left py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase text-center">Score</th>
+<th class="text-left py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase">Logic</th>
+<th class="text-right py-4 px-6 font-label-sm text-label-sm text-on-surface-variant uppercase">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Match Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<img alt="Volunteer" class="w-10 h-10 rounded-full object-cover" data-alt="A focused digital headshot of a young male volunteer, wearing a simple organic cotton t-shirt. The background is a soft, warm cream color with professional lighting that emphasizes clarity and empathy. High-quality resolution with a focus on skin texture and friendly facial expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx5DPl-2qZl_H-TbBFFtrwv6jFVw7r5x2YOQo-fQMmxYeGCUv5xtx-YrfacrPVfW2I2dcSFoBzdAeF4504j9HIXYzFK46y67Q50ok4ppO_OcVuvHva0dIMmdB6tX85x4BOCGDxq41lWSDRaj4wJkVyQw3wvTbMFTplvu_1UpRZG6hWUQM5FybHOvrVylqcK676FyFzwt6Orbt9asI33oqonFM3kfWKEvqTVp2FYJUY6HrZedPTEG84egWXfQxdqaYVGnQnYqgjSkAw"/>
+<div>
+<p class="font-label-lg text-label-lg font-bold">Marcus Thorne</p>
+<p class="text-label-sm text-on-surface-variant">Exp: 4.8 Years</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Emergency Food Logistics</span>
+<span class="text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Downtown Hub
+                                        </span>
+</div>
+</td>
+<td class="py-4 px-6 text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full border-4 border-green-500/20">
+<span class="font-label-lg text-label-lg font-bold text-green-600">98%</span>
+</div>
+</td>
+<td class="py-4 px-6 max-w-[200px]">
+<p class="text-label-sm text-on-surface-variant line-clamp-2 italic">Matched based on logistics background and proximity (0.4 miles).</p>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-lg transition-colors material-symbols-outlined">check_circle</button>
+</td>
+</tr>
+<!-- Match Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<img alt="Volunteer" class="w-10 h-10 rounded-full object-cover" data-alt="Professional studio portrait of a female volunteer, middle-aged, with a confident and kind smile. She is wearing a professional navy blue blazer over a white shirt. The background is a clean, minimalist studio gray with soft directional lighting. High-end photography style suited for an administrative platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvY-ox2pnzAid7pIP4IzybCKYU3GX84QDzKM4t_KpyezO0XVNuC_hF-5R91AoBbCr_ttxhcZAFerqhVG20qwR8V1BCRpUZe5eWYevAoQpwejIgRv6qaTAhAyOgJJ_WSWzscE6J097uAcVG8TL-oRX73XpqSm9PVVUmyqdiopCVDwD77Hmy3ms-AkA3w3a4Cmks2ofzZswMkuNaObpM0LhSsOtxe3a8Xtiw5MNirwHHv6a2IT8lC0qmZy15R-i5-czaKGaMTOOvp9h_"/>
+<div>
+<p class="font-label-lg text-label-lg font-bold">Sarah Jenkins</p>
+<p class="text-label-sm text-on-surface-variant">Exp: 2.1 Years</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Community Outreach Lead</span>
+<span class="text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Westside Annex
+                                        </span>
+</div>
+</td>
+<td class="py-4 px-6 text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full border-4 border-primary/20">
+<span class="font-label-lg text-label-lg font-bold text-primary">85%</span>
+</div>
+</td>
+<td class="py-4 px-6 max-w-[200px]">
+<p class="text-label-sm text-on-surface-variant line-clamp-2 italic">Strong communication score; previously successful in similar roles.</p>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-lg transition-colors material-symbols-outlined">check_circle</button>
+</td>
+</tr>
+<!-- Match Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<img alt="Volunteer" class="w-10 h-10 rounded-full object-cover" data-alt="Close up portrait of a young adult male volunteer with an energetic and helpful expression. He is outdoors in a city park with blurred green trees and sunlight in the background. The aesthetic is bright, optimistic, and natural, maintaining the professional but human tone of an NGO platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQe4aA-jjD4uVv2dTjOR0Udifgp15pvqF7etN9-yPVJcVuKDGAVqVgCz5qqFIHOfckZ-PSZHVVeJda2ahAnTS5HhHHEgtNcgxvre1psCMaPZmW2nX7GO9mXpuJQGDjrXREs2EegZwMrA6UBB5ftPYCVgvZEmlqX-XfqpLk4eOuATZmEEunF5WClZgbj1shmEX6N88FNZxGurmu9M-p-1O8yZLsjTOS9qp068w9SujJQkUArh1-5Nz08ffL0x5CKvvvZbmkqCBJFxV2"/>
+<div>
+<p class="font-label-lg text-label-lg font-bold">David Loo</p>
+<p class="text-label-sm text-on-surface-variant">Exp: New Member</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface">Data Entry Support</span>
+<span class="text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Remote Office
+                                        </span>
+</div>
+</td>
+<td class="py-4 px-6 text-center">
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full border-4 border-tertiary/20">
+<span class="font-label-lg text-label-lg font-bold text-tertiary">72%</span>
+</div>
+</td>
+<td class="py-4 px-6 max-w-[200px]">
+<p class="text-label-sm text-on-surface-variant line-clamp-2 italic">Low experience weight; assigned to low-criticality administrative task.</p>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-primary hover:bg-primary/10 p-2 rounded-lg transition-colors material-symbols-outlined">check_circle</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- RIGHT PANEL: AI Insights Chat Feed -->
+<section class="col-span-12 lg:col-span-4 h-full flex flex-col gap-stack-lg">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col flex-1 max-h-[600px]">
+<div class="p-4 border-b border-outline-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<h2 class="font-label-lg text-label-lg font-bold">AI Insights Chat</h2>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+<!-- Message 1 -->
+<div class="flex flex-col gap-1 max-w-[90%]">
+<div class="bg-surface-container-high p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl text-label-sm font-label-sm text-on-surface-variant">
+                                System ready. Analyzing volunteer availability for the upcoming weekend gala.
+                            </div>
+<span class="text-[10px] text-on-surface-variant ml-1 uppercase">Coordinator AI • 09:00 AM</span>
+</div>
+<!-- Message 2 (Proactive Suggestion) -->
+<div class="flex flex-col gap-2 max-w-[95%]">
+<div class="bg-primary-container p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl border border-primary/20">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-on-primary-container text-[18px]">lightbulb</span>
+<span class="font-label-sm text-label-sm font-bold text-on-primary-container">PROACTIVE SUGGESTION</span>
+</div>
+<p class="text-label-sm text-on-primary-container font-medium mb-3">
+                                    Marcus Thorne has completed 3 shifts early this week. AI suggests promoting him to "Lead Monitor" for Saturday's event.
+                                </p>
+<button class="w-full py-2 bg-on-primary-container text-primary-container rounded-lg font-bold text-label-sm hover:bg-white transition-colors">
+                                    Apply Optimization
+                                </button>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-1 uppercase">Coordinator AI • 09:12 AM</span>
+</div>
+<!-- Message 3 -->
+<div class="flex flex-col gap-1 max-w-[90%]">
+<div class="bg-surface-container-high p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl text-label-sm font-label-sm text-on-surface-variant">
+                                Update: Weather forecast for Sunday indicates heavy rain. 4 outdoor tasks should be moved to "Standby" status.
+                            </div>
+<span class="text-[10px] text-on-surface-variant ml-1 uppercase">Coordinator AI • 10:05 AM</span>
+</div>
+</div>
+<div class="p-4 border-t border-outline-variant bg-surface-container-low">
+<div class="relative">
+<input class="w-full bg-white border border-outline-variant rounded-lg py-2.5 pl-4 pr-12 text-label-sm focus:ring-primary focus:border-primary" placeholder="Ask AI anything..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 bg-primary text-on-primary rounded-md material-symbols-outlined text-[18px]">send</button>
+</div>
+</div>
+</div>
+<!-- Secondary Insight Card -->
+<div class="bg-tertiary-container text-on-tertiary-container p-5 rounded-xl flex flex-col gap-3 relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-20">
+<span class="material-symbols-outlined text-[100px]">auto_awesome</span>
+</div>
+<div class="relative z-10">
+<h4 class="font-label-lg text-label-lg font-bold">Predictive Risk Alert</h4>
+<p class="text-label-sm opacity-90 leading-relaxed">
+                            Sarah Jenkins has a high "Burnout Probability" (62%) due to 12 consecutive hours logged. Recommend mandatory break period.
+                        </p>
+<button class="mt-4 px-4 py-2 bg-on-tertiary-container text-tertiary-container rounded-lg font-bold text-label-sm hover:bg-white/90 transition-colors">
+                            Send Break Reminder
+                        </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Simulate AI message typing or appearing
+            const chatContainer = document.querySelector('.custom-scrollbar');
+            
+            const addInsightMessage = (text) => {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'flex flex-col gap-1 max-w-[90%] opacity-0 transform translate-y-4 transition-all duration-500 ease-out';
+                msgDiv.innerHTML = `
+                    <div class="bg-surface-container-high p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl text-label-sm font-label-sm text-on-surface-variant">
+                        ${text}
+                    </div>
+                    <span class="text-[10px] text-on-surface-variant ml-1 uppercase">Coordinator AI • Just Now</span>
+                `;
+                chatContainer.appendChild(msgDiv);
+                setTimeout(() => {
+                    msgDiv.classList.remove('opacity-0', 'translate-y-4');
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }, 100);
+            };
+
+            // Periodically add a dummy "real-time" update
+            setTimeout(() => {
+                addInsightMessage("All matched pairs have been cross-referenced with local transit schedules. 0 delays predicted.");
+            }, 5000);
+        });
+    </script>
+</body></html>
