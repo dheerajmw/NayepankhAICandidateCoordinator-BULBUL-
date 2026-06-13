@@ -30,8 +30,9 @@ def brand_block() -> None:
     )
 
 
-def page_header(title: str, subtitle: str = "") -> None:
-    sub = f'<p class="np-page-sub">{html.escape(subtitle)}</p>' if subtitle else ""
+def page_header(title: str, subtitle: str = "", *, compact: bool = False) -> None:
+    sub_class = "np-page-sub np-page-sub-compact" if compact else "np-page-sub"
+    sub = f'<p class="{sub_class}">{html.escape(subtitle)}</p>' if subtitle else ""
     render_html(f'<h1 class="np-page-title">{html.escape(title)}</h1>{sub}')
 
 
@@ -101,9 +102,13 @@ def system_health_card(llm: bool, smtp: bool, storage: str) -> None:
     )
 
 
-def form_panel_header(title: str, subtitle: str = "") -> None:
+def form_panel_header(title: str, subtitle: str = "", *, shell: bool = False) -> None:
     sub = f'<p class="np-form-sub">{html.escape(subtitle)}</p>' if subtitle else ""
-    render_html(f'<div class="np-form-header"><h3 class="np-form-title">{html.escape(title)}</h3>{sub}</div>')
+    shell_class = " np-form-header-shell" if shell else ""
+    render_html(
+        f'<div class="np-form-header{shell_class}">'
+        f'<h3 class="np-form-title">{html.escape(title)}</h3>{sub}</div>'
+    )
 
 
 def volunteer_hero_panel() -> None:

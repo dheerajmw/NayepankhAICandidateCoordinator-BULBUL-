@@ -146,28 +146,53 @@ def render_task_card(task: dict, show_ai_fields: bool = True) -> None:
 
 
 def render_volunteer_portal() -> None:
-    page_header("Volunteer Registration", "Join NayePankh Foundation and get AI-matched to meaningful tasks.")
+    page_header(
+        "Volunteer Registration",
+        "Join NayePankh Foundation and get AI-matched to meaningful tasks.",
+        compact=True,
+    )
 
     hero_col, form_col = st.columns([1, 1], gap="large")
     with hero_col:
-        volunteer_hero_panel()
+        with st.container(key="volunteer_hero_shell"):
+            volunteer_hero_panel()
 
     with form_col:
-        form_panel_header(
-            "Create your volunteer profile",
-            "Tell us about your skills and availability so AI can find the right tasks.",
-        )
-        with st.form("volunteer_registration", clear_on_submit=True):
-            name = st.text_input("Full name *", placeholder="Your full name")
-            email = st.text_input("Email *", placeholder="you@example.com")
-            skills = st.text_input("Skills (comma-separated)", placeholder="Teaching, Design, Social media")
-            interests = st.text_input("Interests (comma-separated)", placeholder="Education, Environment")
-            availability = st.text_area(
-                "Availability *",
-                placeholder="e.g. Weekends, 2–4 hours per week",
-                height=100,
+        with st.container(border=True, key="volunteer_form_shell", gap="small"):
+            form_panel_header(
+                "Create your volunteer profile",
+                "Tell us about your skills and availability so AI can find the right tasks.",
+                shell=True,
             )
-            submitted = st.form_submit_button("Register & activate AI matching", type="primary", use_container_width=True)
+            with st.form("volunteer_registration", clear_on_submit=True):
+                name_col, email_col = st.columns(2, gap="medium")
+                with name_col:
+                    name = st.text_input("Full name *", placeholder="Your full name")
+                with email_col:
+                    email = st.text_input("Email *", placeholder="you@example.com")
+
+                skills_col, interests_col = st.columns(2, gap="medium")
+                with skills_col:
+                    skills = st.text_input(
+                        "Skills (comma-separated)",
+                        placeholder="Teaching, Design, Social media",
+                    )
+                with interests_col:
+                    interests = st.text_input(
+                        "Interests (comma-separated)",
+                        placeholder="Education, Environment",
+                    )
+
+                availability = st.text_area(
+                    "Availability *",
+                    placeholder="e.g. Weekends, 2–4 hours per week",
+                    height=88,
+                )
+                submitted = st.form_submit_button(
+                    "Register & activate AI matching",
+                    type="primary",
+                    use_container_width=True,
+                )
 
         if submitted:
             if not name.strip() or not email.strip() or not availability.strip():

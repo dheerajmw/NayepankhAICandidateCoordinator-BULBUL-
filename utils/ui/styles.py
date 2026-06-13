@@ -314,24 +314,94 @@ hr, [data-testid="stDivider"] {
   color: var(--np-on-surface-variant);
   margin: 0 0 2rem 0;
 }
+.np-page-sub-compact {
+  margin: 0 0 1.25rem 0;
+}
 .np-form-header {
   margin-bottom: 1rem;
 }
+.np-form-header-shell {
+  margin: 0;
+  padding: 0 0 1rem 0;
+  border-bottom: 1px solid var(--np-outline-variant);
+}
 .np-form-title {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--np-on-surface);
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.35rem 0;
 }
 .np-form-sub {
   font-size: 0.875rem;
   color: var(--np-on-surface-variant);
   margin: 0;
+  line-height: 1.5;
 }
 .np-form-wrap {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+/* Volunteer registration layout */
+.st-key-volunteer_hero_shell,
+.st-key-volunteer_form_shell {
+  height: 100%;
+  min-height: 500px;
+}
+
+.st-key-volunteer_form_shell {
+  border-radius: 12px !important;
+  border-color: var(--np-outline-variant) !important;
+  background: var(--np-surface) !important;
+  box-shadow: 0 1px 3px rgba(19, 27, 46, 0.05) !important;
+  padding: 1.5rem !important;
+  box-sizing: border-box !important;
+}
+
+.st-key-volunteer_form_shell div[data-testid="stForm"] {
+  border: none !important;
+  box-shadow: none !important;
+  padding: 1rem 0 0 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+}
+
+.st-key-volunteer_form_shell div[data-testid="stForm"] [data-testid="stVerticalBlock"] {
+  gap: 0.75rem !important;
+}
+
+.st-key-volunteer_form_shell [data-testid="stTextInput"],
+.st-key-volunteer_form_shell [data-testid="stTextArea"] {
+  margin-bottom: 0 !important;
+}
+
+.st-key-volunteer_form_shell div[data-baseweb="input"],
+.st-key-volunteer_form_shell div[data-baseweb="textarea"],
+.st-key-volunteer_form_shell [data-testid="stTextInput"] > div > div,
+.st-key-volunteer_form_shell [data-testid="stTextArea"] > div > div {
+  background-color: #ffffff !important;
+  border: 1.5px solid #b8bfd4 !important;
+}
+
+.st-key-volunteer_form_shell div[data-baseweb="input"]:hover,
+.st-key-volunteer_form_shell div[data-baseweb="textarea"]:hover {
+  border-color: #8b93ab !important;
+}
+
+.st-key-volunteer_hero_shell .np-hero-panel {
+  min-height: 500px;
+  margin: 0;
+}
+
+.st-key-volunteer_form_shell [data-testid="stFormSubmitButton"] {
+  padding-top: 0.25rem !important;
+}
+
+.st-key-volunteer_form_shell [data-testid="stFormSubmitButton"] > button {
+  margin-top: 0.75rem !important;
+  min-height: 46px !important;
+  font-size: 0.9375rem !important;
 }
 .np-kpi-grid {
   display: grid;
@@ -423,7 +493,7 @@ hr, [data-testid="stDivider"] {
   background: linear-gradient(135deg, #004ac6 0%, #2563eb 100%);
   color: white;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1.75rem 2rem;
   min-height: 420px;
   height: 100%;
   display: flex;
@@ -465,7 +535,7 @@ hr, [data-testid="stDivider"] {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
 }
 .np-pill {
   display: inline-flex;
