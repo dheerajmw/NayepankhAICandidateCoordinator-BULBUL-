@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import html
+
 import streamlit as st
+
+from utils.ui.logo import logo_svg_markup
 
 STATUS_CLASS = {
     "pending": "np-status-pending",
@@ -14,10 +17,15 @@ STATUS_CLASS = {
 
 def brand_block() -> None:
     st.markdown(
-        """
-        <div style="padding: 0 0 1.5rem 0; border-bottom: 1px solid #c3c6d7; margin-bottom: 1.5rem;">
-            <p class="np-brand-title">NayePankh Bulbul</p>
-            <p class="np-brand-sub">AI-Powered NGO Ops</p>
+        f"""
+        <div class="np-brand-block">
+            <div class="np-brand-row">
+                {logo_svg_markup(size=52)}
+                <div class="np-brand-copy">
+                    <p class="np-brand-title">NayePankh Bulbul</p>
+                    <p class="np-brand-sub">AI-Powered NGO Ops</p>
+                </div>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -104,9 +112,9 @@ def system_health_card(llm: bool, smtp: bool, storage: str) -> None:
 
 def volunteer_hero_panel() -> None:
     st.markdown(
-        """
+        f"""
         <div class="np-hero-panel">
-            <span class="material-symbols-outlined" style="font-size:32px;margin-bottom:1rem;">diversity_3</span>
+            <div class="np-hero-logo-wrap">{logo_svg_markup(size=56)}</div>
             <h2>Welcome to the Next Era of Social Impact</h2>
             <p>Our AI analyzes open NGO tasks to find your perfect mission match.
             Complete your profile to activate the NayePankh Bulbul matching engine.</p>

@@ -147,6 +147,29 @@ div[data-testid="stForm"] {
 }
 
 /* Custom component classes */
+.np-brand-block {
+  padding: 0 0 1.5rem 0;
+  border-bottom: 1px solid var(--np-outline-variant);
+  margin-bottom: 1.5rem;
+}
+.np-brand-row {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.np-brand-copy {
+  min-width: 0;
+}
+.np-brand-logo {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 74, 198, 0.18);
+}
+.np-hero-logo-wrap .np-brand-logo {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  margin-bottom: 1rem;
+}
 .np-brand-title {
   font-size: 1.5rem;
   font-weight: 700;

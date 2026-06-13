@@ -56,11 +56,12 @@ from utils.ui.components import (
     system_health_card,
     volunteer_hero_panel,
 )
+from utils.ui.logo import logo_mark_path
 from utils.ui.styles import inject_theme
 
 st.set_page_config(
     page_title="NayePankh Bulbul",
-    page_icon="🕊️",
+    page_icon=logo_mark_path(),
     layout="wide",
     initial_sidebar_state="expanded",
 )
