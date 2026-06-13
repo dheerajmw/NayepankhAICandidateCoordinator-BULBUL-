@@ -148,7 +148,7 @@ def render_task_card(task: dict, show_ai_fields: bool = True) -> None:
 def render_volunteer_portal() -> None:
     page_header("Volunteer Registration", "Join NayePankh Foundation and get AI-matched to meaningful tasks.")
 
-    hero_col, form_col = st.columns([1, 1], gap="large", vertical_alignment="stretch")
+    hero_col, form_col = st.columns([1, 1], gap="large")
     with hero_col:
         volunteer_hero_panel()
 
