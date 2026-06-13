@@ -7,9 +7,8 @@ import smtplib
 from email.mime.text import MIMEText
 from typing import Literal
 
-from core.config import APP_NAME
-
-load_dotenv()
+from core.config import APP_NAME, EMAIL_MAX_RETRIES, EMAIL_RETRY_DELAY_SECONDS
+from automation.retry import with_retry
 
 DeliveryChannel = Literal["smtp", "log"]
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from core.config import APP_NAME, admin_auth_required, app_env, storage_label
+from core.config import APP_NAME, admin_auth_required, storage_label
 from core.llm_engine import llm_configured
 from services.candidate_service import list_candidates
 from services.task_service import list_tasks
@@ -20,7 +20,6 @@ def main() -> None:
         [
             (storage_label(), True),
             ("LLM enabled" if llm_configured() else "Rule-based AI", llm_configured()),
-            (f"Env: {app_env()}", True),
             ("V2 Dual-Sided", True),
         ]
     )
@@ -65,7 +64,7 @@ def main() -> None:
     )
 
     if admin_auth_required():
-        st.info("Admin pages require the password set in `ADMIN_PASSWORD`.")
+        st.info("Admin pages require a password configured on the server.")
 
 
 if __name__ == "__main__":

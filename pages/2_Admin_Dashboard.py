@@ -37,7 +37,7 @@ volunteers = list_volunteers()
 kpi_row(
     [
         {"label": "Pending", "value": str(len(pending)), "icon": "pending_actions", "badge": "Review"},
-        {"label": "Approved Apps", "value": str(len(approved_c)), "icon": "check_circle", "badge": "Done"},
+        {"label": "Approved Volunteers", "value": str(len(approved_c)), "icon": "check_circle", "badge": "Done"},
         {"label": "Volunteer Pool", "value": str(len(volunteers)), "icon": "group", "badge": "Pool"},
         {"label": "Rejected", "value": str(len(rejected_c)), "icon": "cancel", "badge": "Closed"},
     ]

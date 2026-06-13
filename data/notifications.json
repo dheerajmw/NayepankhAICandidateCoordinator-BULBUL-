@@ -1,26 +1,14 @@
 [
   {
     "id": "fdd86b56-42c6-4d4e-8425-b1d57b93847a",
-    "task_id": "f4a75db2-293d-4475-821c-1c8855108f14",
-    "volunteer_id": "2389cd14-a746-4d18-a14a-be36c43a26b7",
-    "notification_type": "completion",
-    "recipient": "eve@test.com",
+    "task_id": "ed19567a-d32c-4448-a7f4-ea1070842032",
+    "volunteer_id": "a1111111-1111-4111-8111-111111111111",
+    "notification_type": "deadline_3d",
+    "recipient": "priya.mehta@example.com",
     "channel": "log",
     "status": "sent",
-    "subject": "Thank you — task completed: Class",
+    "subject": "Reminder: Weekend tutoring due in 3 days — Bulbul by NayePankh Foundation",
     "error": null,
-    "sent_at": "2026-06-13T10:47:39+00:00"
-  },
-  {
-    "id": "af2d27d1-3bab-4805-bebc-5a6536c8e812",
-    "task_id": "smoke-task-id",
-    "volunteer_id": "smoke-vol-id",
-    "notification_type": "deadline_3d",
-    "recipient": "dheerajj473@gmail.com",
-    "channel": "smtp",
-    "status": "sent",
-    "subject": "Reminder: Smoke Test Task due in 3 days — Bulbul by NayePankh Foundation",
-    "error": null,
-    "sent_at": "2026-06-13T14:26:03+00:00"
+    "sent_at": "2026-06-10T09:00:00+00:00"
   }
 ]

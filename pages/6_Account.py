@@ -53,7 +53,7 @@ sec_col, sess_col = st.columns(2, gap="large")
 with sec_col:
     st.markdown('<div class="np-glass-card np-account-security">', unsafe_allow_html=True)
     section_card_header("Security Settings", "security", tone="secondary")
-    st.markdown("**Change Password** — configured via `ADMIN_PASSWORD` in `.env` (production).")
+    st.markdown("Password changes are managed by your platform administrator.")
     st.toggle(
         "Two-Factor Auth",
         value=st.session_state.get("np_2fa", True),

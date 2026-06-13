@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-import os
-
 import streamlit as st
 
-from core.config import ADMIN_PASSWORD, APP_NAME, ORG_NAME, app_env, storage_label
+from core.config import APP_NAME, ORG_NAME, storage_label
 from core.llm_engine import llm_configured
 from utils.auth import require_admin
 from utils.email_service import email_configured
@@ -14,6 +12,7 @@ from utils.ui.layout import setup_page
 from utils.ui.support_pages import (
     export_database_csv_summary,
     export_database_json,
+    locked_section_overlay,
     section_card_header,
     support_page_header,
     system_health_footer,
@@ -32,32 +31,39 @@ support_page_header(
 main_col, side_col = st.columns([2, 1], gap="large")
 
 with main_col:
-    with st.container():
+    with st.container(key="org_config_locked"):
         section_card_header("Organization Configuration", "corporate_fare")
         with st.form("org_settings"):
-            ngo_name = st.text_input("NGO Name", value=st.session_state.get("np_ngo_name", ORG_NAME))
-            admin_email = st.text_input(
+            st.text_input(
+                "NGO Name",
+                value=st.session_state.get("np_ngo_name", ORG_NAME),
+                disabled=True,
+            )
+            st.text_input(
                 "Admin Email",
                 value=st.session_state.get("np_admin_email", "admin@nayepankh.org"),
+                disabled=True,
             )
-            smtp_host = st.text_input(
+            st.text_input(
                 "SMTP Host",
-                value=os.getenv("SMTP_HOST", ""),
+                value="smtp.provider.com",
                 placeholder="smtp.provider.com",
-                disabled=bool(os.getenv("SMTP_HOST")),
-                help="Set SMTP_HOST in .env to configure email delivery.",
+                disabled=True,
+                help="Email delivery is configured via environment variables on the server.",
             )
             st.text_input(
                 "Admin Password",
-                value="••••••••••••" if ADMIN_PASSWORD else "",
+                value="••••••••••••",
                 type="password",
                 disabled=True,
-                help="Configured via ADMIN_PASSWORD in .env (production only).",
+                help="Managed securely on the server — not editable in the app.",
             )
-            if st.form_submit_button("Save Changes", type="primary"):
-                st.session_state["np_ngo_name"] = ngo_name.strip()
-                st.session_state["np_admin_email"] = admin_email.strip()
-                st.success("Organization settings saved for this session.")
+            st.form_submit_button("Save Changes", type="primary", disabled=True)
+        locked_section_overlay(
+            title="Organization Configuration",
+            message="NGO profile and SMTP credentials are managed via .env for now. Full in-app editing arrives in a future release.",
+            badge="Coming soon",
+        )
 
     st.markdown('<div class="np-ai-mode-card">', unsafe_allow_html=True)
     section_card_header("AI Intelligence Mode", "psychology", tone="secondary")
@@ -66,7 +72,7 @@ with main_col:
         options=["rule", "neural"],
         index=1 if llm_configured() else 0,
         format_func=lambda x: "Neural LLM (Bulbul-2)" if x == "neural" else "Rule-based Logic",
-        help="Neural mode requires OPENAI_API_KEY or GEMINI_API_KEY in .env.",
+        help="Neural mode uses an LLM when API keys are configured on the server.",
         label_visibility="collapsed",
     )
     if mode == "neural" and not llm_configured():
@@ -116,5 +122,5 @@ with side_col:
 
 system_health_footer()
 st.caption(
-    f"Storage: {storage_label()} · Email: {'SMTP active' if email_configured() else 'Dry-run'} · Env: {app_env()}"
+    f"Storage: {storage_label()} · Email: {'Configured' if email_configured() else 'Dry-run demo mode'}"
 )

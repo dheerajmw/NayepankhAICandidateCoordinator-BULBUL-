@@ -43,6 +43,28 @@ def section_card_header(title: str, icon: str, *, tone: str = "primary") -> None
     )
 
 
+def locked_section_overlay(
+    *,
+    title: str = "Locked for now",
+    message: str = "This section is temporarily unavailable.",
+    badge: str = "Coming soon",
+) -> None:
+    render_html(
+        f"""
+<div class="np-locked-overlay" role="presentation">
+  <div class="np-locked-overlay-card">
+    <div class="np-locked-icon-ring">
+      <span class="material-symbols-outlined">lock</span>
+    </div>
+    <span class="np-locked-badge">{html.escape(badge)}</span>
+    <h4 class="np-locked-title">{html.escape(title)}</h4>
+    <p class="np-locked-message">{html.escape(message)}</p>
+  </div>
+</div>
+"""
+    )
+
+
 def system_health_footer(*, latency_ms: int = 42, region: str = "Mumbai-South-1") -> None:
     render_html(
         f"""

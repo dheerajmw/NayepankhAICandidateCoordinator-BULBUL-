@@ -117,7 +117,7 @@ with st.container(key="onboarding_page"):
         hero_state = "idle"
         hero_progress = 45
 
-    hero_col, form_col = st.columns([2, 3], gap="medium")
+    hero_col, form_col = st.columns([2, 3], gap="large")
 
     with hero_col:
         with st.container(key="volunteer_hero_shell"):

@@ -515,6 +515,11 @@ html:has(.stApp) body {
 .stTabs [data-baseweb="tab-list"] {
   gap: 8px;
   background: transparent;
+  border-bottom: none !important;
+}
+.stTabs [data-baseweb="tab-border"],
+.stTabs [data-baseweb="tab-highlight"] {
+  display: none !important;
 }
 .stTabs [data-baseweb="tab"] {
   border-radius: 8px !important;
@@ -522,11 +527,19 @@ html:has(.stApp) body {
   font-weight: 600 !important;
   background: var(--np-surface-low) !important;
   border: 1px solid var(--np-outline-variant) !important;
+  border-bottom: 1px solid var(--np-outline-variant) !important;
 }
 .stTabs [aria-selected="true"] {
   background: var(--np-secondary-container) !important;
-  color: var(--np-primary) !important;
+  color: #fffbff !important;
   border-color: var(--np-primary-container) !important;
+  border-bottom: 1px solid var(--np-primary-container) !important;
+  box-shadow: none !important;
+}
+.stTabs [aria-selected="true"] p,
+.stTabs [aria-selected="true"] span,
+.stTabs [aria-selected="true"] div {
+  color: #fffbff !important;
 }
 
 [data-testid="stExpander"] {
@@ -1740,6 +1753,7 @@ header[data-testid="stHeader"] [data-testid="collapsedControl"] {
   max-height: none !important;
   align-items: flex-start !important;
   overflow: visible !important;
+  gap: 2rem !important;
 }
 .stApp:has(.st-key-onboarding_page) .st-key-onboarding_page > div[data-testid="stVerticalBlock"] {
   height: auto !important;
@@ -1916,29 +1930,28 @@ html:has(.st-key-onboarding_page) .stApp [data-testid="stAppViewContainer"] {
   background: transparent !important;
   border: none !important;
   border-radius: 0 !important;
+  height: auto !important;
+  max-height: none !important;
   overflow: visible !important;
+  margin-right: 0.25rem !important;
 }
 .st-key-volunteer_form_shell {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
+  border: 1px solid var(--np-outline-variant) !important;
+  background: #ffffff !important;
+  box-shadow: 0 4px 24px rgba(70, 72, 212, 0.08) !important;
+  border-radius: 1.25rem !important;
+  padding: 1.1rem 1.35rem 1rem 1.35rem !important;
   height: auto !important;
   max-height: none !important;
   overflow: visible !important;
-}
-.st-key-volunteer_hero_shell {
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
+  box-sizing: border-box !important;
 }
 
 .st-key-volunteer_form_shell > [data-testid="stVerticalBlock"] {
-  background: #ffffff;
-  border: 1px solid rgba(199, 196, 215, 0.35);
-  border-radius: 1.25rem;
-  box-shadow: 0 1px 3px rgba(19, 27, 46, 0.04);
-  padding: 1.1rem 1.35rem 1rem 1.35rem;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
   height: auto !important;
   max-height: none !important;
   overflow: visible !important;
@@ -2492,6 +2505,108 @@ html:has(.st-key-onboarding_page) .stApp [data-testid="stAppViewContainer"] {
   padding: 1.25rem 1.35rem;
   margin-top: 0.5rem;
 }
+
+/* Locked settings section overlay */
+.st-key-org_config_locked {
+  position: relative !important;
+  border: 1px solid rgba(199, 196, 215, 0.45) !important;
+  border-radius: 1rem !important;
+  background: rgba(255, 255, 255, 0.55) !important;
+  padding: 1.25rem 1.35rem 1.35rem 1.35rem !important;
+  margin-bottom: 1rem !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 24px rgba(11, 28, 48, 0.04) !important;
+}
+.st-key-org_config_locked > div[data-testid="stVerticalBlock"] {
+  position: relative !important;
+  min-height: 22rem !important;
+}
+.st-key-org_config_locked > div[data-testid="stVerticalBlock"] > div:not(:has(.np-locked-overlay)) {
+  filter: blur(7px) saturate(0.85) !important;
+  opacity: 0.42 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+.st-key-org_config_locked div[data-testid="stForm"],
+.st-key-org_config_locked .np-section-card-head {
+  filter: blur(7px) saturate(0.85) !important;
+  opacity: 0.42 !important;
+  pointer-events: none !important;
+}
+.np-locked-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 20 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1.5rem !important;
+  background: linear-gradient(
+    145deg,
+    rgba(248, 249, 255, 0.35) 0%,
+    rgba(225, 224, 255, 0.45) 50%,
+    rgba(248, 249, 255, 0.3) 100%
+  ) !important;
+  backdrop-filter: blur(10px) saturate(1.15) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.15) !important;
+  border-radius: 1rem !important;
+  pointer-events: all !important;
+}
+.np-locked-overlay-card {
+  text-align: center;
+  max-width: 19rem;
+  padding: 1.65rem 1.45rem 1.5rem 1.45rem;
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(96, 99, 238, 0.2);
+  box-shadow:
+    0 16px 48px rgba(70, 72, 212, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.np-locked-icon-ring {
+  width: 3.65rem;
+  height: 3.65rem;
+  margin: 0 auto 0.9rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--np-primary) 0%, var(--np-secondary) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fffbff;
+  box-shadow: 0 10px 28px rgba(70, 72, 212, 0.35);
+}
+.np-locked-icon-ring .material-symbols-outlined {
+  font-size: 1.65rem !important;
+  margin-right: 0 !important;
+}
+.np-locked-badge {
+  display: inline-block;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(96, 99, 238, 0.12);
+  color: var(--np-primary);
+  margin-bottom: 0.7rem;
+}
+.np-locked-title {
+  font-family: 'Geist', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 0.45rem 0;
+  color: var(--np-on-surface);
+}
+.np-locked-message {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--np-on-surface-variant);
+}
+
 .np-system-health-bar {
   display: flex;
   align-items: center;

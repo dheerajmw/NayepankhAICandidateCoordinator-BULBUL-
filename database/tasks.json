@@ -3,34 +3,42 @@
     "id": "bca6be8a-898d-4d7f-a9fa-ab6e285790ea",
     "title": "Social media campaign",
     "description": "Create posts for an education awareness drive.",
-    "required_skills": [
-      "social media",
-      "design"
-    ],
+    "required_skills": ["social media", "design"],
     "deadline": "2026-06-27",
     "assigned_volunteer_id": null,
     "status": "open",
     "assignment_reason": "",
     "priority": "High",
     "ai_assigned": false,
-    "created_at": "2026-06-13T12:53:12+00:00",
-    "updated_at": "2026-06-13T12:53:12+00:00"
+    "created_at": "2026-06-01T08:00:00+00:00",
+    "updated_at": "2026-06-01T08:00:00+00:00"
   },
   {
     "id": "ed19567a-d32c-4448-a7f4-ea1070842032",
     "title": "Weekend tutoring",
     "description": "Support students with homework help on Saturdays.",
-    "required_skills": [
-      "teaching",
-      "communication"
-    ],
+    "required_skills": ["teaching", "communication"],
     "deadline": "2026-06-28",
     "assigned_volunteer_id": null,
     "status": "open",
     "assignment_reason": "",
     "priority": "Medium",
     "ai_assigned": false,
-    "created_at": "2026-06-13T12:53:12+00:00",
-    "updated_at": "2026-06-13T12:53:12+00:00"
+    "created_at": "2026-06-01T08:00:00+00:00",
+    "updated_at": "2026-06-01T08:00:00+00:00"
+  },
+  {
+    "id": "2c1d3229-36f8-441a-8ced-6a78e5dca6d1",
+    "title": "Community garden setup",
+    "description": "Help plan and launch a neighborhood garden pilot.",
+    "required_skills": ["research", "communication"],
+    "deadline": "2026-06-20",
+    "assigned_volunteer_id": "a1111111-1111-4111-8111-111111111111",
+    "status": "assigned",
+    "assignment_reason": "Skill overlap: research, communication. Active tasks: 0.",
+    "priority": "Low",
+    "ai_assigned": true,
+    "created_at": "2026-06-03T09:00:00+00:00",
+    "updated_at": "2026-06-03T10:00:00+00:00"
   }
 ]
