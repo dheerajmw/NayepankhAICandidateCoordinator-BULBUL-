@@ -50,6 +50,7 @@ from utils.report_metrics import compute_volunteer_metrics
 from utils.ui.components import (
     ai_match_card,
     brand_block,
+    form_panel_header,
     kpi_row,
     page_header,
     status_pills,
@@ -147,23 +148,26 @@ def render_task_card(task: dict, show_ai_fields: bool = True) -> None:
 def render_volunteer_portal() -> None:
     page_header("Volunteer Registration", "Join NayePankh Foundation and get AI-matched to meaningful tasks.")
 
-    hero_col, form_col = st.columns([1, 1.2], gap="large")
+    hero_col, form_col = st.columns([1, 1], gap="large", vertical_alignment="stretch")
     with hero_col:
         volunteer_hero_panel()
 
     with form_col:
-        st.markdown("##### Create your volunteer profile")
+        form_panel_header(
+            "Create your volunteer profile",
+            "Tell us about your skills and availability so AI can find the right tasks.",
+        )
         with st.form("volunteer_registration", clear_on_submit=True):
-            name = st.text_input("Full name *")
-            email = st.text_input("Email *")
+            name = st.text_input("Full name *", placeholder="Your full name")
+            email = st.text_input("Email *", placeholder="you@example.com")
             skills = st.text_input("Skills (comma-separated)", placeholder="Teaching, Design, Social media")
             interests = st.text_input("Interests (comma-separated)", placeholder="Education, Environment")
             availability = st.text_area(
                 "Availability *",
                 placeholder="e.g. Weekends, 2–4 hours per week",
-                height=80,
+                height=100,
             )
-            submitted = st.form_submit_button("Register & activate AI matching", type="primary")
+            submitted = st.form_submit_button("Register & activate AI matching", type="primary", use_container_width=True)
 
         if submitted:
             if not name.strip() or not email.strip() or not availability.strip():
@@ -181,7 +185,11 @@ def render_volunteer_portal() -> None:
 
     st.divider()
     page_header("My Tasks & AI Recommendations", "Enter your email to view assignments and AI-suggested open tasks.")
-    email_lookup = st.text_input("Volunteer email", placeholder="you@example.com")
+    email_lookup = st.text_input(
+        "Volunteer email",
+        placeholder="you@example.com",
+        key="volunteer_email_lookup",
+    )
     if not email_lookup.strip():
         return
 

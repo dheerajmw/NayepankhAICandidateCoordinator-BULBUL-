@@ -48,6 +48,13 @@ html, body, [class*="css"] {
 
 [data-testid="stSidebar"] .block-container {
   padding-top: 2rem !important;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 4rem);
+}
+
+[data-testid="stSidebar"] [data-testid="stVerticalBlockBorderWrapper"] {
+  margin-top: auto;
 }
 
 [data-testid="stMetric"] {
@@ -114,19 +121,133 @@ html, body, [class*="css"] {
 
 div[data-testid="stForm"] {
   border: 1px solid var(--np-outline-variant) !important;
-  border-radius: 8px !important;
-  padding: 1.25rem !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
   background: var(--np-surface) !important;
+  box-shadow: 0 1px 3px rgba(19, 27, 46, 0.04) !important;
 }
 
-.stTextInput input, .stTextArea textarea, .stSelectbox div[data-baseweb="select"] > div {
-  border-radius: 8px !important;
-  border-color: var(--np-outline-variant) !important;
-  min-height: 40px;
+div[data-testid="stForm"] [data-testid="stFormSubmitButton"] > button {
+  width: 100% !important;
+  margin-top: 0.5rem !important;
+  min-height: 44px !important;
 }
-.stTextInput input:focus, .stTextArea textarea:focus {
+
+/* Input fields — visible borders and backgrounds (Streamlit 1.32+ / BaseWeb) */
+[data-testid="stTextInput"],
+[data-testid="stTextArea"],
+[data-testid="stNumberInput"],
+[data-testid="stSelectbox"],
+[data-testid="stDateInput"],
+[data-testid="stMultiSelect"] {
+  margin-bottom: 0.25rem !important;
+}
+
+[data-testid="stWidgetLabel"] p,
+[data-testid="stTextInput"] label p,
+[data-testid="stTextArea"] label p,
+[data-testid="stSelectbox"] label p {
+  font-weight: 600 !important;
+  color: var(--np-on-surface) !important;
+  font-size: 0.875rem !important;
+  margin-bottom: 0.35rem !important;
+}
+
+div[data-baseweb="input"],
+div[data-baseweb="textarea"],
+div[data-baseweb="select"] > div,
+[data-testid="stTextInput"] > div > div,
+[data-testid="stTextArea"] > div > div,
+[data-testid="stNumberInput"] > div > div,
+[data-testid="stSelectbox"] > div > div {
+  background-color: var(--np-surface-low) !important;
+  border: 1.5px solid var(--np-outline-variant) !important;
+  border-radius: 8px !important;
+  min-height: 44px !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+div[data-baseweb="textarea"] {
+  min-height: 96px !important;
+}
+
+div[data-baseweb="input"]:focus-within,
+div[data-baseweb="textarea"]:focus-within,
+div[data-baseweb="select"]:focus-within > div {
   border-color: var(--np-primary-container) !important;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+}
+
+div[data-baseweb="input"] input,
+div[data-baseweb="textarea"] textarea {
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--np-on-surface) !important;
+  font-size: 0.9375rem !important;
+  padding: 0.65rem 0.85rem !important;
+}
+
+div[data-baseweb="input"] input::placeholder,
+div[data-baseweb="textarea"] textarea::placeholder {
+  color: #737686 !important;
+  opacity: 1 !important;
+}
+
+.stTextInput input,
+.stTextArea textarea,
+.stSelectbox div[data-baseweb="select"] > div {
+  background-color: var(--np-surface-low) !important;
+  border: 1.5px solid var(--np-outline-variant) !important;
+  border-radius: 8px !important;
+  color: var(--np-on-surface) !important;
+  min-height: 44px !important;
+}
+
+.stTextInput input:focus,
+.stTextArea textarea:focus {
+  border-color: var(--np-primary-container) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+  outline: none !important;
+}
+
+[data-testid="stHorizontalBlock"] {
+  align-items: stretch !important;
+  gap: 1.5rem !important;
+}
+
+[data-testid="column"] {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] > div {
+  gap: 0.5rem !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] label {
+  background: var(--np-surface-low) !important;
+  border: 1px solid var(--np-outline-variant) !important;
+  border-radius: 8px !important;
+  padding: 0.65rem 0.85rem !important;
+  margin: 0 !important;
+  width: 100% !important;
+  transition: border-color 0.15s ease, background 0.15s ease !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
+  border-color: var(--np-primary-container) !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] label[data-checked="true"],
+[data-testid="stSidebar"] [data-testid="stRadio"] div[aria-checked="true"] label {
+  background: var(--np-secondary-container) !important;
+  border-color: var(--np-primary-container) !important;
+  color: var(--np-primary) !important;
+}
+
+hr, [data-testid="stDivider"] {
+  margin: 2rem 0 !important;
+  border-color: var(--np-outline-variant) !important;
 }
 
 [data-testid="stDataFrame"] {
@@ -191,7 +312,26 @@ div[data-testid="stForm"] {
 .np-page-sub {
   font-size: 1rem;
   color: var(--np-on-surface-variant);
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 2rem 0;
+}
+.np-form-header {
+  margin-bottom: 1rem;
+}
+.np-form-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--np-on-surface);
+  margin: 0 0 0.25rem 0;
+}
+.np-form-sub {
+  font-size: 0.875rem;
+  color: var(--np-on-surface-variant);
+  margin: 0;
+}
+.np-form-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 .np-kpi-grid {
   display: grid;
@@ -284,7 +424,31 @@ div[data-testid="stForm"] {
   color: white;
   border-radius: 12px;
   padding: 2rem;
-  min-height: 280px;
+  min-height: 420px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.np-hero-body {
+  flex: 1;
+}
+.np-hero-status {
+  margin-top: auto;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+}
+.np-hero-status-label {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin: 0 0 0.25rem 0;
+  letter-spacing: 0.04em;
+}
+.np-hero-status-value {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
 }
 .np-hero-panel h2 {
   font-size: 1.75rem;
@@ -326,7 +490,7 @@ div[data-testid="stForm"] {
   color: var(--np-inverse-on-surface);
   border-radius: 8px;
   padding: 1.25rem;
-  margin-top: 1rem;
+  margin-top: auto;
 }
 .np-skill-tag {
   display: inline-block;

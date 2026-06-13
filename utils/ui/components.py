@@ -110,17 +110,27 @@ def system_health_card(llm: bool, smtp: bool, storage: str) -> None:
     )
 
 
+def form_panel_header(title: str, subtitle: str = "") -> None:
+    sub = f'<p class="np-form-sub">{html.escape(subtitle)}</p>' if subtitle else ""
+    st.markdown(
+        f'<div class="np-form-header"><h3 class="np-form-title">{html.escape(title)}</h3>{sub}</div>',
+        unsafe_allow_html=True,
+    )
+
+
 def volunteer_hero_panel() -> None:
     st.markdown(
         f"""
         <div class="np-hero-panel">
-            <div class="np-hero-logo-wrap">{logo_svg_markup(size=56)}</div>
-            <h2>Welcome to the Next Era of Social Impact</h2>
-            <p>Our AI analyzes open NGO tasks to find your perfect mission match.
-            Complete your profile to activate the NayePankh Bulbul matching engine.</p>
-            <div style="margin-top:2rem;padding:1rem;background:rgba(255,255,255,0.12);border-radius:12px;">
-                <p style="font-size:0.75rem;opacity:0.8;margin:0 0 0.25rem 0;">CURRENT STATUS</p>
-                <p style="font-size:1rem;font-weight:600;margin:0;">Ready to match you with meaningful work</p>
+            <div class="np-hero-body">
+                <div class="np-hero-logo-wrap">{logo_svg_markup(size=56)}</div>
+                <h2>Welcome to the Next Era of Social Impact</h2>
+                <p>Our AI analyzes open NGO tasks to find your perfect mission match.
+                Complete your profile to activate the NayePankh Bulbul matching engine.</p>
+            </div>
+            <div class="np-hero-status">
+                <p class="np-hero-status-label">CURRENT STATUS</p>
+                <p class="np-hero-status-value">Ready to match you with meaningful work</p>
             </div>
         </div>
         """,
