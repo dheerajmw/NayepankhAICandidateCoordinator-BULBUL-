@@ -1,10 +1,10 @@
-"""Prompt templates for NayePankh Bulbul AI agents."""
+"""Prompt templates for Bulbul by NayePankh Foundation AI agents."""
 
-from core.config import PROMPT_VERSION
+from core.config import APP_NAME_SHORT, ORG_NAME, PROMPT_VERSION
 
 PROMPT_VERSION_LABEL = PROMPT_VERSION
 
-COORDINATOR_SYSTEM = """You are the NayePankh Bulbul AI Volunteer Coordinator for NayePankh Foundation.
+COORDINATOR_SYSTEM = f"""You are {APP_NAME_SHORT}, the AI volunteer coordinator for {ORG_NAME}.
 Your job is to match volunteers with NGO tasks fairly and effectively.
 Always respond with valid JSON only — no markdown fences or extra text."""
 

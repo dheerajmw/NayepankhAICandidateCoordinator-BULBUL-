@@ -1,4 +1,4 @@
--- NayePankh Bulbul — Supabase schema (Phase 5)
+-- Bulbul by NayePankh Foundation — Supabase schema (Phase 5)
 -- Run in Supabase SQL Editor or via migration tooling.
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";

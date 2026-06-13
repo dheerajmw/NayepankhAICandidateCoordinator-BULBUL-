@@ -1,14 +1,18 @@
 [theme]
-primaryColor = "#2563eb"
-backgroundColor = "#faf8ff"
+primaryColor = "#4648d4"
+backgroundColor = "#f8f9ff"
 secondaryBackgroundColor = "#ffffff"
-textColor = "#131b2e"
+textColor = "#1e1b4b"
 font = "sans serif"
 
 [server]
 headless = true
-enableCORS = false
-enableXsrfProtection = true
 
 [browser]
 gatherUsageStats = false
+
+[client]
+showSidebarNavigation = false
+
+[ui]
+sidebarWidth = 280

@@ -30,11 +30,9 @@ def _days_until_deadline(task: dict[str, Any]) -> int:
 
 
 def _volunteer_wants_email(volunteer_id: str) -> bool:
+    """Deadline reminders are always on when the volunteer has an email address."""
     volunteer = get_volunteer(volunteer_id)
-    if volunteer is None:
-        return False
-    prefs = volunteer.get("reminder_preferences") or {}
-    return prefs.get("enabled", True) and prefs.get("email", True)
+    return volunteer is not None and bool(volunteer.get("email", "").strip())
 
 
 def _record_and_send(
@@ -96,7 +94,7 @@ def send_completion_notification(task_id: str) -> dict[str, Any] | None:
             channel="log",
             status="skipped",
             subject="Task completion",
-            error="Volunteer opted out of email reminders",
+            error="No recipient email",
         )
 
     subject, body = email_service.render_completion_confirmation(
@@ -161,7 +159,7 @@ def _send_volunteer_reminder(
             channel="log",
             status="skipped",
             subject="Deadline reminder",
-            error="Volunteer opted out of email reminders",
+            error="No recipient email",
         )
 
     subject, body = email_service.render_deadline_reminder(

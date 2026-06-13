@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Volunteer Onboarding | NayePankh Bulbul</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@500;600;700&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#fffbff",
+                        "inverse-surface": "#213145",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "inverse-primary": "#c0c1ff",
+                        "outline": "#767586",
+                        "surface-container-low": "#eff4ff",
+                        "primary": "#4648d4",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-secondary-container": "#fffbff",
+                        "surface-bright": "#f8f9ff",
+                        "primary-fixed": "#e1e0ff",
+                        "on-background": "#0b1c30",
+                        "on-tertiary-container": "#fcfcff",
+                        "on-surface-variant": "#464554",
+                        "tertiary": "#00628d",
+                        "on-secondary-fixed": "#23005c",
+                        "outline-variant": "#c7c4d7",
+                        "on-tertiary-fixed": "#001e2f",
+                        "tertiary-fixed": "#c9e6ff",
+                        "surface-variant": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#6063ee",
+                        "surface-dim": "#cbdbf5",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e9ddff",
+                        "secondary": "#6b38d4",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-container": "#007cb1",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "secondary-container": "#8455ef",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container": "#e5eeff",
+                        "on-primary-fixed": "#07006c",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px",
+                        "base": "4px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "mono-xs": ["JetBrains Mono"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "mono-xs": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(70, 72, 212, 0.1);
+        }
+        .ai-glow {
+            background: radial-gradient(circle at center, rgba(132, 85, 239, 0.15) 0%, transparent 70%);
+        }
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        .typing-effect {
+            overflow: hidden;
+            border-right: 2px solid #4648d4;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #4648d4 }
+        }
+        .progress-bar-fill {
+            transition: width 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-full z-40 bg-surface/80 backdrop-blur-xl border-b border-outline-variant flex justify-between items-center h-16 px-margin-desktop">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-on-primary font-bold">B</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">NayePankh Bulbul</h1>
+</div>
+<div class="flex items-center gap-stack-lg">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 text-body-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all" placeholder="Search insights..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">history_edu</button>
+<button class="px-4 py-1.5 bg-primary-container text-on-primary-container rounded-full font-label-md hover:opacity-90 transition-opacity">AI Consult</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Profile" data-alt="Close up professional headshot of a young woman with a warm and intelligent expression, set against a soft-focus office background. The lighting is natural and high-key, aligning with a premium SaaS and professional NGO aesthetic. Her appearance is friendly yet focused, representing the empathetic spirit of NayePankh Bulbul." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC04IOA5aEp9wRuVK2qEyd8dHMjf2qV89p2HQ6WNJ30yuqB3cwCnl95aWL8oeymuQ70HeGJfTB1RVwlAIU-Vg31DpgDbTS-lIFeC78Nf6s_WsEvK_g8wQLtceRymhlvVJfowtpqkqR0Mq8tRhqF7EVSM4UX7zlLX3p1y49XABIyNBTYk9IVt4BqMLGYJcyrRz0xw8DY6mmzNLDzvKyJlPTrrU_47Dx8XzMYiZtl5s-fD-2J-QZc3sItGHi1PJV6COTfB3eR2P_a2tzB"/>
+</div>
+</div>
+</div>
+</header>
+<main class="pt-16 min-h-screen flex">
+<!-- LEFT: AI Assistant Panel -->
+<section class="w-full md:w-[45%] bg-surface-container-lowest relative flex flex-col p-margin-desktop overflow-hidden border-r border-outline-variant">
+<div class="ai-glow absolute inset-0 pointer-events-none"></div>
+<!-- AI Interaction Area -->
+<div class="relative z-10 flex flex-col h-full justify-center space-y-8 max-w-lg mx-auto">
+<div class="space-y-4">
+<div class="w-12 h-12 bg-secondary rounded-2xl flex items-center justify-center shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined text-on-secondary text-[28px]" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div class="space-y-2">
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight">
+                            Welcome to NayePankh Bulbul!
+                        </h2>
+<div class="h-12">
+<p class="font-body-lg text-body-lg text-on-surface-variant typing-effect">
+                                I’ll help match you with the right NGO opportunities.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Chat Bubbles Simulation -->
+<div class="space-y-4">
+<div class="glass-panel p-4 rounded-2xl rounded-tl-none self-start">
+<p class="text-body-md text-on-surface-variant">I'm currently analyzing our 120+ active humanitarian projects to find the perfect synergy for your profile.</p>
+</div>
+</div>
+<!-- Progress Section -->
+<div class="space-y-3 bg-surface-container-low p-6 rounded-2xl border border-outline-variant/30">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] animate-spin">sync</span>
+                            AI Profiling in Progress
+                        </span>
+<span class="font-mono-xs text-on-surface-variant" id="progress-text">45%</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full progress-bar-fill" id="progress-bar" style="width: 45%"></div>
+</div>
+<p class="text-mono-xs text-outline italic">Deep scanning skill clusters &amp; historical NGO impacts...</p>
+</div>
+</div>
+<!-- Footer Decorative -->
+<div class="mt-auto relative z-10">
+<div class="flex items-center gap-2 text-on-surface-variant/40">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="text-mono-xs">Secured by NayePankh Intelligence Engine</span>
+</div>
+</div>
+<!-- Abstract Background Visual -->
+<div class="absolute bottom-[-100px] left-[-100px] w-96 h-96 opacity-10 blur-[80px] bg-primary-container rounded-full"></div>
+</section>
+<!-- RIGHT: Smart Profile Form -->
+<section class="w-full md:w-[55%] bg-background p-margin-desktop overflow-y-auto">
+<div class="max-w-2xl mx-auto space-y-stack-lg">
+<header>
+<h3 class="font-headline-md text-headline-md text-on-surface">Create Your Smart Profile</h3>
+<p class="text-body-md text-on-surface-variant">Tell us more about yourself to refine your matches.</p>
+</header>
+<form class="space-y-8 pb-20">
+<!-- Identity Section -->
+<div class="grid grid-cols-2 gap-gutter">
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant">Full Name</label>
+<input class="w-full bg-surface-container-lowest border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" type="text" value="Alex Rivera"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant">Email Address</label>
+<input class="w-full bg-surface-container-lowest border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none" type="email" value="alex.rivera@example.com"/>
+</div>
+</div>
+<!-- Skills Section -->
+<div class="space-y-3">
+<label class="font-label-md text-on-surface-variant">Skillset (AI Detected)</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-md border border-primary/20 flex items-center gap-2">
+                                Data Analysis <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<span class="px-3 py-1.5 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-md border border-primary/20 flex items-center gap-2">
+                                UX Design <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<span class="px-3 py-1.5 bg-primary-fixed text-on-primary-fixed-variant rounded-full text-label-md border border-primary/20 flex items-center gap-2">
+                                Public Speaking <button class="material-symbols-outlined text-[14px]">close</button>
+</span>
+<button class="px-3 py-1.5 border border-dashed border-outline-variant text-on-surface-variant rounded-full text-label-md hover:bg-surface-container-low transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Skill
+                            </button>
+</div>
+</div>
+<!-- Interests Section -->
+<div class="space-y-3">
+<label class="font-label-md text-on-surface-variant">Core Interests</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-label-md border border-secondary/20">Climate Action</span>
+<span class="px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-label-md border border-secondary/20">Quality Education</span>
+<span class="px-3 py-1.5 bg-secondary-fixed text-on-secondary-fixed-variant rounded-full text-label-md border border-secondary/20">Poverty Alleviation</span>
+<button class="px-3 py-1.5 border border-dashed border-outline-variant text-on-surface-variant rounded-full text-label-md hover:bg-surface-container-low transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Interest
+                            </button>
+</div>
+</div>
+<!-- Availability Section -->
+<div class="space-y-3">
+<label class="font-label-md text-on-surface-variant">Weekly Availability</label>
+<div class="grid grid-cols-3 gap-4">
+<label class="cursor-pointer group">
+<input checked="" class="hidden peer" type="checkbox"/>
+<div class="p-4 rounded-2xl border-2 border-outline-variant bg-surface-container-lowest peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-outline group-peer-checked:text-primary mb-2 block">calendar_today</span>
+<p class="font-label-md text-on-surface">Weekdays</p>
+<p class="text-mono-xs text-on-surface-variant mt-1">2-4 hrs/day</p>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="hidden peer" type="checkbox"/>
+<div class="p-4 rounded-2xl border-2 border-outline-variant bg-surface-container-lowest peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-outline group-peer-checked:text-primary mb-2 block">event</span>
+<p class="font-label-md text-on-surface">Weekends</p>
+<p class="text-mono-xs text-on-surface-variant mt-1">Flex hours</p>
+</div>
+</label>
+<label class="cursor-pointer group">
+<input class="hidden peer" type="checkbox"/>
+<div class="p-4 rounded-2xl border-2 border-outline-variant bg-surface-container-lowest peer-checked:border-primary peer-checked:bg-primary/5 transition-all group-hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-outline group-peer-checked:text-primary mb-2 block">schedule</span>
+<p class="font-label-md text-on-surface">On-call</p>
+<p class="text-mono-xs text-on-surface-variant mt-1">Emergency only</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Motivation Section -->
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant">What motivates you to volunteer?</label>
+<textarea class="w-full bg-surface-container-lowest border-outline-variant rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none resize-none" placeholder="I want to use my engineering skills to build tools that help remote communities access clean water..." rows="4"></textarea>
+</div>
+<!-- Actions -->
+<div class="pt-4 flex items-center justify-between">
+<button class="text-primary font-label-md hover:underline" type="button">Save as Draft</button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-8 py-3 rounded-xl font-headline-md shadow-lg shadow-primary/20 transition-all active:scale-[0.98]" type="submit">
+                            Complete Profile
+                        </button>
+</div>
+</form>
+</div>
+</section>
+</main>
+<script>
+        // Progress bar simulation
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        let progress = 45;
+
+        const updateProgress = () => {
+            if (progress < 95) {
+                progress += Math.random() * 2;
+                progressBar.style.width = `${progress}%`;
+                progressText.innerText = `${Math.floor(progress)}%`;
+            }
+        };
+
+        setInterval(updateProgress, 1500);
+
+        // Simple skill removal interaction
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            if (icon.innerText === 'close') {
+                icon.parentElement.addEventListener('click', (e) => {
+                    e.currentTarget.style.opacity = '0';
+                    setTimeout(() => e.currentTarget.remove(), 200);
+                });
+            }
+        });
+    </script>
+</body></html>

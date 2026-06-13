@@ -10,5 +10,17 @@
     "subject": "Thank you — task completed: Class",
     "error": null,
     "sent_at": "2026-06-13T10:47:39+00:00"
+  },
+  {
+    "id": "af2d27d1-3bab-4805-bebc-5a6536c8e812",
+    "task_id": "smoke-task-id",
+    "volunteer_id": "smoke-vol-id",
+    "notification_type": "deadline_3d",
+    "recipient": "dheerajj473@gmail.com",
+    "channel": "smtp",
+    "status": "sent",
+    "subject": "Reminder: Smoke Test Task due in 3 days — Bulbul by NayePankh Foundation",
+    "error": null,
+    "sent_at": "2026-06-13T14:26:03+00:00"
   }
 ]

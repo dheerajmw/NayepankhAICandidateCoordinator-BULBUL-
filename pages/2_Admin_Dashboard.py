@@ -14,22 +14,18 @@ from services.candidate_service import (
 )
 from services.task_service import create_task, seed_demo_tasks
 from services.volunteer_service import add_volunteer_manual, list_volunteers
-from utils.auth import is_admin_authenticated, require_admin
+from core.config import APP_NAME
+from utils.auth import require_admin
 from utils.helpers import format_comma_list, parse_comma_list
 from utils.ui.components import kpi_row, page_header
-from utils.ui.logo import logo_mark_path
-from utils.ui.styles import inject_theme
+from utils.ui.layout import setup_page
 
-st.set_page_config(
-    page_title="Admin — NayePankh Bulbul",
-    page_icon=logo_mark_path(),
-    layout="wide",
-)
-
-inject_theme()
+setup_page(f"Admin — {APP_NAME}", active="admin", show_admin_actions=True)
 
 if not require_admin():
     st.stop()
+
+seed_demo_tasks()
 
 page_header("Admin Dashboard", "Review candidates, manage the volunteer pool, and create tasks.")
 
@@ -154,8 +150,3 @@ with tab_tasks:
                 priority=priority,
             )
             st.success(f"Created task: {task['title']}")
-
-if is_admin_authenticated():
-    if st.sidebar.button("Sign out admin"):
-        st.session_state.pop("admin_authenticated", None)
-        st.rerun()

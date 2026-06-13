@@ -6,6 +6,8 @@ import streamlit as st
 
 from core.config import ADMIN_PASSWORD, admin_auth_required
 
+APPLY_PAGE = "pages/1_Volunteer_Onboarding.py"
+
 
 def is_admin_authenticated() -> bool:
     return bool(st.session_state.get("admin_authenticated"))
@@ -20,19 +22,24 @@ def login_admin() -> bool:
         return True
 
     st.subheader("Admin sign in")
-    st.caption("Admin Interface requires authentication in production.")
-    password = st.text_input("Admin password", type="password", key="admin_password_input")
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("Sign in", type="primary"):
-            if password == ADMIN_PASSWORD:
-                st.session_state["admin_authenticated"] = True
-                st.rerun()
-            st.error("Invalid admin password.")
-    with col2:
-        if st.button("Continue as volunteer"):
-            st.session_state["sidebar_view"] = "Volunteer Portal"
+    st.caption("Enter the admin password to manage volunteers and tasks.")
+    with st.form("admin_sign_in", clear_on_submit=False):
+        password = st.text_input("Admin password", type="password")
+        col1, col2 = st.columns(2)
+        with col1:
+            submitted = st.form_submit_button("Sign in", type="primary", use_container_width=True)
+        with col2:
+            volunteer = st.form_submit_button("Continue as volunteer", use_container_width=True)
+
+    if volunteer:
+        st.switch_page(APPLY_PAGE)
+
+    if submitted:
+        if password == ADMIN_PASSWORD:
+            st.session_state["admin_authenticated"] = True
             st.rerun()
+        st.error("Invalid admin password.")
+
     return False
 
 

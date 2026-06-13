@@ -1,10 +1,10 @@
-# NayePankh Bulbul AI Volunteer Coordinator
+# Bulbul by NayePankh Foundation
 
 ## Overview
 
 NGOs such as **NayePankh Foundation** rely on volunteers to deliver their mission, but coordinating them remains largely manual. Onboarding, task assignment, progress tracking, and follow-ups are fragmented across spreadsheets, messages, and ad hoc coordination. As volunteer numbers grow, these workflows do not scale and consume disproportionate staff time.
 
-**NayePankh Bulbul AI Volunteer Coordinator** automates the operational backbone of volunteer management—matching people to the right work, tracking outcomes, and keeping everyone accountable without constant human intervention.
+**Bulbul by NayePankh Foundation** automates the operational backbone of volunteer management—matching people to the right work, tracking outcomes, and keeping everyone accountable without constant human intervention.
 
 ---
 
@@ -139,7 +139,7 @@ naye-pankh-bulbul/
 
 ## AI Agent Logic (Core Prompt)
 
-The central agent acts as the **NayePankh Bulbul AI Volunteer Coordinator** with the following responsibilities:
+The central agent acts as the **Bulbul by NayePankh Foundation** with the following responsibilities:
 
 **Goals**
 

@@ -9,6 +9,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+APP_NAME = "Bulbul by NayePankh Foundation"
+APP_NAME_SHORT = "Bulbul"
+ORG_NAME = "NayePankh Foundation"
+
+
 def _get(name: str, default: str = "") -> str:
     return os.getenv(name, default).strip()
 
@@ -42,7 +47,10 @@ def storage_label() -> str:
 
 
 def admin_auth_required() -> bool:
-    return bool(ADMIN_PASSWORD)
+    """Password gate only in production when ADMIN_PASSWORD is configured."""
+    if not ADMIN_PASSWORD:
+        return False
+    return app_env().lower() in ("production", "prod")
 
 
 def app_env() -> str:

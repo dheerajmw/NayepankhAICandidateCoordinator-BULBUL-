@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NayePankh Bulbul | Task Assignment Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@500;600;700&family=JetBrains+Mono&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #F1F5F9;
+        }
+        .ai-glow-border {
+            position: relative;
+        }
+        .ai-glow-border::after {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(45deg, #4648d4, #8455ef);
+            z-index: -1;
+            border-radius: inherit;
+            opacity: 0.15;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4648d4, transparent);
+            position: absolute;
+            top: 0;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#fffbff",
+                        "inverse-surface": "#213145",
+                        "surface-tint": "#494bd6",
+                        "on-tertiary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "on-surface": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "inverse-primary": "#c0c1ff",
+                        "outline": "#767586",
+                        "surface-container-low": "#eff4ff",
+                        "primary": "#4648d4",
+                        "surface-container-high": "#dce9ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-secondary-container": "#fffbff",
+                        "surface-bright": "#f8f9ff",
+                        "primary-fixed": "#e1e0ff",
+                        "on-background": "#0b1c30",
+                        "on-tertiary-container": "#fcfcff",
+                        "on-surface-variant": "#464554",
+                        "tertiary": "#00628d",
+                        "on-secondary-fixed": "#23005c",
+                        "outline-variant": "#c7c4d7",
+                        "on-tertiary-fixed": "#001e2f",
+                        "tertiary-fixed": "#c9e6ff",
+                        "surface-variant": "#d3e4fe",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#6063ee",
+                        "surface-dim": "#cbdbf5",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e9ddff",
+                        "secondary": "#6b38d4",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-container": "#007cb1",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "secondary-container": "#8455ef",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-container": "#e5eeff",
+                        "on-primary-fixed": "#07006c",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "container-max": "1440px",
+                        "base": "4px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Inter"],
+                        "mono-xs": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed h-screen w-[280px] left-0 top-0 bg-surface-container-lowest border-r border-outline-variant shadow-sm z-50 hidden md:flex flex-col p-stack-md">
+<div class="flex items-center gap-3 mb-8 px-4">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">NayePankh</h1>
+<p class="text-xs text-on-surface-variant">Bulbul Intelligence</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-sm">Volunteers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="font-body-sm">Task Engine</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-body-sm">AI Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-sm">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant space-y-1">
+<button class="w-full bg-primary text-on-primary font-medium py-3 rounded-xl mb-4 active:scale-[0.98] transition-transform">
+                Assign Task
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-sm">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
+<span class="font-body-sm">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] h-screen flex flex-col overflow-hidden relative">
+<!-- TopAppBar (Shared Component Equivalent) -->
+<header class="h-20 bg-surface/80 backdrop-blur-xl border-b border-outline-variant px-margin-desktop flex justify-between items-center z-40">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-primary" data-icon="task_alt">task_alt</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">AI Task Assignment Complete</h2>
+<p class="text-sm text-on-surface-variant flex items-center gap-2">
+<span class="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                        Optimization engine successfully mapped 124 tasks to 86 volunteers.
+                    </p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">92%</div>
+<div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Accuracy Score</div>
+</div>
+<div class="h-10 w-[1px] bg-outline-variant"></div>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-lg font-medium hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="auto_awesome">auto_awesome</span>
+                        AI Consult
+                    </button>
+</div>
+</div>
+</header>
+<!-- Content Area: Bento Grid Layout -->
+<div class="flex-1 p-margin-desktop overflow-y-auto bg-background">
+<div class="grid grid-cols-12 gap-gutter max-w-container-max mx-auto">
+<!-- Main Grid of Volunteer Cards -->
+<div class="col-span-8 space-y-6">
+<div class="flex justify-between items-end mb-4">
+<h3 class="font-headline-md font-bold text-on-surface">Top Assignments</h3>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-medium text-on-surface-variant border border-outline-variant">High Impact</span>
+<span class="px-3 py-1 bg-surface-container-high rounded-full text-xs font-medium text-on-surface-variant border border-outline-variant">Urgent</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<!-- Volunteer Card 1 -->
+<div class="glass-card p-stack-md rounded-xl hover:shadow-lg transition-all border border-outline-variant group relative overflow-hidden">
+<div class="scanline"></div>
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full border-2 border-primary-container p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="A professional portrait of a diverse female volunteer in a modern office setting, smiling warmly. The lighting is bright and natural, reflecting an empathetic and intelligent brand personality with soft violet and indigo tones in the background. The style is clean, pro-sumer oriented, and optimistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9X_adBmnJ3Qe-U30pL0szglcoJCDOuTjMIagecBMr-EZWxcxB1jiXbOsNtAiiaqbO-iEtv9m1LJO3CZMH0ldjmxANFWmdhtj2oj17U3_dt-WBLsejt84uxX5f751nIBUSUbCrzZ5Uixi0Pl905LR0n35APuXH2IgIEMNnfOy6yZuTFd1jErWUuG5C6Od2v0LQTFhTkcAiURYDjROiq7EVlwvY0rdl9ye6yt7cMr7S0Q95by4lZ8DuessJbhQelgixTpYh39PukLne"/>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Sarah Mitchell</h4>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-secondary" data-icon="verified">verified</span>
+<span class="text-xs text-on-surface-variant">Senior Field Lead</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold">98% MATCH</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant/30 mb-4">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter mb-1">Assigned Task</p>
+<p class="text-sm font-medium text-on-surface">Curriculum Strategy for Rural Tech Outreach</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Educational Design</span>
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Leadership</span>
+</div>
+</div>
+<!-- Volunteer Card 2 -->
+<div class="glass-card p-stack-md rounded-xl hover:shadow-lg transition-all border border-outline-variant group relative overflow-hidden">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full border-2 border-outline-variant p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="A headshot of a focused male tech volunteer in a brightly lit studio environment. He has a calm, intelligent expression, suitable for a precision-engineered data platform. The color palette is dominated by soft slates and indigos with high-key lighting that emphasizes a modern, humanitarian mission vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIcZdTuRgbS-QokxiTST6QG6cL4Mt9Oci6f-fg7Px322XZxE3lbu06AwwoIGlzvQQTRZEXZqARctAIpYwbnTOnnQFB6nx2phE-VJccoWzwVV7xN0Cri-0Cvjpea-SwfKpW1igaRTNTR40m980UL3xcgcSQg6ONhO0YtPJLGR5WYGkybIQ4IQlJvt0HVRe6jbgADSkvhRYWmduEBm-E0snndwuYW9y99TIN4pvpm8ifcWsPAiatFPxWwcWX91b0GpWPAqEbwVKVnwbn"/>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">David Chen</h4>
+<div class="flex items-center gap-1">
+<span class="text-xs text-on-surface-variant">Tech Strategist</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold">94% MATCH</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant/30 mb-4">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter mb-1">Assigned Task</p>
+<p class="text-sm font-medium text-on-surface">Regional Cloud Infrastructure Audit</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Cloud Ops</span>
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Security</span>
+</div>
+</div>
+<!-- Volunteer Card 3 -->
+<div class="glass-card p-stack-md rounded-xl hover:shadow-lg transition-all border border-outline-variant group relative overflow-hidden">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full border-2 border-outline-variant p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="A professional portrait of a female non-profit organizer with an empathetic and intelligent expression. She is set against a clean, minimalist background with subtle indigo gradients. The style is premium and fast-paced, suggesting an AI-optimized workspace for humanitarian work with soft, directional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOywzithuutvTXISjEMQ6q-mBMOvq4NbYwad9NyfowN9RMJ0gHGQ7_74pu177Jiyixxs4P575onTHbqxexqusVBbYZnpdzbLzdrpCu0mGxok_wZ6mH_Bot-qv3ERZf1KrfFGgAC5BzE2QwgW0Hk7GNu2_0rePauku5piuo6gPoPEwXNqgZQShvrKO9ZDVLkyFSjpId6WiFQOy906khJVM67w57WwaeKaouOCHe93UaL5AS22XYykEFjPP5WO5fM66IuEHx5Q9hNyzM"/>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Priya Sharma</h4>
+<div class="flex items-center gap-1">
+<span class="text-xs text-on-surface-variant">Logistics Lead</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold">91% MATCH</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant/30 mb-4">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter mb-1">Assigned Task</p>
+<p class="text-sm font-medium text-on-surface">Inter-District Health Supplies Log</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Supply Chain</span>
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Crisis Mgmt</span>
+</div>
+</div>
+<!-- Volunteer Card 4 -->
+<div class="glass-card p-stack-md rounded-xl hover:shadow-lg transition-all border border-outline-variant group relative overflow-hidden">
+<div class="flex items-start justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full border-2 border-outline-variant p-0.5">
+<img class="w-full h-full rounded-full object-cover" data-alt="Portrait of a young, intelligent female professional in a modern, light-filled creative studio. Her expression is focused and capable. The aesthetic combines minimalism with warm humanitarian mission values, featuring soft lighting and a sophisticated palette of white and slate with subtle violet accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp4M1EGDBBQ86DWDjc5pmT5bdolc7woY8zISSh_n_VxQtRlpwT4JQmMWb4YPb1UZFi-Dvanu4br8UICXscGeK2QfbXU92RsLNX6I7w2PH1aPAA6xBMAPtTySuIM0kCibWDLsdEDg9QI_RWhf4CKkbOK1RV5dwhzUFoc5KU_4sOPvueVrZiI-7KVUgzOVJY_sdzNiYH5GIuoLR_N0rSXn8LeNHHmYMkqU-mtqN2HZgeYdMvuGq0-uFnoMGGnE_nWY_GV5zEA6lEIT-7"/>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Elena Rodriguez</h4>
+<div class="flex items-center gap-1">
+<span class="text-xs text-on-surface-variant">Communications Expert</span>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 text-primary px-2 py-1 rounded text-[10px] font-bold">89% MATCH</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg border border-outline-variant/30 mb-4">
+<p class="text-xs font-bold text-primary uppercase tracking-tighter mb-1">Assigned Task</p>
+<p class="text-sm font-medium text-on-surface">Annual Impact Visualization Project</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Design</span>
+<span class="bg-tertiary-container/10 text-tertiary text-[10px] px-2 py-0.5 rounded-full font-medium">Media</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side Panel: AI Reasoning -->
+<div class="col-span-4 space-y-gutter">
+<div class="bg-inverse-surface text-on-primary-container p-6 rounded-2xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-20">
+<span class="material-symbols-outlined text-6xl" data-icon="psychology">psychology</span>
+</div>
+<h3 class="font-headline-md font-bold mb-4">Reasoning Engine</h3>
+<p class="text-sm opacity-80 mb-6">Bulbul AI analyzed 1,200+ data points to generate these assignments. Here's the logic for the current batch:</p>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" data-icon="hub">hub</span>
+</div>
+<div>
+<h4 class="text-sm font-bold">Skill-Task Fusion</h4>
+<p class="text-xs opacity-70">Cross-referencing technical certifications with real-time project requirements for zero-latency start.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+</div>
+<div>
+<h4 class="text-sm font-bold">Sentiment Analysis</h4>
+<p class="text-xs opacity-70">Historical engagement patterns and feedback loops were used to predict volunteer retention.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="w-8 h-8 bg-primary-container rounded-lg flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h4 class="text-sm font-bold">Geographic Affinity</h4>
+<p class="text-xs opacity-70">Tasks were weighted based on proximity to ensure local impact and reduced travel overhead.</p>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-white/10 rounded-xl border border-white/10">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold uppercase tracking-widest">System Health</span>
+<span class="text-xs text-green-400">OPTIMAL</span>
+</div>
+<div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+<div class="bg-primary w-4/5 h-full"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-6 rounded-2xl">
+<h3 class="font-bold text-on-surface mb-4">Analytics Visualization</h3>
+<div class="space-y-4">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface-variant">Tech Distribution</span>
+<span class="font-bold">42%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-secondary w-[42%] h-full"></div>
+</div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface-variant">On-Field Support</span>
+<span class="font-bold">38%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-primary w-[38%] h-full"></div>
+</div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-on-surface-variant">Admin & Strategy</span>
+<span class="font-bold">20%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-tertiary-container w-[20%] h-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar (Bottom Fixed) -->
+<footer class="h-20 bg-white border-t border-outline-variant px-margin-desktop flex items-center justify-between z-40">
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-body-sm font-medium">Export Report</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-body-sm font-medium">Notify All</span>
+</button>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2 border border-outline-variant text-on-surface font-medium rounded-lg hover:bg-surface-container-low transition-all">
+                    Reject Batch
+                </button>
+<button class="px-8 py-2 bg-gradient-to-r from-primary to-secondary text-on-primary font-medium rounded-lg shadow-md active:scale-95 transition-all">
+                    Finalize Assignments
+                </button>
+</div>
+</footer>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple hover effect for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('ai-glow-border');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('ai-glow-border');
+            });
+        });
+    </script>
+</body></html>

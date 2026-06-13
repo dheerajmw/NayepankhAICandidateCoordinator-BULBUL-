@@ -15,6 +15,8 @@ MATCH_HISTORY_FILE = DATA_DIR / "match_history.json"
 NOTIFICATIONS_FILE = DATA_DIR / "notifications.json"
 REPORTS_FILE = DATA_DIR / "reports.json"
 
+REMINDER_PREFERENCES_ALWAYS_ON = {"enabled": True, "email": True}
+
 
 class JsonStorageBackend:
     def _now_iso(self) -> str:
@@ -38,11 +40,17 @@ class JsonStorageBackend:
             json.dump(records, handle, indent=2, ensure_ascii=False)
             handle.write("\n")
 
+    @staticmethod
+    def _normalize_volunteer(volunteer: dict[str, Any]) -> dict[str, Any]:
+        volunteer["reminder_preferences"] = dict(REMINDER_PREFERENCES_ALWAYS_ON)
+        return volunteer
+
     def get_volunteers(self) -> list[dict[str, Any]]:
-        return self._load_list(VOLUNTEERS_FILE)
+        return [self._normalize_volunteer(v) for v in self._load_list(VOLUNTEERS_FILE)]
 
     def get_volunteer(self, volunteer_id: str) -> dict[str, Any] | None:
-        return next((v for v in self.get_volunteers() if v["id"] == volunteer_id), None)
+        volunteer = next((v for v in self._load_list(VOLUNTEERS_FILE) if v["id"] == volunteer_id), None)
+        return self._normalize_volunteer(volunteer) if volunteer else None
 
     def add_volunteer(
         self,
@@ -60,7 +68,7 @@ class JsonStorageBackend:
             "skills": skills,
             "interests": interests,
             "availability": availability.strip(),
-            "reminder_preferences": {"enabled": True, "email": True},
+            "reminder_preferences": dict(REMINDER_PREFERENCES_ALWAYS_ON),
             "created_at": self._now_iso(),
         }
         volunteers.append(volunteer)
@@ -73,12 +81,13 @@ class JsonStorageBackend:
         enabled: bool,
         email: bool,
     ) -> dict[str, Any]:
-        volunteers = self.get_volunteers()
+        del enabled, email  # Reminders are permanently on for all volunteers.
+        volunteers = self._load_list(VOLUNTEERS_FILE)
         for volunteer in volunteers:
             if volunteer["id"] == volunteer_id:
-                volunteer["reminder_preferences"] = {"enabled": enabled, "email": email}
+                volunteer["reminder_preferences"] = dict(REMINDER_PREFERENCES_ALWAYS_ON)
                 self._save_list(VOLUNTEERS_FILE, volunteers)
-                return volunteer
+                return self._normalize_volunteer(volunteer)
         raise ValueError("Volunteer not found")
 
     def get_tasks(self) -> list[dict[str, Any]]:

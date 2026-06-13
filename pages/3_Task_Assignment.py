@@ -5,24 +5,20 @@ from __future__ import annotations
 import streamlit as st
 
 from agents.task_matching_agent import match_all_open_tasks, match_volunteers_to_task
-from services.task_service import assign_task, list_tasks, open_tasks, update_task_status
+from services.task_service import assign_task, list_tasks, open_tasks, seed_demo_tasks, update_task_status
 from services.volunteer_service import list_volunteers, volunteer_name, workload_counts
+from core.config import APP_NAME
 from utils.auth import require_admin
 from utils.ui.components import ai_match_card, kpi_row, page_header, status_chip
-from utils.ui.logo import logo_mark_path
+from utils.ui.layout import setup_page
 from utils.ui.render import render_html
-from utils.ui.styles import inject_theme
 
-st.set_page_config(
-    page_title="Tasks — NayePankh Bulbul",
-    page_icon=logo_mark_path(),
-    layout="wide",
-)
-
-inject_theme()
+setup_page(f"Tasks — {APP_NAME}", active="tasks", show_admin_actions=True)
 
 if not require_admin():
     st.stop()
+
+seed_demo_tasks()
 
 volunteers = list_volunteers()
 tasks = list_tasks()
@@ -111,8 +107,8 @@ with tab_status:
   <div style="display:flex;justify-content:space-between;align-items:start;gap:1rem;">
     <div>
       <h4 style="margin:0 0 0.35rem 0;">{task["title"]}</h4>
-      <p style="margin:0;color:#434655;font-size:0.9rem;">{task.get("description", "")}</p>
-      <p style="margin:0.5rem 0 0 0;font-size:0.8rem;color:#737686;">
+      <p style="margin:0;color:var(--np-on-surface-variant);font-size:0.9rem;">{task.get("description", "")}</p>
+      <p style="margin:0.5rem 0 0 0;font-size:0.8rem;color:var(--np-outline);">
         Assignee: {assignee} · Deadline: {task.get("deadline", "—")}
       </p>
     </div>

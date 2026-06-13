@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": "bca6be8a-898d-4d7f-a9fa-ab6e285790ea",
+    "title": "Social media campaign",
+    "description": "Create posts for an education awareness drive.",
+    "required_skills": [
+      "social media",
+      "design"
+    ],
+    "deadline": "2026-06-27",
+    "assigned_volunteer_id": null,
+    "status": "open",
+    "assignment_reason": "",
+    "priority": "High",
+    "ai_assigned": false,
+    "created_at": "2026-06-13T12:53:12+00:00",
+    "updated_at": "2026-06-13T12:53:12+00:00"
+  },
+  {
+    "id": "ed19567a-d32c-4448-a7f4-ea1070842032",
+    "title": "Weekend tutoring",
+    "description": "Support students with homework help on Saturdays.",
+    "required_skills": [
+      "teaching",
+      "communication"
+    ],
+    "deadline": "2026-06-28",
+    "assigned_volunteer_id": null,
+    "status": "open",
+    "assignment_reason": "",
+    "priority": "Medium",
+    "ai_assigned": false,
+    "created_at": "2026-06-13T12:53:12+00:00",
+    "updated_at": "2026-06-13T12:53:12+00:00"
+  }
+]

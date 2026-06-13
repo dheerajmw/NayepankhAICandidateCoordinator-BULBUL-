@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NayePankh Bulbul | Admin Command Center</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@500;600;700&family=JetBrains+Mono:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#fffbff",
+                    "inverse-surface": "#213145",
+                    "surface-tint": "#494bd6",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8f9ff",
+                    "on-primary-fixed-variant": "#2f2ebe",
+                    "on-surface": "#0b1c30",
+                    "on-tertiary-fixed-variant": "#004c6e",
+                    "inverse-primary": "#c0c1ff",
+                    "outline": "#767586",
+                    "surface-container-low": "#eff4ff",
+                    "primary": "#4648d4",
+                    "surface-container-high": "#dce9ff",
+                    "tertiary-fixed-dim": "#89ceff",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "on-secondary-container": "#fffbff",
+                    "surface-bright": "#f8f9ff",
+                    "primary-fixed": "#e1e0ff",
+                    "on-background": "#0b1c30",
+                    "on-tertiary-container": "#fcfcff",
+                    "on-surface-variant": "#464554",
+                    "tertiary": "#00628d",
+                    "on-secondary-fixed": "#23005c",
+                    "outline-variant": "#c7c4d7",
+                    "on-tertiary-fixed": "#001e2f",
+                    "tertiary-fixed": "#c9e6ff",
+                    "surface-variant": "#d3e4fe",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#6063ee",
+                    "surface-dim": "#cbdbf5",
+                    "on-primary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#e9ddff",
+                    "secondary": "#6b38d4",
+                    "surface-container-highest": "#d3e4fe",
+                    "tertiary-container": "#007cb1",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "secondary-container": "#8455ef",
+                    "primary-fixed-dim": "#c0c1ff",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8f9ff",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-container": "#e5eeff",
+                    "on-primary-fixed": "#07006c",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "container-max": "1440px",
+                    "base": "4px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "gutter": "24px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "headline-lg": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Geist"],
+                    "body-md": ["Inter"],
+                    "mono-xs": ["JetBrains Mono"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "mono-xs": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #F1F5F9;
+        }
+        .ai-glow {
+            position: relative;
+        }
+        .ai-glow::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #4648d4, #6b38d4, #00628d);
+            filter: blur(8px);
+            opacity: 0.15;
+            z-index: -1;
+            border-radius: inherit;
+        }
+        .scanner-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4648d4, transparent);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0; opacity: 0; }
+            50% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+        .tap-highlight-transparent { -webkit-tap-highlight-color: transparent; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Desktop Sidebar -->
+<aside class="fixed h-screen w-[280px] left-0 top-0 border-r border-outline-variant bg-surface-container-lowest hidden md:flex flex-col p-stack-md z-50">
+<div class="flex items-center gap-3 mb-10 px-4">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">NayePankh</h1>
+<p class="text-xs font-mono-xs text-on-surface-variant uppercase tracking-widest">Bulbul Intelligence</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg bg-primary-container text-on-primary-container font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-sm text-body-sm">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-body-sm text-body-sm">Volunteers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-body-sm text-body-sm">Task Engine</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-sm text-body-sm">AI Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</a>
+</nav>
+<button class="mt-4 bg-primary text-on-primary py-3 px-4 rounded-xl font-label-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            Assign Task
+        </button>
+<div class="mt-auto space-y-1 pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-sm text-body-sm">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-body-sm text-body-sm">Account</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-280px)] h-16 bg-surface/80 backdrop-blur-xl border-b border-outline-variant z-40 flex justify-between items-center px-margin-desktop">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md focus-within:ring-2 focus-within:ring-primary/20 transition-all rounded-full bg-surface-container-low border border-outline-variant px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-body-sm placeholder:text-on-surface-variant/50" placeholder="Search candidates, tasks..." type="text"/>
+<span class="text-[10px] font-mono-xs bg-surface-container-highest px-1.5 py-0.5 rounded border border-outline-variant text-on-surface-variant">CMD + K</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<button class="flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full font-label-md transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+                AI Consult
+            </button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="Admin User" data-alt="A professional headshot of a modern corporate administrator in a bright, clean office environment. The lighting is soft and neutral, conveying intelligence and leadership. The style is high-end editorial photography with a minimal aesthetic consistent with a premium SaaS platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6_VJfssAdLLSclfD19TR0QSN6CM0okX1VFbDoOpbU2o8-DNwVMCdl0k-5TRUSjYe3ftw5WcTWZhYzO0RYmTfJ54pc64JtoSW1P1J6CCH7HPt5G2UW-7XmB-eBYf35eiN720l5QYXaIxyZYidQS-evtmE_Gx_ax54WsufTJIK7XcuFvzZSQYgna6PDnSfknz08yy6xA_oBqBsw3TD5RIVVv9XcRuilaxoaE0wVIXdbKLCCfdIcQJP6ze1CSexG1BXe5FZ6YrVMoOL9"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="pt-24 pb-12 px-margin-desktop md:ml-[280px] min-h-screen">
+<!-- KPI Section -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-gutter mb-stack-lg">
+<!-- KPI 1 -->
+<div class="glass-card p-5 rounded-2xl flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md">Total Candidates</span>
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<div class="mt-2">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">1,284</h3>
+<p class="text-xs text-green-600 flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12% this month
+                    </p>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="glass-card p-5 rounded-2xl flex flex-col gap-2 border-l-4 border-l-secondary">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md">Pending Approvals</span>
+<span class="material-symbols-outlined text-secondary">pending_actions</span>
+</div>
+<div class="mt-2">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">42</h3>
+<p class="text-xs text-secondary flex items-center gap-1 mt-1">
+                        Priority: High
+                    </p>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="glass-card p-5 rounded-2xl flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md">Active Volunteers</span>
+<span class="material-symbols-outlined text-tertiary">person_play</span>
+</div>
+<div class="mt-2">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">856</h3>
+<div class="flex items-center gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<p class="text-xs text-on-surface-variant">14 currently online</p>
+</div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="glass-card p-5 rounded-2xl flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md">Tasks Assigned</span>
+<span class="material-symbols-outlined text-primary">assignment_turned_in</span>
+</div>
+<div class="mt-2">
+<h3 class="font-headline-md text-headline-md font-bold text-on-surface">312</h3>
+<p class="text-xs text-on-surface-variant mt-1">84% completion rate</p>
+</div>
+</div>
+<!-- KPI 5: AI Score -->
+<div class="glass-card p-5 rounded-2xl flex flex-col gap-2 ai-glow overflow-hidden">
+<div class="scanner-line"></div>
+<div class="flex justify-between items-start">
+<span class="text-on-surface-variant font-label-md">AI Match Score</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div class="mt-2">
+<h3 class="font-headline-md text-headline-md font-bold text-primary">94.8%</h3>
+<p class="text-xs text-on-surface-variant mt-1">Intelligence Accuracy</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Main List: Intelligence Engine -->
+<section class="flex-1 space-y-stack-md">
+<div class="flex justify-between items-center mb-4">
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface flex items-center gap-2">
+                            Bulbul AI Intelligence Engine
+                            <span class="bg-primary/10 text-primary text-[10px] px-2 py-0.5 rounded-full uppercase tracking-tighter">Live Analysis</span>
+</h2>
+<p class="text-on-surface-variant text-body-sm">Top candidates algorithmically prioritized by mission alignment.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-body-sm font-medium hover:bg-surface-container-low transition-colors">Bulk Action</button>
+<button class="px-4 py-2 bg-surface-container-high text-primary rounded-lg text-body-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filters
+                        </button>
+</div>
+</div>
+<!-- Candidate List -->
+<div class="space-y-3">
+<!-- Candidate Card 1 -->
+<div class="glass-card p-4 rounded-2xl flex items-center gap-6 hover:shadow-lg hover:shadow-primary/5 transition-all group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-secondary"></div>
+<div class="w-12 h-12 rounded-full bg-surface-container-highest overflow-hidden shrink-0">
+<img alt="Aditi Sharma" data-alt="Close up portrait of a young professional woman with a kind and intelligent expression. She is in a softly lit, modern workspace. The aesthetic is clean, professional, and empathetic, featuring a bright color palette with high-key lighting for a premium NGO platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq5qizXMf0RiRfP01pjNola5VRgiKrcQFMSj7ZJRaNSAr3yvddlcfohHUZ8Xv80q3xiADznwHorDwS2mUAdg3h_NZrDN5oAb2-d4HAm56U2aMW42Rijz8wqzHM5klwikCoM6GVVTIqJmdluczh84FYZdrm5VlgUXQsD5A_FegdH986cQsWUXQz2CuPH9o0GQkG1edEPYeXmDO10JbLy1hSebvCiYX93GTt5q83_YmNMGOPKbz6aw9flnKPad8fMff0ncvZC07X7g40"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-on-surface">Aditi Sharma</h4>
+<span class="bg-green-100 text-green-700 text-[10px] px-1.5 py-0.5 rounded font-mono-xs font-bold">LEGACY BUILDER</span>
+</div>
+<p class="text-xs text-on-surface-variant">Applied 2h ago • New Delhi, IN</p>
+</div>
+<div class="flex flex-col items-center px-4 border-x border-outline-variant shrink-0">
+<span class="text-xs font-mono-xs text-on-surface-variant">MATCH SCORE</span>
+<span class="font-bold text-primary font-headline-md">98%</span>
+</div>
+<div class="flex-1">
+<span class="text-xs text-on-surface-variant block mb-1">SUGGESTED ROLE</span>
+<div class="flex gap-2">
+<span class="bg-primary/5 text-primary text-[11px] px-2 py-1 rounded-full border border-primary/20">Operations Lead</span>
+<span class="bg-surface-container text-on-surface-variant text-[11px] px-2 py-1 rounded-full">Crisis Mgmt</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-xl border border-error/30 text-error flex items-center justify-center hover:bg-error-container transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<button class="px-6 py-2 bg-primary text-white rounded-xl font-label-md flex items-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                Approve
+                            </button>
+</div>
+</div>
+<!-- Candidate Card 2 -->
+<div class="glass-card p-4 rounded-2xl flex items-center gap-6 hover:shadow-lg hover:shadow-primary/5 transition-all group relative overflow-hidden">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest overflow-hidden shrink-0">
+<img alt="Rohan Gupta" data-alt="Portrait of a focused young man with a creative and energetic vibe, set against a blurred, airy background of a modern communal area. The lighting is natural and bright, conveying a sense of humanitarian warmth and technical expertise for a high-end volunteer management dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCk6j_pdtMSpQZvFsohf_DhkkbCLSRWtANs9QxJLoG8B4gurzNmUl1qpZz3EXmQ4cK621ELkUekkDiBSpTxw3WyypNZm8_YPoEh6uIHJDnebEgBYwI0L5gchy3wQKYzvU6g2UFqSMwjpgVUbQ4h9l6g1lYUoOA9afmnuCiobz2DwcFu0LIneylkX_Y667ozvhh7cbJdOBHH1DscFLy5XZuGEwsiJgto0jAji8qZN_J3JaBKVe9SFNnkTZiU7szYRPkJhmusKzcobA7r"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-on-surface">Rohan Gupta</h4>
+<span class="bg-tertiary/10 text-tertiary text-[10px] px-1.5 py-0.5 rounded font-mono-xs font-bold">TOP 5% PERFORMER</span>
+</div>
+<p class="text-xs text-on-surface-variant">Applied 5h ago • Bangalore, IN</p>
+</div>
+<div class="flex flex-col items-center px-4 border-x border-outline-variant shrink-0">
+<span class="text-xs font-mono-xs text-on-surface-variant">MATCH SCORE</span>
+<span class="font-bold text-on-surface font-headline-md">92%</span>
+</div>
+<div class="flex-1">
+<span class="text-xs text-on-surface-variant block mb-1">SUGGESTED ROLE</span>
+<div class="flex gap-2">
+<span class="bg-primary/5 text-primary text-[11px] px-2 py-1 rounded-full border border-primary/20">Data Analyst</span>
+<span class="bg-surface-container text-on-surface-variant text-[11px] px-2 py-1 rounded-full">Report Genius</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-xl border border-outline-variant text-on-surface-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<button class="px-6 py-2 bg-surface-container-highest text-on-surface rounded-xl font-label-md flex items-center gap-2 hover:bg-surface-variant transition-colors border border-outline-variant/30">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                Approve
+                            </button>
+</div>
+</div>
+<!-- Candidate Card 3 -->
+<div class="glass-card p-4 rounded-2xl flex items-center gap-6 hover:shadow-lg hover:shadow-primary/5 transition-all group relative overflow-hidden">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest overflow-hidden shrink-0">
+<img alt="Ishani Verma" data-alt="Portrait of a confident female leader with a professional yet approachable demeanor, set in a bright, modern office with soft-focus greenery in the background. The lighting is clean and vibrant, showcasing a high-quality, pro-sumer aesthetic suitable for a modern NGO administration dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFdES4j-AtRROfQ3Z4PKJ33Y77_mXNjArxLWWHWF0bGDN_HpKYy0qB9yIQT4DJTNEIX2rjZkM6lXp9vWgrbjqn3MkUcT1HcX_BnqHoHVmaAlYiP2GHW25QYa2_ozS7S-F3PDOmmN6bYDRowVwqGBfx3hKvz8zkunGFtgznkPfPSLGRCQpG-YieSAtG3T17wcOH2bN5DWIzLi5rwPxNY7e7w0OUvcOZ40Qn9KBqV09ku5k_74K_nSawsxoQqLSprAvL8EeN8M_k-t4g"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<h4 class="font-bold text-on-surface">Ishani Verma</h4>
+</div>
+<p class="text-xs text-on-surface-variant">Applied 8h ago • Mumbai, IN</p>
+</div>
+<div class="flex flex-col items-center px-4 border-x border-outline-variant shrink-0">
+<span class="text-xs font-mono-xs text-on-surface-variant">MATCH SCORE</span>
+<span class="font-bold text-on-surface font-headline-md">89%</span>
+</div>
+<div class="flex-1">
+<span class="text-xs text-on-surface-variant block mb-1">SUGGESTED ROLE</span>
+<div class="flex gap-2">
+<span class="bg-primary/5 text-primary text-[11px] px-2 py-1 rounded-full border border-primary/20">Legal Consultant</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-xl border border-outline-variant text-on-surface-variant flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+<button class="px-6 py-2 bg-surface-container-highest text-on-surface rounded-xl font-label-md flex items-center gap-2 hover:bg-surface-variant transition-colors border border-outline-variant/30">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                Approve
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Sidebar: AI Insights -->
+<aside class="w-full lg:w-[320px] space-y-6">
+<div class="glass-card p-6 rounded-3xl ai-glow border-t-2 border-t-primary">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="font-bold text-on-surface">AI Insights</h3>
+</div>
+<div class="space-y-4">
+<div class="bg-primary/5 p-3 rounded-xl border border-primary/10">
+<p class="text-body-sm font-medium text-primary">Priority Alert</p>
+<p class="text-xs text-on-surface-variant mt-1">3 high-quality candidates waiting for approval. Aditi Sharma matches 100% of the "Crisis Ops" criteria.</p>
+<button class="mt-2 text-xs font-bold text-primary flex items-center gap-1">Review Profile <span class="material-symbols-outlined text-[14px]">arrow_forward</span></button>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<p class="text-body-sm font-medium text-on-surface">Volunteer Churn Warning</p>
+<p class="text-xs text-on-surface-variant mt-1">Activity in the "Tech Support" squad has dropped by 14% this week. Suggest re-assigning 2 tasks.</p>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low border border-outline-variant/30">
+<p class="text-body-sm font-medium text-on-surface">Optimization Tip</p>
+<p class="text-xs text-on-surface-variant mt-1">Moving "Task ID #492" to Rohan Gupta could increase delivery speed by 2.4 days based on historical data.</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/30">
+<div class="flex justify-between items-center text-xs text-on-surface-variant mb-2">
+<span>Processing Power</span>
+<span>Optimal</span>
+</div>
+<div class="w-full h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-[82%] h-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Recent Activity -->
+<div class="glass-card p-6 rounded-3xl">
+<h3 class="font-bold text-on-surface mb-4">Task Activity</h3>
+<div class="space-y-4">
+<div class="flex gap-3">
+<div class="w-2 h-2 rounded-full bg-green-500 mt-1.5"></div>
+<div>
+<p class="text-xs font-bold">Education Campaign #4</p>
+<p class="text-[10px] text-on-surface-variant">Completed by 4 volunteers</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-2 h-2 rounded-full bg-orange-400 mt-1.5"></div>
+<div>
+<p class="text-xs font-bold">Food Drive Logistical Mapping</p>
+<p class="text-[10px] text-on-surface-variant">In Progress • 80%</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-2 h-2 rounded-full bg-blue-400 mt-1.5"></div>
+<div>
+<p class="text-xs font-bold">New Recruit Onboarding</p>
+<p class="text-[10px] text-on-surface-variant">32 pending modules</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-xs font-bold text-primary hover:bg-primary/5 rounded-lg transition-colors">View All Activity</button>
+</div>
+</aside>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden flex justify-around items-center h-16 px-4 bg-surface/90 backdrop-blur-lg border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-primary relative after:content-[''] after:absolute after:-bottom-1 after:w-1 after:h-1 after:bg-primary after:rounded-full" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-md text-label-md">Tasks</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-label-md text-label-md">Intelligence</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Team</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions and focus handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.classList.add('border-primary');
+                });
+                input.addEventListener('blur', () => {
+                    input.parentElement.classList.remove('border-primary');
+                });
+            });
+
+            // Keyboard shortcut placeholder interaction
+            window.addEventListener('keydown', (e) => {
+                if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                    e.preventDefault();
+                    document.querySelector('input').focus();
+                }
+            });
+        });
+    </script>
+</body></html>

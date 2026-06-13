@@ -1,4 +1,4 @@
-# NayePankh Bulbul — Phase-Wise Architecture
+# Bulbul by NayePankh Foundation — Phase-Wise Architecture
 
 This document breaks the system described in [problemStatement.md](./problemStatement.md) into incremental delivery phases. Each phase activates specific layers, ships testable value, and sets up the next phase without rework.
 
@@ -172,7 +172,7 @@ flowchart TB
 
 ### Core prompt behavior
 
-The Decision Engine enforces the **NayePankh Bulbul AI Volunteer Coordinator** contract:
+The Decision Engine enforces the **Bulbul by NayePankh Foundation** contract:
 
 - Recommend only **1–2 best-fit tasks** per volunteer
 - Explain **why** each task was assigned

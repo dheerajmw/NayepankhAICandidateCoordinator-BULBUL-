@@ -12,6 +12,8 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
 
+from core.config import APP_NAME, ORG_NAME
+
 
 def generate_certificate_pdf(volunteer: dict[str, Any], metrics: dict[str, Any]) -> bytes:
     buffer = io.BytesIO()
@@ -70,12 +72,12 @@ def generate_certificate_pdf(volunteer: dict[str, Any], metrics: dict[str, Any])
 
     story = [
         Paragraph("Certificate of Appreciation", title_style),
-        Paragraph("NayePankh Bulbul AI Volunteer Coordinator · NayePankh Foundation", subtitle_style),
+        Paragraph(f"{APP_NAME} · {ORG_NAME}", subtitle_style),
         Spacer(1, 0.2 * inch),
         Paragraph("This is to certify that", body_style),
         Paragraph(volunteer["name"], name_style),
         Paragraph(
-            f"has successfully contributed to NayePankh Foundation by completing "
+            f"has successfully contributed to {ORG_NAME} by completing "
             f"<b>{completed}</b> volunteer task(s), applying skills in "
             f"<b>{skill_text}</b>.",
             body_style,
@@ -86,7 +88,7 @@ def generate_certificate_pdf(volunteer: dict[str, Any], metrics: dict[str, Any])
         ),
         Spacer(1, 0.4 * inch),
         Paragraph(f"Issued on {date.today().isoformat()}", footer_style),
-        Paragraph("NayePankh Foundation — Volunteer Program", footer_style),
+        Paragraph(f"{ORG_NAME} — Volunteer Program", footer_style),
     ]
 
     doc.build(story)

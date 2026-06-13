@@ -1,32 +1,20 @@
-"""NayePankh Bulbul V2 — AI Volunteer Coordinator (home)."""
+"""Bulbul by NayePankh Foundation — AI Volunteer Coordinator (home)."""
 
 from __future__ import annotations
 
 import streamlit as st
 
-from core.config import admin_auth_required, app_env, storage_label
+from core.config import APP_NAME, admin_auth_required, app_env, storage_label
 from core.llm_engine import llm_configured
 from services.candidate_service import list_candidates
 from services.task_service import list_tasks
 from services.volunteer_service import list_volunteers
-from utils.ui.components import brand_block, kpi_row, page_header, status_pills
-from utils.ui.logo import logo_mark_path
-from utils.ui.styles import inject_theme
+from utils.ui.components import flow_steps, hero_panel, kpi_row, status_pills
+from utils.ui.layout import setup_page
 
 
 def main() -> None:
-    st.set_page_config(
-        page_title="NayePankh Bulbul",
-        page_icon=logo_mark_path(),
-        layout="wide",
-        initial_sidebar_state="expanded",
-    )
-
-    inject_theme()
-
-    with st.sidebar:
-        brand_block()
-        st.caption("Use the page menu above to open Apply, Admin, or Task Assignment.")
+    setup_page(APP_NAME, active="overview")
 
     status_pills(
         [
@@ -37,9 +25,10 @@ def main() -> None:
         ]
     )
 
-    page_header(
-        "NayePankh Bulbul AI Volunteer Coordinator",
-        "V2 — Candidate applications, admin approval, unified volunteer pool, and AI task matching.",
+    hero_panel(
+        APP_NAME,
+        "Candidate applications, admin approval, unified volunteer pool, and AI task matching — one intelligence layer for NGO ops.",
+        badge="Luminous Intelligence",
     )
 
     pending = len(list_candidates("pending"))
@@ -55,36 +44,28 @@ def main() -> None:
     )
 
     st.markdown("### How it works")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown(
-            """
-            **1. Candidate Apply**  
-            Public users submit applications with skills, interests, and motivation.  
-            AI screens each application automatically.
-            """
-        )
-    with col2:
-        st.markdown(
-            """
-            **2. Admin Dashboard**  
-            NGO admins approve or reject candidates, or add volunteers directly.  
-            Approved candidates join the unified volunteer pool.
-            """
-        )
-    with col3:
-        st.markdown(
-            """
-            **3. Task Assignment**  
-            AI matches volunteers to open tasks using skills, interests, availability,  
-            and assignment memory.
-            """
-        )
+    flow_steps(
+        [
+            (
+                1,
+                "Volunteer Onboarding",
+                "Public users submit applications with skills, interests, and motivation. AI screens each application automatically.",
+            ),
+            (
+                2,
+                "Admin Dashboard",
+                "NGO admins approve or reject candidates, or add volunteers directly. Approved candidates join the unified volunteer pool.",
+            ),
+            (
+                3,
+                "Task Assignment",
+                "AI matches volunteers to open tasks using skills, interests, availability, and assignment memory.",
+            ),
+        ]
+    )
 
     if admin_auth_required():
         st.info("Admin pages require the password set in `ADMIN_PASSWORD`.")
-
-    st.caption("Open **Candidate Apply**, **Admin Dashboard**, or **Task Assignment** from the sidebar page list.")
 
 
 if __name__ == "__main__":

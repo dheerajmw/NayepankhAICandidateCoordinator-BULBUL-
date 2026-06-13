@@ -1,5 +1,5 @@
 {
-  "name": "NayePankh Bulbul — Production Reminder Webhook",
+  "name": "Bulbul by NayePankh Foundation — Production Reminder Webhook",
   "description": "n8n workflow calling the Phase 5 webhook server.",
   "nodes": [
     {
@@ -49,7 +49,7 @@
     }
   },
   "meta": {
-    "project": "NayePankh Bulbul AI Volunteer Coordinator",
+    "project": "Bulbul by NayePankh Foundation",
     "phase": 5
   }
 }

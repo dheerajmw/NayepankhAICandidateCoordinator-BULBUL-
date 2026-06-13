@@ -136,5 +136,6 @@ def _build_volunteer(
         "candidate_id": candidate_id,
         "ai_screening": ai_screening,
         "memory": {"assignments": [], "completed_tasks": []},
+        "reminder_preferences": {"enabled": True, "email": True},
         "created_at": now_iso(),
     }

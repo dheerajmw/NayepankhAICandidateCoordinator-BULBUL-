@@ -7,10 +7,7 @@ import smtplib
 from email.mime.text import MIMEText
 from typing import Literal
 
-from dotenv import load_dotenv
-
-from automation.retry import with_retry
-from core.config import EMAIL_MAX_RETRIES, EMAIL_RETRY_DELAY_SECONDS
+from core.config import APP_NAME
 
 load_dotenv()
 
@@ -84,21 +81,21 @@ def render_deadline_reminder(
     urgent: bool = False,
 ) -> tuple[str, str]:
     if urgent:
-        subject = f"Urgent: {task_title} due tomorrow — NayePankh Bulbul"
+        subject = f"Urgent: {task_title} due tomorrow — {APP_NAME}"
         body = (
             f"Hi {volunteer_name},\n\n"
             f"This is an urgent reminder that your assigned task \"{task_title}\" "
             f"is due on {deadline} (1 day remaining).\n\n"
             f"Please update your progress or contact the coordinator if you need help.\n\n"
-            f"— NayePankh Bulbul AI Volunteer Coordinator"
+            f"— {APP_NAME}"
         )
     else:
-        subject = f"Reminder: {task_title} due in 3 days — NayePankh Bulbul"
+        subject = f"Reminder: {task_title} due in 3 days — {APP_NAME}"
         body = (
             f"Hi {volunteer_name},\n\n"
             f"Friendly reminder: your task \"{task_title}\" is due on {deadline} "
             f"({days_left} days remaining).\n\n"
-            f"— NayePankh Bulbul AI Volunteer Coordinator"
+            f"— {APP_NAME}"
         )
     return subject, body
 
@@ -109,13 +106,13 @@ def render_overdue_escalation(
     deadline: str,
     days_overdue: int,
 ) -> tuple[str, str]:
-    subject = f"Escalation: overdue task \"{task_title}\" — NayePankh Bulbul"
+    subject = f"Escalation: overdue task \"{task_title}\" — {APP_NAME}"
     body = (
         f"Admin notice,\n\n"
         f"The task \"{task_title}\" assigned to {volunteer_name} was due on {deadline} "
         f"and is now {days_overdue} day(s) overdue (status not completed).\n\n"
         f"Please follow up with the volunteer.\n\n"
-        f"— NayePankh Bulbul Automation"
+        f"— {APP_NAME}"
     )
     return subject, body
 
@@ -129,6 +126,6 @@ def render_completion_confirmation(
         f"Hi {volunteer_name},\n\n"
         f"Thank you for completing \"{task_title}\". Your contribution makes a real "
         f"difference at NayePankh Foundation.\n\n"
-        f"— NayePankh Bulbul AI Volunteer Coordinator"
+        f"— {APP_NAME}"
     )
     return subject, body

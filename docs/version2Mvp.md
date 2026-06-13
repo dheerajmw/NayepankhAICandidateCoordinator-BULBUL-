@@ -1,4 +1,4 @@
-# NayePankh Bulbul — Version 2 MVP
+# Bulbul by NayePankh Foundation — Version 2 MVP
 
 This document describes **V2** of the AI Volunteer Coordinator: a dual-sided system with public candidate applications, admin approval, a unified volunteer pool, and AI task matching.
 

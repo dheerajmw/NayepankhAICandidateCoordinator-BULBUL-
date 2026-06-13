@@ -8,6 +8,8 @@ from typing import Any
 
 from core.config import SUPABASE_KEY, SUPABASE_URL
 
+REMINDER_PREFERENCES_ALWAYS_ON = {"enabled": True, "email": True}
+
 
 class SupabaseStorageBackend:
     def __init__(self) -> None:
@@ -30,7 +32,7 @@ class SupabaseStorageBackend:
             "skills": record.get("skills", []),
             "interests": record.get("interests", []),
             "availability": record.get("availability", ""),
-            "reminder_preferences": record.get("reminder_preferences") or {"enabled": True, "email": True},
+            "reminder_preferences": dict(REMINDER_PREFERENCES_ALWAYS_ON),
             "created_at": record.get("created_at"),
         }
 
@@ -53,14 +55,14 @@ class SupabaseStorageBackend:
 
     def get_volunteers(self) -> list[dict[str, Any]]:
         response = self.client.table("volunteers").select("*").order("created_at").execute()
-        return response.data or []
+        return [self._volunteer_row(row) for row in (response.data or [])]
 
     def get_volunteer(self, volunteer_id: str) -> dict[str, Any] | None:
         response = (
             self.client.table("volunteers").select("*").eq("id", volunteer_id).limit(1).execute()
         )
         rows = response.data or []
-        return rows[0] if rows else None
+        return self._volunteer_row(rows[0]) if rows else None
 
     def add_volunteer(
         self,
@@ -77,7 +79,7 @@ class SupabaseStorageBackend:
             "skills": skills,
             "interests": interests,
             "availability": availability.strip(),
-            "reminder_preferences": {"enabled": True, "email": True},
+            "reminder_preferences": dict(REMINDER_PREFERENCES_ALWAYS_ON),
             "created_at": self._now_iso(),
         }
         self.client.table("volunteers").insert(self._volunteer_row(volunteer)).execute()
@@ -89,17 +91,17 @@ class SupabaseStorageBackend:
         enabled: bool,
         email: bool,
     ) -> dict[str, Any]:
-        prefs = {"enabled": enabled, "email": email}
+        del enabled, email  # Reminders are permanently on for all volunteers.
         response = (
             self.client.table("volunteers")
-            .update({"reminder_preferences": prefs})
+            .update({"reminder_preferences": dict(REMINDER_PREFERENCES_ALWAYS_ON)})
             .eq("id", volunteer_id)
             .execute()
         )
         rows = response.data or []
         if not rows:
             raise ValueError("Volunteer not found")
-        return rows[0]
+        return self._volunteer_row(rows[0])
 
     def get_tasks(self) -> list[dict[str, Any]]:
         response = self.client.table("tasks").select("*").order("created_at").execute()

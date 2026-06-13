@@ -1,5 +1,5 @@
 {
-  "name": "NayePankh Bulbul V2 — Reminder Webhook",
+  "name": "Bulbul by NayePankh Foundation V2 — Reminder Webhook",
   "nodes": [
     {
       "parameters": {
@@ -51,6 +51,6 @@
     }
   },
   "meta": {
-    "project": "NayePankh Bulbul AI Volunteer Coordinator V2"
+    "project": "Bulbul by NayePankh Foundation V2"
   }
 }

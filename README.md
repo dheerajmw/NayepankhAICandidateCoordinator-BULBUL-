@@ -1,4 +1,4 @@
-# NayePankh Bulbul AI Volunteer Coordinator (V2)
+# Bulbul by NayePankh Foundation — AI Volunteer Coordinator (V2)
 
 Production-grade MVP for AI-powered NGO volunteer management with a **dual-sided system**:
 
